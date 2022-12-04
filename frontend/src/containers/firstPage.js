@@ -10,7 +10,7 @@ const FirstPage = () => {
     return(
         <>
             <MenuAppBar />
-            <MainPlane />
+            {/* <MainPlane /> */}
             {openBar ? <InlineMenu /> : <></>}
         </>
         

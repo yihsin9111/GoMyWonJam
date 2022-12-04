@@ -17,7 +17,7 @@ import {useMenu} from './hooks/useMenu';
 function MenuAppBar( clickBar, setClickBar ) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const {revealBar} = useMenu();
+  const {openBar, revealBar} = useMenu();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -32,6 +32,7 @@ function MenuAppBar( clickBar, setClickBar ) {
   };
 
   const handleSideMenu = () => {
+    console.log("bool: ", openBar);
     revealBar();
   }
 
@@ -51,7 +52,7 @@ function MenuAppBar( clickBar, setClickBar ) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
+            GoMyWonJam
           </Typography>
           <IconButton
                 size="large"
