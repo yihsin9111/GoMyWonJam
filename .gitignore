@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package.json
 yarn.lock
 package-lock.json
@@ -8,3 +9,6 @@ package-lock.json
 */package-lock.json
 */.DS_Store
 backend/.env
+=======
+/node_modules
+>>>>>>> 59c556a (bar and side menu)

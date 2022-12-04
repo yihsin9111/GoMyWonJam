@@ -1,30 +1,26 @@
-import {useState} from 'react';
+import {useState, Fragment} from 'react';
 import InlineMenu from './InlineMenu';
 import {useMenu} from "./hooks/useMenu";
+import Drawer from '@mui/material/Drawer';
 
-const FirstPage = () => {
-    const {openBar} = useMenu();
+const MainPlane = () => {
+    const {openBar, revealBar} = useMenu();
 
     return(
         <>
-            <div>
-                {['left', 'right', 'top', 'bottom'].map((anchor) => (
-                    <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                    </React.Fragment>
-                ))}
-            </div>
+            <Fragment>
+                <Drawer
+                    open={openBar}
+                    onClose={revealBar(false)}
+                >
+                    <InlineMenu />
+                </Drawer>
+            </Fragment>
+
         </>
         
     )
 
 }
 
-export default FirstPage
+export default MainPlane
