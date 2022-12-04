@@ -1,8 +1,8 @@
-// react import
-import {useState} from "react";
-
-// Router Import
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import logo from './logo.svg';
+import './App.css';
+//import "antd/dist/antd.css"; 
+import * as React from 'react';
+import FirstPage from "./containers/firstPage";
 
 // Container Import
 import MainPage from './containers/MainPage';
