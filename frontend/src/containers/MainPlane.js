@@ -1,6 +1,9 @@
+import React from 'react';
 import {useState} from 'react';
 import InlineMenu from './InlineMenu';
 import {useMenu} from "./hooks/useMenu";
+import { Button } from '@mui/material';
+
 
 const FirstPage = () => {
     const {openBar} = useMenu();
