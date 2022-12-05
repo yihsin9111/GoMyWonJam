@@ -38,7 +38,7 @@ function MenuAppBar( clickBar, setClickBar ) {
 
   return (
     <>
-    <Box sx={{ flexGrow: 0 }} elevation={3}>
+    <Box sx={{ flexGrow: 0 }}>
       <AppBar position="static" style={{ background: '#b0bec5' }}>
         <Toolbar>
           <IconButton

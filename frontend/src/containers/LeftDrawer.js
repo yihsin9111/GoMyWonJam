@@ -1,3 +1,4 @@
+// meterial ui import
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -9,15 +10,26 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+
+// icons
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import InfoIcon from '@mui/icons-material/Info';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import MenuIcon from '@mui/icons-material/Menu';
+import HelpIcon from '@mui/icons-material/Help';
+
+// my functional component import
+import ObjectCards from './ObjectCards';
+
 
 const drawerWidth = 200;
 
@@ -78,6 +90,10 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const handleShoppingButton = () => {
+
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -92,9 +108,19 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Go My Won Jam
           </Typography>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={(e)=>{handleShoppingButton()}}
+          >
+            <ShoppingCartIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -117,11 +143,11 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['首頁', '我的主頁', '關於此網站'].map((text, index) => (
+          {['首頁', '我的主頁'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <HomeIcon /> : <AccountCircleIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -130,11 +156,11 @@ export default function PersistentDrawerLeft() {
         </List>
         <Divider />
         <List>
-          {["增新按鍵", "Hi 譯心", "Hi 子緹"].map((text, index) => (
+          {['關於此網站', "增新按鍵", "Hi 譯心", "Hi 子緹"].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <InfoIcon/> : <HelpIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -144,9 +170,10 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader /> {/*make sure the things go under the Bar*/}
-        <Typography paragraph>
-          This is a inside part that needs to edit
-        </Typography>
+            <ObjectCards />
+            {/* <Typography paragraph>
+            This is a inside part that needs to edit
+            </Typography> */}
         
       </Main>
     </Box>
