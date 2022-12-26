@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-
 const Schema = mongoose.Schema
 
 const ProductSchema = Schema({
@@ -14,6 +13,6 @@ const ProductSchema = Schema({
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 }) 
 
-const exportSchema = mongoose.model('Product', ProductSchema)
+const ProductModel = mongoose.model('Product', ProductSchema)
 
-export default ProductSchema
+export default ProductModel
