@@ -4,15 +4,22 @@ import './App.css';
 //import * as React from 'react';
 import React from 'react';
 import FirstPage from "./containers/firstPage";
+import TestPage from "./containers/testPage"
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 
 function App() {
 
   return (
-    <div className="App">
-      <FirstPage />
-    </div>
+    <Router>
+      <div className="App">
+      <Routes>
+        <Route path="/" element={<FirstPage />} />
+        <Route path="/test" element={<TestPage />} />
+      </Routes>
+      </div>
+    </Router>
   );
 }
 
