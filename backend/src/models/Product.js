@@ -5,6 +5,7 @@ const ProductSchema = Schema({
     _id:        { type: Schema.ObjectId, required: true},
     name:       { type: String, required: true },
     URL:        { type: String, required: true },
+    price:      { type: Number, required: true },
     deadline:   { type: String, required: true },
     product_type: { type: String, required: true }, 
     option_type:  { type: String,  required: true },
