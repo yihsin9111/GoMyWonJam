@@ -19,11 +19,16 @@ function App() {
   return (
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
-      </Routes>
+      <Main>
+        <DrawerHeader>Here is the DrawerHeader
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
+        </Routes>
+        </DrawerHeader>
+      </Main>
     </Router>
+
     // <div className="App">
     //   <FirstPage />
     // </div>
