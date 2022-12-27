@@ -7,7 +7,8 @@ const BillSchema = Schema({
     total:   { type: Number, required: true },
     package: { type: String, required: true },
     payment: { type: String, required: true },
-    address: { type: String, required: true }
+    address: { type: String, required: true },
+    status:  { type: Number, default: 0 },
 }, {
     collection: 'Bill',
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
