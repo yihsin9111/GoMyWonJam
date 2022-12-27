@@ -1,17 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-//import "antd/dist/antd.css"; 
-//import * as React from 'react';
-import React from 'react';
-import FirstPage from "./containers/firstPage";
-import TestPage from "./containers/testPage"
+// react import
+import {useState} from "react";
+
+// Router import
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Container Import
 import MainPage from './containers/MainPage';
-// import PersistentDrawerLeft from "./containers/LeftDrawer";
 
-// Component Import
+// Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
 import {Main, DrawerHeader} from "./components/BarComponent/barPositionHandler";
 
@@ -22,7 +18,7 @@ function App() {
   return (
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
-      <Main>
+      <Main open={open}>
         <DrawerHeader>Here is the DrawerHeader
         <Routes>
           <Route path="/" element={<MainPage />} />
