@@ -5,6 +5,7 @@ import './App.css';
 import React from 'react';
 import FirstPage from "./containers/firstPage";
 import TestPage from "./containers/testPage"
+import ProductPage from "./components/ProductPage"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -15,7 +16,7 @@ function App() {
     <Router>
       <div className="App">
       <Routes>
-        <Route path="/" element={<FirstPage />} />
+        <Route path="/" element={<ProductPage/>} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
       </div>
