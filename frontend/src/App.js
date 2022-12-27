@@ -1,17 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-import "antd/dist/antd.css"; 
-import * as React from 'react';
-import FirstPage from "./containers/firstPage";
+// react import
+import {useState} from "react";
 
+// Router Import
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
+// Container Import
+import MainPage from './containers/MainPage';
+// import PersistentDrawerLeft from "./containers/LeftDrawer";
+
+// Component Import
+import NavBar from "./components/BarComponent/NavBar";
+import {Main, DrawerHeader} from "./components/BarComponent/barPositionHandler";
 
 function App() {
+  // set state
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="App">
-      <FirstPage />
-    </div>
+    <Router>
+      <NavBar open={open} setOpen={setOpen}/>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
+      </Routes>
+    </Router>
+    // <div className="App">
+    //   <FirstPage />
+    // </div>
   );
 }
 
