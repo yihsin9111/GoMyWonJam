@@ -1,59 +1,141 @@
-import {Button, Checkbox, Form, Input} from 'antd'
-import {useState} from 'react'
-import useAdd from './hooks/useAdd'
+import React from 'react';
+import { Button, Form, Input, Select, DatePicker } from 'antd';
+import { AddCategory,
+    AddProductToCategory, UpdateProduct, GetProductById,
+    AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} from './hooks/useBackend'
+
+const { Option } = Select;
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 
 
 const TestPage = ()=>{
-    const [name, setName] = useState('');
-    const [add, setAdd] = useState('');
-    const {AddUser} = useAdd();
 
-    const onFinish = (e) => {
-        console.log('Success:', e);
-        AddUser(e.username, e.Address);
+    const [form] = Form.useForm();
+    const [productForm] = Form.useForm();
+    const [itemForm] = Form.useForm();
+    const [billForm] = Form.useForm();
+
+    const onReset = () => {
+        console.log(form.getFieldValue());
     };
+
+    const AddProduct = () => {
+        console.log(productForm.getFieldValue());
+    }
     
-    const onFinishFailed = (e) => {
-    console.log('Failed:', e);
-    };
+  return (
+    <>
+    <Form {...layout} form={form} name="control-hooks">
+        Category
+        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+            <Button htmlType="button" onClick={onReset}>
+                Add
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+                Update
+            </Button>
+        </Form.Item>
+    </Form>
 
-    return(
-        <Form
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-        >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input/>
-            </Form.Item>
+    <Form {...layout} form={productForm} name="control-hooks">
+        Product
+        <Form.Item name="category" label="Category" rules={[{ required: true }]}>
+            <Select options={[
+            {
+            value: 'jack',
+            label: 'Jack',
+            },
+            {
+            value: 'lucy',
+            label: 'Lucy',
+            }]}/>
+        </Form.Item>
+        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item name="url" label="url" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item name="price" label="price" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item name="note" label="note">
+            <Input />
+        </Form.Item>
+        <Form.Item name="type" label="product_type" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item name="o_type" label="option_type" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        {/* <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item> */}
+        <Form.Item {...tailLayout}>
+            <Button htmlType="button" onClick={AddProduct}>
+                Add
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+                Update
+            </Button>
+        </Form.Item>
+    </Form>
 
-            <Form.Item
-                label="Address"
-                name="Address"
-                rules={[{ required: true, message: 'Please input your address!' }]}
-            >
-                <Input/>
-            </Form.Item>
+    <Form {...layout} form={billForm} name="control-hooks">
+        Bill
+        <Form.Item name="userLineId" label="lineId">
+            <Input />
+        </Form.Item>
+        <Form.Item name="package" label="package" rules={[{ required: true }]}>
+            <Select options={[
+                {
+                value: '泡泡紙',
+                label: '泡泡紙',
+                },
+                {
+                value: '破壞袋',
+                label: '破壞袋',
+            }]}/>
+        </Form.Item>
+        <Form.Item name="total" label="total" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item name="payment" label="payment" rules={[{ required: true }]}>
+            <Select options={[
+                {
+                value: '現金',
+                label: '現金',
+                },
+                {
+                value: '刷卡',
+                label: '刷卡',
+            }]}/>
+        </Form.Item>
+        <Form.Item name="address" label="address">
+            <Input />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+            <Button htmlType="button" onClick={AddProduct}>
+                Add
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+                Update
+            </Button>
+        </Form.Item>
+    </Form>
 
-            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                Submit
-                </Button>
-            </Form.Item>
-        </Form>
-    );
+    </>
+  );
 }
 
 export default TestPage

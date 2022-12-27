@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const CategorySchema = Schema({
     name:       { type: String, required: true },
+    deadline:   { type: Date, required: true },
     products:   [{ type: mongoose.Types.ObjectId, ref: 'Product' }],
 }, {
     collection: 'Product',

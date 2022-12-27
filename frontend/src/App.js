@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Container Import
 import MainPage from './containers/MainPage';
+import TestPage from "./containers/testPage";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
@@ -17,15 +18,16 @@ function App() {
 
   return (
     <Router>
-      <NavBar open={open} setOpen={setOpen}/>
+      {/* <NavBar open={open} setOpen={setOpen}/>
       <Main open={open}>
-        <DrawerHeader>Here is the DrawerHeader
+        <DrawerHeader>Here is the DrawerHeader */}
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/test" element={<TestPage />} />
           {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
         </Routes>
-        </DrawerHeader>
-      </Main>
+        {/* </DrawerHeader>
+      </Main> */}
     </Router>
 
     // <div className="App">
