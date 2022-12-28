@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const CategorySchema = Schema({
     name:       { type: String, required: true },
-    products:   [{ type: mongoose.Types.ObjectId, ref: 'Product' }],
+    deadline:   { type: Date, required: true },
+    products:   [{type: String}],
 }, {
     collection: 'Product',
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }

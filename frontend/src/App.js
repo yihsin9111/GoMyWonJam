@@ -5,6 +5,7 @@ import * as React from 'react';
 
 // Container Import
 import MainPage from './containers/MainPage';
+import TestPage from "./containers/testPage";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
@@ -15,9 +16,17 @@ function App() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="App">
-      <FirstPage />
-    </div>
+    <Router>
+      <NavBar open={open} setOpen={setOpen}/>
+      <Main open={open}>
+        <DrawerHeader>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/test" element={<TestPage />} />
+        </Routes>
+        </DrawerHeader>
+      </Main>
+    </Router>
   );
 }
 
