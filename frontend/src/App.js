@@ -1,8 +1,7 @@
-// react import
-import {useState} from "react";
-
-// Router import
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import logo from './logo.svg';
+import './App.css';
+import "antd/dist/antd.css"; 
+import * as React from 'react';
 
 // Container Import
 import MainPage from './containers/MainPage';
@@ -16,21 +15,9 @@ function App() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Router>
-      <NavBar open={open} setOpen={setOpen}/>
-      <Main open={open}>
-        <DrawerHeader>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
-        </Routes>
-        </DrawerHeader>
-      </Main>
-    </Router>
-
-    // <div className="App">
-    //   <FirstPage />
-    // </div>
+    <div className="App">
+      <FirstPage />
+    </div>
   );
 }
 
