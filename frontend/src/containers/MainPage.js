@@ -1,4 +1,8 @@
+// react import
 import {useState} from "react";
+
+// Component import
+import ProductsTabs from "../components/MainPageComponent.js/productsTabs";
 
 const MainPage = () => {
 
@@ -10,7 +14,7 @@ const MainPage = () => {
 
     //return
     return(
-        <div>HELLO WORLD!</div>
+        <ProductsTabs />
     )
 
 }

@@ -19,7 +19,7 @@ function App() {
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
       <Main open={open}>
-        <DrawerHeader>Here is the DrawerHeader
+        <DrawerHeader>
         <Routes>
           <Route path="/" element={<MainPage />} />
           {/* <Route path="/PersonalPage" element={<PersonalPage />} /> */}
