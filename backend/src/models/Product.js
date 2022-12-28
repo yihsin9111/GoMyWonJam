@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const ProductSchema = Schema({
-    _id:        { type: Schema.ObjectId, required: true},
     name:       { type: String, required: true },
+    category:   { type: String, required: true },
     URL:        { type: String, required: true },
     price:      { type: Number, required: true },
     note:       { type: String }, //如果截止日期有提早之類的
