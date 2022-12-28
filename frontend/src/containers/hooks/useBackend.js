@@ -15,6 +15,9 @@ const useBackend = () => {
         console.log("Adding category...");
         sendData(["AddCategory",Category]);
     }
+    const UpdateCategory = (Category) => {
+
+    }
     const GetProductsByCategory = (name) => {
         console.log("getting products by category "+name+" ...");
         sendData(["GetProductByCategory",name]);
@@ -46,9 +49,8 @@ const useBackend = () => {
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
     const AddBillToUser = (userLineId, items, packing, payment, address)=>{
-        console.log("Adding Bill to User...");
-        let total = 10; //to be modified, calculate total money
-        sendData(["AddBillToUser",{userLineId, items, total, package:packing, payment, address}])
+        console.log("Adding Bill to User..."); 
+        sendData(["AddBillToUser",{userLineId, items, package:packing, payment, address}])
     }
     
     //return a list of user's bill

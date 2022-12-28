@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Form, Input, Select, DatePicker } from 'antd';
-import { AddCategory,
-    AddProductToCategory, UpdateProduct, GetProductById,
-    AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} from './hooks/useBackend'
+import useBackendTest from './hooks/useBackend_test'
 
 const { Option } = Select;
 
@@ -21,6 +19,9 @@ const TestPage = ()=>{
     const [productForm] = Form.useForm();
     const [itemForm] = Form.useForm();
     const [billForm] = Form.useForm();
+    const { AddCategory, GetProductsByCategory,
+        AddProductToCategory, UpdateProduct, GetProductById,
+        AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} = useBackendTest();
 
     const onReset = () => {
         console.log(form.getFieldValue());
@@ -77,6 +78,15 @@ const TestPage = ()=>{
         </Form.Item>
         <Form.Item name="o_type" label="option_type" rules={[{ required: true }]}>
             <Input />
+        </Form.Item>
+        <Form.Item name="option numbers" label="options" rules={[{ required: true }]}>
+            <Input/>
+        </Form.Item>
+        <Form.Item name="option1" label="option1" rules={[{ required: true }]}>
+            <Input/>
+        </Form.Item>
+        <Form.Item name="option2" label="option2" rules={[{ required: true }]}>
+            <Input/>
         </Form.Item>
         {/* <Form.Item name="name" label="Name" rules={[{ required: true }]}>
             <Input />
