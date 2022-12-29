@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 const CategorySchema = Schema({
     name:       { type: String, required: true },
-    deadline:   { type: Date, required: true },
+    deadline:   { type: Date },
     products:   [{type: String}],
 }, {
-    collection: 'Product',
+    collection: 'Category',
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 }) 
 
