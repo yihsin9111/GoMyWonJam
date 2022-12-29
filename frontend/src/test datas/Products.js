@@ -1,6 +1,7 @@
 const Products = [
     {
         "name": "bag",
+        "_id": "00001",
         "category": "seventeen",
         "URL": "https://www.amax.hk/cache/img/7065a279aaaf7dee3418b38924ba90a4.jpg",
         "price": 500,
@@ -24,6 +25,7 @@ const Products = [
     },
     {
         "name": "T-Shirt",
+        "_id": "00002",
         "category": "seventeen",
         "URL": "https://teeruto.com/wp-content/uploads/2021/11/seventeen-svt-kpop-rock-bootleg-vintage-style-unisex-tshirt-p0zow97515.jpg",
         "price": 800,
@@ -47,6 +49,7 @@ const Products = [
     },
     {
         "name": "Album",
+        "_id": "00003",
         "category": "seventeen",
         "URL": "https://m.media-amazon.com/images/I/3177NvLTioL._SY580_.jpg",
         "price": 1000,

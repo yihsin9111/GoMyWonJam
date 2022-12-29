@@ -4,6 +4,9 @@ import {useState} from "react";
 // Component import
 import ProductsTabs from "../components/MainPageComponent.js/productsTabs";
 
+// get items function import
+import useBackendTest from "./hooks/useBackend_test";
+
 const MainPage = () => {
 
     //set state
