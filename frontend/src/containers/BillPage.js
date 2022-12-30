@@ -24,7 +24,7 @@ const BillPage = () => {
             gap: 2
             }}>
             {Bills.map((value, index) => (
-                <Bill item={value} key={index} id={index}/>
+                <Bill item={value} key={index}/>
             ))}
         </Box>
     )

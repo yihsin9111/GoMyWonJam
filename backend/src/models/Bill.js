@@ -3,11 +3,13 @@ const Schema = mongoose.Schema
 
 const BillSchema = Schema({
     userLineId: { type: String, required: true },
-    items:   [{ type: mongoose.Types.ObjectId, required: true }],
-    total:   { type: Number, required: true },
-    package: { type: String, required: true },
-    payment: { type: String, required: true },
-    address: { type: String, required: true }
+    billId:  { type:String },
+    items:   [{ type: mongoose.Types.ObjectId }],
+    total:   { type: Number },
+    package: { type: String },
+    payment: { type: String },
+    address: { type: String },
+    status:  { type: Number, default:0} 
 }, {
     collection: 'Bill',
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }

@@ -10,10 +10,17 @@ const sendData =  async(data) =>{
 
 const useBackend = () => {
 
+    //--User handling functions--//
+    const AddUser = (name, lineId, address, phoneNumber) => {
+        console.log("Adding User...");
+        const User = {name, lineId, address, phoneNumber};
+        sendData(["AddUser",User]);
+    }
+    const UpdateUser = (userLineId, toUpdate, newData) => {}
     //--Category handling functions--//
-    const AddCategory = (Category) => {
+    const AddCategory = (category) => {
         console.log("Adding category...");
-        sendData(["AddCategory",Category]);
+        sendData(["AddCategory",category]);
     }
     const UpdateCategory = (Category) => {
 
@@ -25,9 +32,9 @@ const useBackend = () => {
     }
 
     //--Product handling functions--//
-    const AddProductToCategory = (Category, Product) => {
+    const AddProductToCategory = (Product) => {
         console.log("Adding product to category...");
-        sendData(["AddProductToCategory",{Category, Product}]);
+        sendData(["AddProductToCategory",Product]);
     }
 
     const UpdateProduct = (ProductId, newProduct)=>{
@@ -42,15 +49,20 @@ const useBackend = () => {
 
 
     //--Bill handling functions--//
-    const AddItemToBill = (item)=>{
+    const AddItemToBill = (item)=>{ //need frontend ;_;
         console.log("adding item to bill...");
         sendData(["AddItemToBill",item]);
     }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
-    const AddBillToUser = (userLineId, items, packing, payment, address)=>{
+    const AddBillToUser = (user)=>{
         console.log("Adding Bill to User..."); 
-        sendData(["AddBillToUser",{userLineId, items, package:packing, payment, address}])
+        sendData(["AddBillToUser",user.userLineId])
+    }
+
+    const ConfirmBill = ()=>{
+        console.log("confirming bill...")
+        sendData(["ConfirmBill"])
     }
     
     //return a list of user's bill
@@ -73,7 +85,7 @@ const useBackend = () => {
    
 
     return {
-        AddCategory,
+        AddUser, AddCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
     };
