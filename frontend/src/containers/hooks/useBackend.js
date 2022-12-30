@@ -26,7 +26,8 @@ const useBackend = () => {
         sendData(["AddCategory",category]);
     }
     const UpdateCategory = (Category) => {
-
+        console.log("Updating category...");
+        sendData(["UpdateCategory",Category]);
     }
     const GetProductsByCategory = (name) => {
         console.log("getting products by category "+name+" ...");
@@ -88,7 +89,7 @@ const useBackend = () => {
    
 
     return {
-        AddUser, UpdateUser, AddCategory,
+        AddUser, UpdateUser, AddCategory, UpdateCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
     };

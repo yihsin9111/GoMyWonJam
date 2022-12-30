@@ -4,7 +4,7 @@ import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 
-const UpdateUser = (userLineId, user)=>{
+const UpdateUser = (user)=>{
     UserModel.find({lineId:user.lineId}, async function(err, obj){
         if(obj.length){
             obj[0].name = user.name;
@@ -15,16 +15,23 @@ const UpdateUser = (userLineId, user)=>{
         else console.log('user not found ;_;')
     })
 }
-const UpdateBill = (billId, bill)=>{
+const UpdateCategory = (category)=>{ //date not updated ?
+    CategoryModel.find({name:category.cat_name}, async function(err, obj){
+        if(obj.length){
+            obj[0].deadline = Date(category.deadLine);
+            await obj[0].save;
+            console.log(obj[0]);
+        }
+        else console.log('category does not exist ;_;')
+    })
+}
+const UpdateProduct = (product)=>{
 
 }
-const UpdateCategory = (categoryName, category)=>{
 
-}
-const UpdateProduct = (productName, category, product)=>{
-
-}
+//bill modify handling functions
 
 
 
-export {UpdateUser, UpdateBill, UpdateCategory, UpdateProduct}
+
+export {UpdateUser, UpdateCategory, UpdateProduct}

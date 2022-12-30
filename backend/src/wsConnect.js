@@ -33,14 +33,12 @@ export default {
             }
             //Update functions
             case 'UpdateUser':{
-                UpdateUser(payload.lineId, payload);
+                UpdateUser(payload);
                 break;
             }
-            case 'UpdateBill':{
-
-            } 
             case 'UpdateCategory':{
-
+                UpdateCategory(payload);
+                break;
             } 
             case 'UpdateProduct':{
 

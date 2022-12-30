@@ -27,7 +27,7 @@ const TestPage = ()=>{
     const [itemForm] = Form.useForm();
     const [billForm] = Form.useForm();
     const [createForm] = Form.useForm();
-    const { AddCategory, AddUser, UpdateUser, GetProductsByCategory,
+    const { AddCategory, AddUser, UpdateUser,UpdateCategory, GetProductsByCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} = useBackend();
 
@@ -49,6 +49,11 @@ const TestPage = ()=>{
         const category = catform.getFieldValue();
         console.log('on add category', category);
         AddCategory(category);
+    }
+    const onUpdateCategory = ()=>{
+        const category = catform.getFieldValue();
+        console.log('on updat category', category);
+        UpdateCategory(category);
     }
 
     const onAddProduct = () => {
@@ -151,7 +156,7 @@ const TestPage = ()=>{
             <Button htmlType="button" onClick={onAddCategory}>
                 Add
             </Button>
-            <Button htmlType="button" onClick={onReset}>
+            <Button htmlType="button" onClick={onUpdateCategory}>
                 Update
             </Button>
         </Form.Item>
