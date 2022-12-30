@@ -4,18 +4,6 @@ import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 
-// const AddUser = (name, address) => {
-//     UserModel.find({name:name}, async function(err, obj){
-//         if(obj.length){
-//             console.log('user name already taken.');
-//         }
-//         else{
-//             console.log('registering new user...');
-//             await new UserModel({name:name, address:address}).save();
-//         }
-//     })
-// }
-
 //helper functions
 const appendProduct = (category, product) => {
     CategoryModel.find({name:category}, async function(err, obj){
@@ -28,7 +16,7 @@ const appendProduct = (category, product) => {
             console.log('category does not exist.');
             const model = new CategoryModel({name:category}).save();
             model.products = [product];
-            await new model.save();
+            await model.save();
         }
     })
 }
@@ -50,18 +38,33 @@ const AddUser = (User)=>{
     })
 }
 
-const AddBillToUser = (userLineId)=>{
-    
+const AddBillToUser = async(userLineId)=>{
+    console.log('adding bill to user', userLineId)
+    const bill = await new BillModel({
+        userLineId: userLineId,
+        billId:     '',
+        items:      [],
+        total:      0,
+        package:    '',
+        payment:    '',
+        address:    ''
+    });
+  
+    const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
+    bill.billId = id
+
+    bill.save();
 }
 
 const AddCategory = (Category)=>{
-    CategoryModel.find({name:Category.name}, async function(err, obj){
+    console.log(Category);
+    CategoryModel.find({name:Category.cat_name}, async function(err, obj){
         if(obj.length){
             console.log('This category has already been created');
         }
         else{
             console.log('creating new category...');
-            await new CategoryModel({name:Category.name, products:[]}).save();
+            await new CategoryModel({name:Category.cat_name, deadline:Category.deadLine,products:[]}).save();
         }
     })
 }

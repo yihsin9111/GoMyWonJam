@@ -17,9 +17,8 @@ const useBackend = () => {
         sendData(["AddUser",User]);
     }
     //--Category handling functions--//
-    const AddCategory = (name) => {
+    const AddCategory = (category) => {
         console.log("Adding category...");
-        const category = {name};
         sendData(["AddCategory",category]);
     }
     const UpdateCategory = (Category) => {
@@ -49,15 +48,15 @@ const useBackend = () => {
 
 
     //--Bill handling functions--//
-    const AddItemToBill = (item)=>{
+    const AddItemToBill = (item)=>{ //need frontend ;_;
         console.log("adding item to bill...");
         sendData(["AddItemToBill",item]);
     }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
-    const AddBillToUser = (userLineId)=>{
+    const AddBillToUser = (user)=>{
         console.log("Adding Bill to User..."); 
-        sendData(["AddBillToUser",userLineId])
+        sendData(["AddBillToUser",user.userLineId])
     }
 
     const ConfirmBill = ()=>{

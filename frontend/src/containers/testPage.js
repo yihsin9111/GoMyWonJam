@@ -26,6 +26,7 @@ const TestPage = ()=>{
     const [productForm] = Form.useForm();
     const [itemForm] = Form.useForm();
     const [billForm] = Form.useForm();
+    const [createForm] = Form.useForm();
     const { AddCategory, AddUser, GetProductsByCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} = useBackend();
@@ -39,7 +40,7 @@ const TestPage = ()=>{
     const onAddCategory = ()=>{
         const category = catform.getFieldValue();
         console.log('on add category', category);
-        AddCategory(category.cat_name);
+        AddCategory(category);
     }
 
     const onAddProduct = () => {
@@ -65,6 +66,11 @@ const TestPage = ()=>{
         }
         console.log('confirming product added', Product)
         AddProductToCategory(Product);
+    }
+
+    const onAddBilltoUser = () => {
+        const id = createForm.getFieldValue();
+        AddBillToUser(id);
     }
 
     const onReset = () => {
@@ -108,10 +114,25 @@ const TestPage = ()=>{
         </Form.Item>
     </Form>
     <p>________</p>
+    <div style={{display:"flex",flexDirection:"column"}}>
+    <Form {...layout} form={createForm} name="control-hooks">
+        create new Bill
+        <Form.Item name="userLineId" label="userLineId" rules={[{ required: true }]}>
+            <Input />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+            <Button htmlType="button" onClick={onAddBilltoUser}>
+                Create
+            </Button>
+        </Form.Item>
+    </Form>
     <Form {...layout} form={catform} name="control-hooks">
         Category
         <Form.Item name="cat_name" label="Name" rules={[{ required: true }]}>
             <Input />
+        </Form.Item>
+        <Form.Item name="deadLine" label="deadLine" rules={[{ required: true }]}>
+            <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
         <Form.Item {...tailLayout}>
             <Button htmlType="button" onClick={onAddCategory}>
@@ -122,6 +143,7 @@ const TestPage = ()=>{
             </Button>
         </Form.Item>
     </Form>
+    </div>
     <p>________</p>
     <Form {...layout} form={productForm} name="control-hooks">
         Product
@@ -201,7 +223,7 @@ const TestPage = ()=>{
             <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
-            <Button htmlType="button">
+            <Button htmlType="button" onClick={onAddBilltoUser}>
                 Add
             </Button>
             <Button htmlType="button" onClick={onReset}>

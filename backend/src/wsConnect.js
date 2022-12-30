@@ -28,8 +28,7 @@ export default {
                 break;
             }
             case 'AddBillToUser':{
-                const {userLineId} = payload;
-                AddBillToUser(userLineId);
+                AddBillToUser(payload);
                 break;
             }
             //Update functions
