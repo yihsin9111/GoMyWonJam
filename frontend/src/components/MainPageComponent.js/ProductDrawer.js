@@ -86,7 +86,7 @@ const ProductDrawer = ({item, handleClose}) => {
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={option}
+                    // value={option}
                     label="選項"
                     value={optionChosed}
                     onChange={(e)=>{setOptionChosed(e.target.value)}}>
