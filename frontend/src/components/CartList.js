@@ -1,12 +1,12 @@
 import React from 'react'
 import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
+import Dialog from '@mui/material/Dialog'
 
 //test Data
 import Bills from "../test datas/Bills.js"
@@ -107,13 +107,12 @@ export default function CartList() {
     <div>
         <React.Fragment>
           <Button onClick={toggleDrawer(true)}>{'The Product'}</Button>
-          <SwipeableDrawer
-            anchor={"right"}
+          <Dialog
             open={Open}
             onClose={toggleDrawer(false)}
           >
             {list('bottom')}
-          </SwipeableDrawer>
+          </Dialog>
         </React.Fragment>
     </div>
   );
