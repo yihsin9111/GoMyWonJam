@@ -16,6 +16,7 @@ const useBackend = () => {
         const User = {name, lineId, address, phoneNumber};
         sendData(["AddUser",User]);
     }
+    const UpdateUser = (userLineId, toUpdate, newData) => {}
     //--Category handling functions--//
     const AddCategory = (category) => {
         console.log("Adding category...");

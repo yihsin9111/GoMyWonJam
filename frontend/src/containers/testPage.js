@@ -27,7 +27,7 @@ const TestPage = ()=>{
     const [itemForm] = Form.useForm();
     const [billForm] = Form.useForm();
     const [createForm] = Form.useForm();
-    const { AddCategory, AddUser, GetProductsByCategory,
+    const { AddCategory, AddUser, UpdateUserData, GetProductsByCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} = useBackend();
 
@@ -35,6 +35,14 @@ const TestPage = ()=>{
         const user = form.getFieldValue();
         console.log('on add user', user);
         AddUser(user.name, user.lineId, user.address, user.phoneNumber);
+    }
+    const onUpdateUser = ()=> {
+        const user = form.getFieldValue();
+        console.log('on update user', user);
+        UpdateUserData(user.lineId, user.updateField, user)
+    }
+    const onDeleteUser = ()=> {
+
     }
 
     const onAddCategory = ()=>{
@@ -73,6 +81,8 @@ const TestPage = ()=>{
         AddBillToUser(id);
     }
 
+    
+
     const onReset = () => {
         console.log(form.getFieldValue());
     };
@@ -104,12 +114,18 @@ const TestPage = ()=>{
         <Form.Item name="phoneNumber" label="phone" rules={[{ required: true }]}>
             <Input />
         </Form.Item>
+        <Form.Item name="updateField" label="update?">
+            <Input />
+        </Form.Item>
         <Form.Item {...tailLayout}>
             <Button htmlType="button" onClick={onAddUser}>
                 Add
             </Button>
-            <Button htmlType="button" onClick={onReset}>
+            <Button htmlType="button" onClick={onUpdateUser}>
                 Update
+            </Button>
+            <Button htmlType="button" onClick={onDeleteUser}>
+                Delete
             </Button>
         </Form.Item>
     </Form>

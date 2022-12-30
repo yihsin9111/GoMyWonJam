@@ -1,5 +1,5 @@
 import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill } from './functions/AddFunc'
-
+import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
 
 //helper functions
 const sendData = (data, ws) =>{
