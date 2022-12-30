@@ -31,6 +31,11 @@ export default {
                 AddBillToUser(payload);
                 break;
             }
+            case 'AddItemToBill':{
+                const {BillId, item} = payload;
+                AddItemToBill(BillId, item);
+                break;
+            }
             //Update functions
             case 'UpdateUser':{
                 UpdateUser(payload);

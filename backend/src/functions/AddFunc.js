@@ -81,8 +81,18 @@ const AddProductToCategory = (Product)=>{
         }
     })
 }
-const AddItemToBill = (item, BillId) => {
-
+const AddItemToBill = (BillId, item) => {
+    console.log('adding item to bill...', item, BillId);
+    BillModel.find({billId:BillId}, async function(err, obj){
+        if(obj.length){
+            console.log('Bill found. adding item to bill...');
+            obj[0].items = [...obj[0].items, item]
+            await obj[0].save();
+        }
+        else{
+            console.log('Bill not found ;_;');
+        }
+    })
 }
 
 export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill}
