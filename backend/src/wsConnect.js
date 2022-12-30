@@ -36,6 +36,7 @@ export default {
                 AddItemToBill(BillId, item);
                 break;
             }
+
             //Update functions
             case 'UpdateUser':{
                 UpdateUser(payload);
@@ -46,7 +47,22 @@ export default {
                 break;
             } 
             case 'UpdateProduct':{
+                UpdateProduct(product);
+                break;
+            }
 
+            //delete functions
+            case 'DeleteUser':{
+                UpdateUser(payload);
+                break;
+            }
+            case 'DeleteCategory':{
+                UpdateCategory(payload);
+                break;
+            } 
+            case 'DeleteProduct':{
+                UpdateProduct(product);
+                break;
             }
         }
     }

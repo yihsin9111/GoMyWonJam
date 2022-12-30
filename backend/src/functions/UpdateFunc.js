@@ -26,7 +26,16 @@ const UpdateCategory = (category)=>{ //date not updated ?
     })
 }
 const UpdateProduct = (product)=>{
-
+    ProductModel.find({name:product.name,category:product.category}, async function(err, obj){
+        if(obj.length){
+            obj[0].URL = product.URL;
+            obj[0].price = product.price;
+            obj[0].note = product.note;
+            obj[0].product_type = product.product_type;
+            await obj[0].save;
+        }
+        else console.log('product does not exist ;_;')
+    })
 }
 
 //bill modify handling functions
