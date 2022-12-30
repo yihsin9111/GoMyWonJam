@@ -32,6 +32,19 @@ export default {
                 break;
             }
             //Update functions
+            case 'UpdateUser':{
+                UpdateUser(payload.lineId, payload);
+                break;
+            }
+            case 'UpdateBill':{
+
+            } 
+            case 'UpdateCategory':{
+
+            } 
+            case 'UpdateProduct':{
+
+            }
         }
     }
 }

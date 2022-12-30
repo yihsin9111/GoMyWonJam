@@ -27,7 +27,7 @@ const TestPage = ()=>{
     const [itemForm] = Form.useForm();
     const [billForm] = Form.useForm();
     const [createForm] = Form.useForm();
-    const { AddCategory, AddUser, UpdateUserData, GetProductsByCategory,
+    const { AddCategory, AddUser, UpdateUser, GetProductsByCategory,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress} = useBackend();
 
@@ -39,7 +39,7 @@ const TestPage = ()=>{
     const onUpdateUser = ()=> {
         const user = form.getFieldValue();
         console.log('on update user', user);
-        UpdateUserData(user.lineId, user.updateField, user)
+        UpdateUser(user);
     }
     const onDeleteUser = ()=> {
 
@@ -112,9 +112,6 @@ const TestPage = ()=>{
             <Input />
         </Form.Item>
         <Form.Item name="phoneNumber" label="phone" rules={[{ required: true }]}>
-            <Input />
-        </Form.Item>
-        <Form.Item name="updateField" label="update?">
             <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
