@@ -10,6 +10,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 
+// mui icon import
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 // react import
 import {useState} from "react";
 
@@ -81,9 +84,9 @@ const NavBar = ({open, setOpen}) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <ShoppingCartIcon />
               </IconButton>
-              <Menu
+              {/* <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -100,7 +103,7 @@ const NavBar = ({open, setOpen}) => {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
+              </Menu> */}
         </Toolbar>
       </AppBar>
     </Box>

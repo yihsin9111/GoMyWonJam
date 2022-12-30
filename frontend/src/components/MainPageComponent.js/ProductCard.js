@@ -36,85 +36,13 @@ const ProductCard = ({item}) => {
 
     // navigate function
 
-    // set toggleDrawer
-    const toggleDrawer = (open) => (event) => {
-        if (
-          event &&
-          event.type === 'keydown' &&
-          (event.key === 'Tab' || event.key === 'Shift')
-        ) {
-          return;
-        }
-        setOpen(open);
-      };
-
-    const handleChange = (event) => {
-        setOption(event.target.value);
-    };
-
+    // function define
     const handleClose = (value) => {
         setOpen(value);
     }
 
 
     // set const
-    const list = () => (
-        <Box
-          sx={{backgroundColor:'#b0bec5',
-          display:"flex",
-          flexDirection:"row",
-          justifyContent:"center"
-          }}
-          //onClick={toggleDrawer(anchor, false)}
-          //onKeyDown={toggleDrawer(anchor, false)}
-        >
-            <Box sx={{
-                width: 300,
-                height:300,
-                margin:"20px",
-                backgroundColor: 'primary.light',
-            }}>
-                <img src={item.URL} width="300px" height="300px"></img>
-            </Box>
-            <Box sx={{flexDirection:"column",
-                    display:"flex",
-                    backgroundColor:'#b0bec5',
-                    justifyContent:"space-between",
-                    justifyItems:"center",
-                    paddingBottom:"10px"}}>
-                <Box sx={{flexDirection:"display",
-                          alignContent:"center",
-                          margin:"10px"}}>
-                    <ListItemText primary={"PRODUCT_NAME"} secondary={"Genre"}/>
-                </Box>
-                <TextField label="數量"
-                helperText="請輸入數量"
-                id="outlined-start-adornment"
-                sx={{ m: 1, width: '25ch' }}
-                InputProps={{
-                type:"number",
-                defaultValue:1,
-                startAdornment: <InputAdornment position="start"></InputAdornment>,
-                }}/>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-label">選項</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={Option}
-                    label="選項"
-                    onChange={handleChange}>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <Button sx={{width:"50%",alignSelf:"flex-end"}}
-                variant="outlined"
-                onClick={setOpen(false)}>加入購物車</Button>
-            </Box>
-        </Box>
-      );
 
     // return
     return(
@@ -148,7 +76,7 @@ const ProductCard = ({item}) => {
         // </Fragment>
     <div>
         <Fragment>
-           <Card sx = {{ minWidth: 250, maxWidth: 300}} onClick={toggleDrawer(true)}>
+           <Card sx = {{ width: "90%"}} onClick={()=>{setOpen(true)}}>
                <CardActionArea>
                    <CardMedia
                         image ={item.URL}
@@ -168,7 +96,7 @@ const ProductCard = ({item}) => {
             <Drawer
                 anchor={"bottom"}
                 open={open}
-                onClose={toggleDrawer(false)}
+                onClose={()=>{setOpen(false)}}
             >
              <ProductDrawer item={item} handleClose={handleClose} />
             </Drawer>

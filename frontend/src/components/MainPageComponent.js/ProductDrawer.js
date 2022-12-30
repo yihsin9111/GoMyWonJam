@@ -10,14 +10,16 @@ import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
 
 // react import
+import {useState} from "react";
 
 // functional component
 const ProductDrawer = ({item, handleClose}) => {
-
+    // set state
+    const [option, setOption] = useState("");
     // function
-    const handleChange = () => {
-
-    }
+    const handleChange = (event) => {
+        setOption(event.target.value);
+    };
 
     return(
         <div>
@@ -63,7 +65,7 @@ const ProductDrawer = ({item, handleClose}) => {
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={Option}
+                    value={option}
                     label="選項"
                     onChange={handleChange}>
                         <MenuItem value={"10"}>Ten</MenuItem>

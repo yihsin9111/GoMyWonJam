@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
 
-export default function ProductPage() {
+export default function SwipeableTemporaryDrawer() {
   const toggleDrawer = (open) => (event) => {
     if (
       event &&
@@ -75,7 +75,7 @@ export default function ProductPage() {
                 value={Option}
                 label="選項"
                 onChange={handleChange}>
-                    <MenuItem value={10} >Ten</MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>

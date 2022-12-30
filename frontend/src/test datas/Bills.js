@@ -28,7 +28,7 @@ const Bills = [
         "package": "破壞袋",
         "payment": "刷卡",
         "address": "小琉球",
-        "status": 3     
+        "status": 4     
     },
     {
         "userLineId":"ming",

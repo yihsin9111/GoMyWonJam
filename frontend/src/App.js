@@ -1,26 +1,18 @@
 // react import
 import { useState } from "react";
 import './App.css';
-<<<<<<< HEAD
-import "antd/dist/antd.css"; 
-=======
-//import "antd/dist/antd.css"; 
-import { useState } from "react";
->>>>>>> origin/LZT
 
 // Container Import
 import MainPage from './containers/MainPage';
 import TestPage from "./containers/testPage";
-<<<<<<< HEAD
 import ProductPage from "./components/ProductPage";
-=======
 import CartList from './components/CartList';
->>>>>>> origin/LZT
+import PersonalPage from "./containers/PersonalPage";
+import BillPage from "./containers/BillPage";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
 import {Main, DrawerHeader} from "./components/BarComponent/barPositionHandler";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Router import
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -36,12 +28,11 @@ function App() {
         <DrawerHeader>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/personal" element={<PersonalPage />} />
+          <Route path="/personal/bills" element={<BillPage />} />
           <Route path="/test" element={<TestPage />} />
-<<<<<<< HEAD
           <Route path="/product" element={<ProductPage />} />
-=======
           <Route path="/cartlist" element={<CartList />} />
->>>>>>> origin/LZT
         </Routes>
         </DrawerHeader>
       </Main>
