@@ -9,6 +9,7 @@ import ProductPage from "./components/ProductPage";
 import CartList from './components/CartList';
 import PersonalPage from "./containers/PersonalPage";
 import BillPage from "./containers/BillPage";
+import ManagerPage from "./containers/ManagerPage";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/cartlist" element={<CartList />} />
+          <Route path="/manager" element={<ManagerPage />} />
         </Routes>
         </DrawerHeader>
       </Main>
