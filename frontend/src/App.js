@@ -18,11 +18,15 @@ import {Main, DrawerHeader} from "./components/BarComponent/barPositionHandler";
 // Router import
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+// Provider import
+import {WebsiteProvider} from './containers/hooks/WebsiteContext'
 function App() {
   // set state
   const [open, setOpen] = useState(false);
 
   return (
+    
+    <WebsiteProvider>
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
       <Main open={open}>
@@ -39,6 +43,7 @@ function App() {
         </DrawerHeader>
       </Main>
     </Router>
+    </WebsiteProvider>
   );
 }
 

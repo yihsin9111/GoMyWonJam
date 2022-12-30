@@ -1,11 +1,14 @@
 //test datas for frontend testing//
 import Products from "../../test datas/Products"
 //////////////////////////////////
-const client = new WebSocket('ws://localhost:4000');
+import client from './wsConnect'
+
 
 const sendData =  async(data) =>{
-    await client.send(JSON.stringify(data));
-    console.log('data send. data:', JSON.stringify(data));
+    if(client.readyState===client.OPEN){
+        await client.send(JSON.stringify(data));
+        console.log('data send. data:', JSON.stringify(data));
+    }
 };
 
 const useBackend = () => {

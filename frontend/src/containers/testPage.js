@@ -3,6 +3,7 @@ import { Button, Form, Input, Select, DatePicker } from 'antd';
 import useBackend from './hooks/useBackend'
 import {useState} from 'react'
 import OptionModal from './testModal'
+import { useWebsite } from './hooks/WebsiteContext';
 
 const { Option } = Select;
 
@@ -16,6 +17,8 @@ const tailLayout = {
 
 
 const TestPage = ()=>{
+
+    const {userLineId} = useWebsite();
 
     const [optionNum, setOptionNum] = useState(1);
     const [modalOpen, setModalOpen] = useState(false);
@@ -89,7 +92,7 @@ const TestPage = ()=>{
     
 
     const onReset = () => {
-        console.log(form.getFieldValue());
+        console.log(userLineId);
     };
 
     
