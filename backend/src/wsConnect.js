@@ -1,6 +1,7 @@
 import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill } from './functions/AddFunc'
 import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
-import { GetCategories, GetProductsByCategory } from './functions/GetFunc';
+import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill } from './functions/GetFunc';
+import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct } from './functions/DeleteFunc'
 
 //helper functions
 const sendData = (data, ws) =>{
@@ -47,6 +48,14 @@ export default {
                 GetProductsByCategory(payload,ws);
                 break;
             }
+            case 'GetUserData':{
+                GetUserData(payload,ws);
+                break;
+            }
+            case 'GetUserBill':{
+                GetUserBill(payload,ws);
+                break;
+            }
 
             //Update functions
             case 'UpdateUser':{
@@ -64,15 +73,19 @@ export default {
 
             //delete functions
             case 'DeleteUser':{
-                UpdateUser(payload);
+                DeleteUser(payload);
                 break;
             }
             case 'DeleteCategory':{
-                UpdateCategory(payload);
+                DeleteCategory(payload);
                 break;
             } 
             case 'DeleteProduct':{
-                UpdateProduct(product);
+                DeleteProduct(product);
+                break;
+            }
+            case 'DeleteBill':{
+                DeleteBill(payload.name, payload.category);
                 break;
             }
         }

@@ -96,7 +96,7 @@ const AddProductForm = () => {
                     margin="dense"
                     label="商品種類"
                     value={whichCategory}
-                    onChange={()=>{HandleCategory()}}
+                    onChange={(e)=>{HandleCategory(e)}}
                 >
                     {category.map((option) => (
                         <MenuItem key={option.value} value={option.value}>

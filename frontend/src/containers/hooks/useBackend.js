@@ -23,6 +23,16 @@ const useBackend = () => {
         console.log('updating user...')
         sendData(["UpdateUser", user])
     }
+    const GetUserData = (userLineId) => {
+        console.log('fetching user data...');
+        sendData(["GetUserData", userLineId]);
+    }
+    //return a list of user's bill
+    const GetUserBill = (userLineId)=>{
+        console.log("Getting UserBill...");
+        sendData(["GetUserBill",userLineId]);
+    }
+
     //--Category handling functions--//
     const AddCategory = (category) => {
         console.log("Adding category...");
@@ -75,12 +85,6 @@ const useBackend = () => {
         sendData(["ConfirmBill"])
     }
     
-    //return a list of user's bill
-    const GetUserBill = (userLineId)=>{
-        console.log("Getting UserBill...");
-        sendData(["GetUserBill",userLineId]);
-    }
-
     //return a list of bill based on input filters
     const FindBill = (filters)=>{
         console.log("Finding Bill...");
@@ -92,12 +96,31 @@ const useBackend = () => {
         console.log("Updating Bill Address...");
         sendData(["UpdateBillAddress",{billId, newAddr}]);
     }
+
+    //---delete functions--//
+    const DeleteBill = (billId)=>{
+        console.log('deleting bill...');
+        sendData(["DeleteBill", billId]);
+    }
+    const DeleteCategory = (name)=>{
+        console.log('deleting category...');
+        sendData(["DeleteCategory", name]);
+    }
+    const DeleteUser = (userLineId)=>{
+        console.log('deleting user...');
+        sendData(["DeleteUser",userLineId]);
+    }
+    const DeleteProduct = (product)=>{
+        console.log('deleting product...');
+        sendData(["DeleteProduct",product])
+    }
    
 
     return {
         AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
-        AddProductToCategory, UpdateProduct, GetProductById,
+        AddProductToCategory, UpdateProduct, GetProductById, GetUserData,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
+        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct
     };
 };
 

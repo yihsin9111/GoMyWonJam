@@ -59,23 +59,23 @@ function ProductsTabs() {
         </Box>
         {categories.map((label)=>(
           <TabPanel value={label} key={label}>
-            <Grid container key="1">
-              <Box
-                sx={{
-                  p: 2,
-                  bgcolor: 'background.default',
-                  display: 'grid',
-                  gridTemplateColumns: { md: '1fr 1fr 1fr' },
-                  gap: 2,
-                }}>
-              {products.map((value,index)=>(
-                <Grid item>
-                  <ProductCard item={value} key={index} />
-                </Grid>))}
-              </Box>
-            </Grid>
-          </TabPanel>
-        ))}
+            {products.length?
+              (<Grid container key="1">
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: 'background.default',
+                    display: 'grid',
+                    gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                    gap: 2,
+                  }}>
+                    {products.map((value,index)=>(
+                      <Grid item>
+                        <ProductCard item={value} key={index} />
+                      </Grid>))}
+                </Box>
+              </Grid>):<p>No product in this category : /</p>}
+        </TabPanel>))}
       </TabContext>
     </Box>
   );

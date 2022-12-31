@@ -1,6 +1,5 @@
 import BillModel from '../models/Bill'
 import UserModel from '../models/User'
-import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 
@@ -27,4 +26,26 @@ const GetProductsByCategory = async(category, ws)=>{
     //sendData(["products",obj[0].products],ws);
 }
 
-export {GetCategories, GetProductsByCategory}
+const GetUserData = async(userLineId, ws)=>{
+    UserModel.find({userLineId:userLineId}, async function(err, obj){
+        if(obj.length){
+            sendData(["userData",obj[0]], ws);
+        }
+        else{
+            console.log("user not found ;_;");
+        }
+    })
+}
+
+const GetUserBill = async(userLineId, ws)=>{
+    BillModel.find({userLineId:userLineId}, async function(err, obj){
+        if(obj.length){
+            sendData(["userBill",obj],ws);
+        }
+        else{
+            sendData(["userBill",[]],ws);
+        }
+    })
+}
+
+export {GetCategories, GetProductsByCategory, GetUserData, GetUserBill}
