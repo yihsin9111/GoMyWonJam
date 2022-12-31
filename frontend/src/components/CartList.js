@@ -111,7 +111,7 @@ export default function CartList() {
             open={Open}
             onClose={toggleDrawer(false)}
           >
-            {list('bottom')}
+            {list()}
           </Dialog>
         </React.Fragment>
     </div>
