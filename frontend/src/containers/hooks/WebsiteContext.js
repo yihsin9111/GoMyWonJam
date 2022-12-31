@@ -9,7 +9,7 @@ const WebsiteContext = createContext({
     userBill:   [],
     shopping:   false,
     currentBillId: "",
-    categories: "",
+    categories: [],
     products:   [],
 })
 
@@ -21,7 +21,7 @@ const WebsiteProvider = (props) => {
     const [userBill, setuserBill]       = useState([]);
     const [shopping, setShopping]       = useState(false);
     const [currentBillId, setCurrentBillId] = useState("");
-    const [categories, setCategories]       = useState("");
+    const [categories, setCategories]       = useState([]);
     const [products, setProducts]           = useState([]);
 
     client.onmessage = (byteString) => {

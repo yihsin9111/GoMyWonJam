@@ -32,10 +32,13 @@ const useBackend = () => {
         console.log("Updating category...");
         sendData(["UpdateCategory",Category]);
     }
+    const GetCategories = () => {
+        console.log("fetching categories...");
+        sendData(["GetCategories","/"]);
+    }
     const GetProductsByCategory = (name) => {
         console.log("getting products by category "+name+" ...");
-        sendData(["GetProductByCategory",name]);
-        return Products
+        sendData(["GetProductsByCategory",name]);
     }
 
     //--Product handling functions--//
@@ -92,7 +95,7 @@ const useBackend = () => {
    
 
     return {
-        AddUser, UpdateUser, AddCategory, UpdateCategory,
+        AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
         AddProductToCategory, UpdateProduct, GetProductById,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
     };

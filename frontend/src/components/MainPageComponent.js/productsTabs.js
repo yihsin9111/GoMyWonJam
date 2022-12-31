@@ -1,5 +1,7 @@
 // react import
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+import useBackend from "../../containers/hooks/useBackend"
 
 // mui import
 import Box from '@mui/material/Box';
@@ -16,23 +18,47 @@ import ProductCard from "./ProductCard";
 import Products from "../../test datas/Products";
 
 function ProductsTabs() {
+  const { categories, products } = useWebsite();
+  const { GetCategories, GetProductsByCategory } = useBackend();
+  
   const [value, setValue] = useState('1');
+  const [renderProducts, setRenderProducts] = useState([]);
 
   const handleChange = (event, newValue) => {
+    console.log(newValue);
     setValue(newValue);
   };
+
+  //get existing categories on each re-render.
+  useEffect(()=>{
+    async function fetchData(){
+      await GetCategories();
+      //await GetProductsByCategory(categories[0]);
+    };
+    fetchData();
+    //if(categories[0]) setValue(categories[0]); 使用login
+    setRenderProducts(products);
+  }, [])
+
+  //
+  useEffect(()=>{
+    async function fetchData(){
+      await GetProductsByCategory(value);
+    }
+    fetchData();
+    setRenderProducts(products);
+  },[value])
 
   return (
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" variant="fullWidth">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
+            {categories.map((label)=>(<Tab label={label} value={label} />))}
           </TabList>
         </Box>
-        <TabPanel value="1" key="1">
+        {categories.map((label)=>(
+          <TabPanel value={label} key={label}>
             <Grid container key="1">
               <Box
                 sx={{
@@ -42,15 +68,14 @@ function ProductsTabs() {
                   gridTemplateColumns: { md: '1fr 1fr 1fr' },
                   gap: 2,
                 }}>
-              {Products.map((value,index)=>(
+              {products.map((value,index)=>(
                 <Grid item>
                   <ProductCard item={value} key={index} />
                 </Grid>))}
               </Box>
             </Grid>
-        </TabPanel>
-        <TabPanel value="2" key="2">Item Two</TabPanel>
-        <TabPanel value="3" key="3">Item Three</TabPanel>
+          </TabPanel>
+        ))}
       </TabContext>
     </Box>
   );

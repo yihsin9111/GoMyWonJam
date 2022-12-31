@@ -1,5 +1,6 @@
 import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill } from './functions/AddFunc'
 import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
+import { GetCategories, GetProductsByCategory } from './functions/GetFunc';
 
 //helper functions
 const sendData = (data, ws) =>{
@@ -34,6 +35,16 @@ export default {
             case 'AddItemToBill':{
                 const {BillId, item} = payload;
                 AddItemToBill(BillId, item);
+                break;
+            }
+
+            //Get functions
+            case 'GetCategories':{
+                GetCategories(ws);
+                break;
+            }
+            case 'GetProductsByCategory':{
+                GetProductsByCategory(payload,ws);
                 break;
             }
 
