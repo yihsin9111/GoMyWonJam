@@ -10,6 +10,7 @@ import CartList from './components/CartList';
 import PersonalPage from "./containers/PersonalPage";
 import BillPage from "./containers/BillPage";
 import ManagerPage from "./containers/ManagerPage";
+import CheckPage from "./containers/CheckPage";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
@@ -29,6 +30,7 @@ function App() {
         <DrawerHeader>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/check" element={<CheckPage />} />
           <Route path="/personal" element={<PersonalPage />} />
           <Route path="/personal/bills" element={<BillPage />} />
           <Route path="/test" element={<TestPage />} />

@@ -17,7 +17,6 @@ import BasicDateTimePicker from "./DateTimePicker";
 //hook import 
 import useBackend from "../../containers/hooks/useBackend";
 
-
 //functional component
 const AddCategoryForm = () => {
     //call hook
@@ -59,19 +58,19 @@ const AddCategoryForm = () => {
                 display: "grid",
                 gap: 1.5
             }}>
-            <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="category_name"
-                label="商品種類名稱"
-                type="text"
-                fullWidth
-                variant="outlined"
-                value={name}
-                onChange={(e)=>{HandleTextChange(e)}}
-            />
-            <BasicDateTimePicker date={date} setDate={setDate} />
+                <TextField
+                    autoFocus
+                    required
+                    margin="dense"
+                    id="category_name"
+                    label="商品種類名稱"
+                    type="text"
+                    fullWidth
+                    variant="outlined"
+                    value={name}
+                    onChange={(e)=>{HandleTextChange(e)}}
+                />
+                <BasicDateTimePicker date={date} setDate={setDate} />
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>

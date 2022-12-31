@@ -46,34 +46,6 @@ const ProductCard = ({item}) => {
 
     // return
     return(
-        // <Fragment>
-        //     <Card sx = {{ minWidth: 250, maxWidth: 300}} onClick={toggleDrawer}>
-        //         <CardActionArea>
-        //             <CardMedia
-        //                 image ={item.URL}
-        //                 height = "80%"
-        //                 component = "img"
-        //             />
-        //             <CardContent>
-        //                 <Typography variant="h5" component="div">
-        //                     {item.name}
-        //                 </Typography>
-        //                 <Typography variant="body2" color="text.secondary">
-        //                     價格：{item.price}
-        //                 </Typography>
-        //             </CardContent>
-        //         </CardActionArea>
-        //     </Card>
-        //     <SwipeableDrawer
-        //         anchor={"bottom"}
-        //         open={open}
-        //         onClose={toggleDrawer(false)}
-        //         onOpen={toggleDrawer(true)}
-        //         >
-        //         {list('bottom')}
-        //     </SwipeableDrawer>
-        //     {/* <ProductPage item={item} open={open} setOpen={setOpen} /> */}
-        // </Fragment>
     <div>
         <Fragment>
            <Card sx = {{ width: "90%"}} onClick={()=>{setOpen(true)}}>

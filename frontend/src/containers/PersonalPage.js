@@ -4,6 +4,9 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
+//mui icon import
+import EditIcon from '@mui/icons-material/Edit';
+
 //test data import 
 import User from "../test datas/User";
 
@@ -15,10 +18,17 @@ const PersonalPage = () => {
 
     //return
     return(
-        <Box>
-            <Typography gutterBottom variant="h4" component="div" color="text.primary">
-                個人基本資料
-            </Typography>
+        <Box sx={{border: "10%"}}>
+            <Box sx={{
+                display:"flex",
+                flexDirection:"row",
+                justifyContent:"center",
+            }}>
+                <Typography gutterBottom variant="h4" component="div" color="text.primary">
+                    個人基本資料
+                </Typography>
+                <EditIcon />
+            </Box>
             <Typography variant="body1" color="text.secondary">
                 名稱：{User.name}
             </Typography>
