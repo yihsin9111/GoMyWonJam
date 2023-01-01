@@ -77,48 +77,48 @@ const NavBar = ({open, setOpen}) => {
     }
     
     return (
-    <>
-    <Box sx={{ flexGrow: 0 }}>
-      <AppBar position="static" style={{ background: '#b0bec5' }} open={open}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={(e)=>{handleDrawer()}}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            GoMyWonJam
-          </Typography>
-          <Fragment>
+      <>
+      <Box sx={{ flexGrow: 0 }}>
+        <AppBar position="static" style={{ background: '#b0bec5' }} open={open}>
+          <Toolbar>
             <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={()=>{handleCart()}}
-                  color="inherit"
-                >
-                  <ShoppingCartIcon />
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={(e)=>{handleDrawer()}}
+            >
+              <MenuIcon />
             </IconButton>
-            <Dialog 
-              open={openCart} 
-              onClose={()=>{setOpenCart(false)}} 
-              fullWidth={true}
-              >
-              <CartInclude open={openCart} setOpen={setOpenCart} />
-            </Dialog>
-            {/* <CartList open={openCart} setOpen={setOpenCart} /> */}
-          </Fragment>
-        </Toolbar>
-      </AppBar>
-    </Box>
-    <BarDrawer open={open} setOpen={setOpen} theme={theme} />
-    </>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              GoMyWonJam
+            </Typography>
+            <Fragment>
+              <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={()=>{handleCart()}}
+                    color="inherit"
+                  >
+                    <ShoppingCartIcon />
+              </IconButton>
+              <Dialog 
+                open={openCart} 
+                onClose={()=>{setOpenCart(false)}} 
+                fullWidth={true}
+                >
+                <CartInclude open={openCart} setOpen={setOpenCart} />
+              </Dialog>
+              {/* <CartList open={openCart} setOpen={setOpenCart} /> */}
+            </Fragment>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <BarDrawer open={open} setOpen={setOpen} theme={theme} />
+      </>
     )
 }
 

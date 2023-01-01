@@ -116,7 +116,11 @@ const useBackend = () => {
     }
     const DeleteProduct = (product)=>{
         console.log('deleting product...');
-        sendData(["DeleteProduct",product])
+        sendData(["DeleteProduct",product]);
+    }
+    const DeleteItemFromBill = (billId,i)=>{
+        console.log('deleting item from bill...');
+        sendData(["DeleteItemFromBill",{billId,i}]);
     }
    
 
@@ -124,7 +128,7 @@ const useBackend = () => {
         AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
         AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetBill,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
-        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct
+        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill,
     };
 };
 

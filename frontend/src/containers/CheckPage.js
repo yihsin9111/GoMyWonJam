@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField'
 import  Divider  from '@mui/material/Divider';
+import Autocomplete from '@mui/material/Autocomplete';
 
 //component import 
 import Receipt from '../components/PersonalComponent/Receipt';
@@ -28,9 +29,11 @@ const CheckPage = () => {
     const [PackageOption, setPackageOption] = React.useState('');
     const [PaymentOption, setPaymentOption] = React.useState('');
     const [Phone, setPhone] = React.useState('');
+    const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
+    const [value, setValue] = React.useState("");
     
     //hooks
-    const {bill} = useWebsite();
+    const {bill, total} = useWebsite();
 
     //function define
     const handlePackage = (event) => {
@@ -45,14 +48,34 @@ const CheckPage = () => {
           setPhone(Phone+e.target.value);
       };
 
+    const handleInfmChange=()=>{
+        if(Infm.state){
+            setInfm({btn:"確認",state:false,color:"success"})
+        }
+        else{
+            setInfm({btn:"修改",state:true,color:"error"})
+        }
+    }
+
+    const setFieldValue = (value) => {
+        setValue(value);
+        console.log(value)
+      };
+
+    const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
+    "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
+    "南投縣","雲林縣","嘉義市","嘉義縣","台南市","高雄市",
+    "屏東縣","花蓮縣","台東縣","澎湖縣","金門縣","連江縣","海南諸島"
+    ]
+
     const list=()=>{
         return(
-            <Box sx={{display:"grid",gap:1.5}}>
+            <Box sx={{display:"grid",gap:1.5,gridColumnStart:1,gridColumnEnd:3}}>
                 <Typography variant='h5'>結帳</Typography>
                 <Receipt item={bill.items||[]} />
                 <Box>
                     <Typography variant='h6' sx={{display:"flex",flexDirection:"row"}}>總金額</Typography>
-                    <Typography variant='body2' sx={{display:"flex",flexDirection:"row-reverse"}}>{Bills[0].total}</Typography>
+                    <Typography variant='body2' sx={{display:"flex",flexDirection:"row-reverse"}}>{total}</Typography>
                 </Box>
                 <Divider></Divider>
             </Box>
@@ -74,6 +97,7 @@ const CheckPage = () => {
                     value={PaymentOption}
                     label="付款方式"
                     onChange={(e)=>{handlePayment(e)}}
+                    sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                         <MenuItem value={"貨到付款"}>貨到付款</MenuItem>
                         <MenuItem value={"匯款"}>匯款</MenuItem>
@@ -85,38 +109,60 @@ const CheckPage = () => {
                     label="包材"
                     defaultValue={PackageOption}
                     onChange={(e)=>{handlePackage(e)}}
+                    sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                         <MenuItem value={"紙箱"}>紙箱</MenuItem>
                         <MenuItem value={"破壞袋"}>破壞袋</MenuItem>
                 </TextField>
-                <Divider></Divider>
-                <Typography variant="body1">收件人資訊</Typography>
+                <Divider sx={{gridColumnStart:1,gridColumnEnd:3}}></Divider>
+                <Typography variant="body1" sx={{gridColumnStart:1}}>收件人資訊</Typography>
+                <Button variant="contained" color={Infm.color} onClick={(e)=>handleInfmChange()} sx={{gridColumnStart:2}}>{Infm.btn}</Button>
                 <TextField
                     id="ReceiverName"
                     margin="dense"
                     label="姓名"
+                    disabled={Infm.state}
                     //defaultValue="小名"
                     onChange={(e)=>{handlePackage(e)}}
+                    sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
                 <TextField
                     id="ReceiverPhone"
                     margin="dense"
                     label="手機"
+                    disabled={Infm.state}
                     defaultValue={Phone}
                     onChange={(e)=>{handlePhone(e)}}
                     inputMode="tel"
+                    sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
-                <TextField
+                <Autocomplete
+                disablePortal
+                id="COUNTY"
+                margin='dense'
+                disabled={Infm.state}
+                options={CountyOption}
+                sx={{gridColumnStart:1,gridColumnEnd:2}}
+                renderInput={(params) => <TextField {...params} label="台灣縣市" 
+                helperText="輸入門市所在縣市"/>}
+                >
+                </Autocomplete>
+                <Autocomplete
+                    disablePortal
                     id="ReceiverAddress"
                     margin="dense"
-                    label="收件7-11門市"
+                    disabled={Infm.state}
+                    options={["台大","師大"]}
                     //defaultValue={"小名"}
-                    onChange={(e)=>{handlePackage(e)}}
+                    sx={{gridColumnStart:2,gridColumnEnd:3}}
+                    onChange={(e, option) => setFieldValue(option)}
+                    renderInput={(params) => <TextField {...params} label="門市" 
+                    helperText="輸入 店號/門市名稱/道路名稱 查找"/>}
                 >
-                </TextField>
-                <Button variant="contained">結帳</Button>
+                </Autocomplete>
+                <Button variant="contained" disabled={!Infm.state} sx={{gridColumnStart:1,gridColumnEnd:3}}>結帳</Button>
             </CardContent>
         </Card>
     )

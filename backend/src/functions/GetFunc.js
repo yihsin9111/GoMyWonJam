@@ -51,6 +51,7 @@ const GetUserBill = async(userLineId, ws)=>{
 const GetBill = async(billId, ws)=>{
     BillModel.find({billId}, async function(err, obj){
         if(obj.length){
+            console.log('send bill',obj[0]);
             sendData(["bill",obj[0]],ws);
         }
         else{

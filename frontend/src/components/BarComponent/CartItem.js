@@ -29,16 +29,19 @@ const CartInclude = ({open ,setOpen}) => {
     }
 
     //fetch data
-    const { GetBill } = useBackend();
-    const { bill, currentBillId } = useWebsite();
-    const [ cartBill, setCartBill ] = useState({});
+    const { GetBill, DeleteItemFromBill } = useBackend();
+    const { bill, currentBillId, total, setTotal } = useWebsite();
 
     useEffect(()=>{
-        setCartBill(bill);
-    },[])
-    useEffect(()=>{
-        setCartBill(bill);
+        let tot = 0;
+        bill.items.map((value,index)=>(tot+=value.price*value.number))
+        setTotal(tot);
     },[bill])
+
+    const onDeleteItemFromBill= async(i)=>{
+        console.log('deleting item '+i+' from bill'+currentBillId)
+        DeleteItemFromBill(currentBillId, i);
+    }
 
     return(
     <Box>
@@ -83,8 +86,9 @@ const CartInclude = ({open ,setOpen}) => {
                     <Button sx={{width:"50%",alignSelf:"flex-end"}}
                     variant="outlined"
                     color='error'
+                    value={index}
                     //delete function
-                    //onClick={}
+                    onClick={(e)=>{onDeleteItemFromBill(e.target.value)}}
                     >刪除此商品</Button>
                     {/* <Divider></Divider> */}
                     </CardActionArea>
@@ -93,7 +97,7 @@ const CartInclude = ({open ,setOpen}) => {
                 </Card>
             ))}
         </Box>
-            <Typography variant="body1" component="div">總金額：{bill.total}</Typography>
+            <Typography variant="body1" component="div">總金額：{total}</Typography>
             <Button sx={{width:"50%",alignSelf:"flex-end"}}
             variant="contained"
             onClick={()=>{handlePay()}}>結帳</Button>
