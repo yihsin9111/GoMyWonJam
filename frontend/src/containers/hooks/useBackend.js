@@ -73,6 +73,10 @@ const useBackend = () => {
         console.log("adding item to bill...");
         sendData(["AddItemToBill",{BillId,item}]);
     }
+    const GetBill = (BillId)=>{
+        console.log('fetching bill by bill id...');
+        sendData(["GetBill",BillId]);
+    }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
     const AddBillToUser = (user)=>{
@@ -112,15 +116,19 @@ const useBackend = () => {
     }
     const DeleteProduct = (product)=>{
         console.log('deleting product...');
-        sendData(["DeleteProduct",product])
+        sendData(["DeleteProduct",product]);
+    }
+    const DeleteItemFromBill = (billId,i)=>{
+        console.log('deleting item from bill...');
+        sendData(["DeleteItemFromBill",{billId,i}]);
     }
    
 
     return {
         AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
-        AddProductToCategory, UpdateProduct, GetProductById, GetUserData,
+        AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetBill,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
-        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct
+        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill,
     };
 };
 

@@ -21,7 +21,7 @@ function ProductsTabs() {
   const { categories, products } = useWebsite();
   const { GetCategories, GetProductsByCategory } = useBackend();
   
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState('all');
   const [renderProducts, setRenderProducts] = useState([]);
 
   const handleChange = (event, newValue) => {
@@ -54,11 +54,27 @@ function ProductsTabs() {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" variant="fullWidth">
+            <Tab label='all' value='all'/>
             {categories.map((label)=>(<Tab label={label} value={label} />))}
           </TabList>
         </Box>
         {categories.map((label)=>(
           <TabPanel value={label} key={label}>
+            <Grid container key="1">
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: 'background.default',
+                    display: 'grid',
+                    gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                    gap: 2,
+                  }}>
+                    {/* {products.map((value,index)=>(
+                      <Grid item>
+                        <ProductCard item={value} key={index} />
+                      </Grid>))} */}
+                </Box>
+            </Grid>
             {products.length?
               (<Grid container key="1">
                 <Box

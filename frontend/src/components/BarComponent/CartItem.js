@@ -11,6 +11,11 @@ import {Card, CardContent, CardActionArea, Typography, Divider} from "@mui/mater
 //test data import
 import Bills from '../../test datas/Bills';
 
+//hooks import
+import { useState, useEffect } from 'react';
+import useBackend from '../../containers/hooks/useBackend';
+import { useWebsite } from '../../containers/hooks/WebsiteContext';
+
 //functional component
 const CartInclude = ({open ,setOpen}) => {
 
@@ -21,6 +26,21 @@ const CartInclude = ({open ,setOpen}) => {
     const handlePay = () => {
         setOpen(false);
         navigate("/check");
+    }
+
+    //fetch data
+    const { GetBill, DeleteItemFromBill } = useBackend();
+    const { bill, currentBillId, total, setTotal } = useWebsite();
+
+    useEffect(()=>{
+        let tot = 0;
+        bill.items.map((value,index)=>(tot+=value.price*value.number))
+        setTotal(tot);
+    },[bill])
+
+    const onDeleteItemFromBill= async(i)=>{
+        console.log('deleting item '+i+' from bill'+currentBillId)
+        DeleteItemFromBill(currentBillId, i);
     }
 
     return(
@@ -39,7 +59,7 @@ const CartInclude = ({open ,setOpen}) => {
             gap: 1
         }}>
             <Typography variant="h5" component="div">購物車明細</Typography>
-            {Bills[0].items.map((value,index)=>(
+            {bill.items.map((value,index)=>(
                 <Card>
                 <CardContent>
                     <Box sx={{
@@ -66,8 +86,9 @@ const CartInclude = ({open ,setOpen}) => {
                     <Button sx={{width:"50%",alignSelf:"flex-end"}}
                     variant="outlined"
                     color='error'
+                    value={index}
                     //delete function
-                    //onClick={}
+                    onClick={(e)=>{onDeleteItemFromBill(e.target.value)}}
                     >刪除此商品</Button>
                     {/* <Divider></Divider> */}
                     </CardActionArea>
@@ -76,7 +97,7 @@ const CartInclude = ({open ,setOpen}) => {
                 </Card>
             ))}
         </Box>
-            <Typography variant="body1" component="div">總金額：{Bills[0].total}</Typography>
+            <Typography variant="body1" component="div">總金額：{total}</Typography>
             <Button sx={{width:"50%",alignSelf:"flex-end"}}
             variant="contained"
             onClick={()=>{handlePay()}}>結帳</Button>

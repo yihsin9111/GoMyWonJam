@@ -7,7 +7,9 @@ const WebsiteContext = createContext({
     userLineId: "",
     userData:   {}, 
     userBill:   [],
+    bill:       {},
     shopping:   false,
+    total:      0,
     currentBillId: "",
     categories: [],
     products:   [],
@@ -20,9 +22,11 @@ const WebsiteProvider = (props) => {
     const [userData, setUserData]       = useState({});
     const [userBill, setUserBill]       = useState([]);
     const [shopping, setShopping]       = useState(false);
-    const [currentBillId, setCurrentBillId] = useState("");
+    const [bill, setBill]                 = useState({});
+    const [currentBillId, setCurrentBillId] = useState("ming_2022-12-30T09:14:22.000Z");
     const [categories, setCategories]       = useState([]);
     const [products, setProducts]           = useState([]);
+    const [total, setTotal]                 = useState(0);
 
     client.onmessage = (byteString) => {
         const {data} = byteString;
@@ -44,6 +48,10 @@ const WebsiteProvider = (props) => {
                 setUserBill(payload);
                 break;
             }
+            case "bill":{
+                setBill(payload);
+                break;
+            }
             case "categories":{
                 setCategories(payload);
                 break;
@@ -61,7 +69,7 @@ const WebsiteProvider = (props) => {
             value={{
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
-                setCurrentBillId ,categories, products,
+                setCurrentBillId ,categories, products, bill, total, setTotal
             }}
             {...props}
         />
