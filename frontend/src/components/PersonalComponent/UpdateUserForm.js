@@ -25,7 +25,7 @@ const UpdateUserForm = () => {
     
     //call hook
     const { userLineId, userData } = useWebsite();
-    const { GetUserData } = useBackend();
+    const { GetUserData, UpdateUser } = useBackend();
 
     //set state
     const [open, setOpen] = useState(false);
@@ -35,23 +35,19 @@ const UpdateUserForm = () => {
     const [address, setAddress] = useState('');
 
     useEffect(()=>{
-        GetUserData(userLineId)
+        GetUserData(userLineId);
         setName(userData.name);
         setPhone(userData.phoneNumber);
         setAddress(userData.address);
     },[])
     //function define
     const Cancel = () => {
-        setDate(dayjs(""));
-        setName("");
         setOpen(false);
     }
 
     const onAddCategory = ()=>{
-        const newCategory = {cat_name: name, deadLine: date};
-        //AddCategory(newCategory);
-        setName("");
-        setDate(dayjs(""));
+        const newUser = {lineId:userLineId, name, address, phoneNumber:phone};
+        UpdateUser(newUser);
         setOpen(false);
     }
 
@@ -59,7 +55,7 @@ const UpdateUserForm = () => {
     return(
         <>
         <IconButton color="primary" aria-label="upload picture" 
-            component="label" onClick={()=>{setOpen(true)}} sx={{height:40,width:40}}>
+            component="label" onClick={()=>{setOpen(true)}} sx={{height:30,width:30}}>
             <EditIcon />
         </IconButton>
         <Dialog open={open} onClose={()=>{Cancel()}}>
@@ -107,7 +103,7 @@ const UpdateUserForm = () => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onAddCategory()}}>增新</Button>
+            <Button onClick={()=>{onAddCategory()}}>確認</Button>
             </DialogActions>
         </Dialog>
         </>

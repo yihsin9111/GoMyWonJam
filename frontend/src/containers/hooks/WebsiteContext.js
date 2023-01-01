@@ -7,6 +7,7 @@ const WebsiteContext = createContext({
     userLineId: "",
     userData:   {}, 
     userBill:   [],
+    items:      [],
     shopping:   false,
     currentBillId: "",
     categories: [],
@@ -20,6 +21,7 @@ const WebsiteProvider = (props) => {
     const [userData, setUserData]       = useState({});
     const [userBill, setUserBill]       = useState([]);
     const [shopping, setShopping]       = useState(false);
+    const [items, setItems]                 = useState([]);
     const [currentBillId, setCurrentBillId] = useState("");
     const [categories, setCategories]       = useState([]);
     const [products, setProducts]           = useState([]);
@@ -44,6 +46,10 @@ const WebsiteProvider = (props) => {
                 setUserBill(payload);
                 break;
             }
+            case "items":{
+                setItems(payload);
+                break;
+            }
             case "categories":{
                 setCategories(payload);
                 break;
@@ -61,7 +67,7 @@ const WebsiteProvider = (props) => {
             value={{
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
-                setCurrentBillId ,categories, products,
+                setCurrentBillId ,categories, products, items,
             }}
             {...props}
         />
