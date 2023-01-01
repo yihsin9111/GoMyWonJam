@@ -9,13 +9,20 @@ import Bill from "../components/PersonalComponent/Bill";
 //test data import 
 import Bills from "../test datas/Bills";
 
+//hooks import
+import { useWebsite } from "./hooks/WebsiteContext";
+import useBackend from "./hooks/useBackend";
+
 
 //functional component
 const BillPage = () => {
+    
     //set state
 
     //function define
-
+    const { userBill } = useWebsite();
+    const { GetUserBill } = useBackend();
+    
     //return
     return(
         <Box sx={{
