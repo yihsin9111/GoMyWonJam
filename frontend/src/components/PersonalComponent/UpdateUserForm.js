@@ -35,8 +35,11 @@ const UpdateUserForm = () => {
     const [address, setAddress] = useState('');
 
     useEffect(()=>{
-
-    })
+        GetUserData(userLineId)
+        setName(userData.name);
+        setPhone(userData.phoneNumber);
+        setAddress(userData.address);
+    },[])
     //function define
     const Cancel = () => {
         setDate(dayjs(""));
@@ -75,7 +78,7 @@ const UpdateUserForm = () => {
                     fullWidth
                     variant="outlined"
                     value={name}
-                    onChange={(e)=>{setName(e)}}
+                    onChange={(e)=>{setName(e.target.value)}}
                 />
                 <TextField
                     autoFocus
@@ -87,7 +90,7 @@ const UpdateUserForm = () => {
                     fullWidth
                     variant="outlined"
                     value={address}
-                    onChange={(e)=>{setAddress(e)}}
+                    onChange={(e)=>{setAddress(e.target.value)}}
                 />
                 <TextField
                     autoFocus
@@ -99,7 +102,7 @@ const UpdateUserForm = () => {
                     fullWidth
                     variant="outlined"
                     value={phone}
-                    onChange={(e)=>{setPhone(e)}}
+                    onChange={(e)=>{setPhone(e.target.value)}}
                 />
             </DialogContent>
             <DialogActions>
