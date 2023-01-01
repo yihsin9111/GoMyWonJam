@@ -19,12 +19,18 @@ import Item from 'antd/es/list/Item';
 //import { isEnumType } from 'graphql';
 import Input from 'antd/es/input/Input';
 
+//hooks import
+import { useWebsite } from './hooks/WebsiteContext'; 
+
 //functional component
 const CheckPage = () => {
     //set state
     const [PackageOption, setPackageOption] = React.useState('');
     const [PaymentOption, setPaymentOption] = React.useState('');
     const [Phone, setPhone] = React.useState('');
+    
+    //hooks
+    const {bill} = useWebsite();
 
     //function define
     const handlePackage = (event) => {
@@ -43,7 +49,7 @@ const CheckPage = () => {
         return(
             <Box sx={{display:"grid",gap:1.5}}>
                 <Typography variant='h5'>結帳</Typography>
-                <Receipt item={Bills[0].items} />
+                <Receipt item={bill.items||[]} />
                 <Box>
                     <Typography variant='h6' sx={{display:"flex",flexDirection:"row"}}>總金額</Typography>
                     <Typography variant='body2' sx={{display:"flex",flexDirection:"row-reverse"}}>{Bills[0].total}</Typography>
