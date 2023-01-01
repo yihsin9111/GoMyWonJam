@@ -51,7 +51,7 @@ const TestPage = ()=>{
     const onAddCategory = ()=>{
         const category = catform.getFieldValue();
         console.log('on add category', category);
-        // AddCategory(category);
+        AddCategory(category);
     }
     const onUpdateCategory = ()=>{
         const category = catform.getFieldValue();
@@ -65,7 +65,7 @@ const TestPage = ()=>{
         setProduct(product);
         setOptionNum(product.o_num);
         setModalOpen(true);
-        // AddProductToCategory(product);
+        //AddProductToCategory(product);
     }
 
     const onConfirmProduct = (product, optionArray) => {

@@ -1,4 +1,5 @@
 //react import
+import { useState } from 'react'
 
 //mui import
 import Box from "@mui/material/Box";
@@ -13,7 +14,8 @@ import User from "../test datas/User";
 //functional component
 const PersonalPage = () => {
     //set state
-    
+    const [open, setOpen] = useState(false);
+
     //function define
     const handleAdjustInform = () => {
 
