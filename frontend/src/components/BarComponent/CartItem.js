@@ -34,7 +34,10 @@ const CartInclude = ({open ,setOpen}) => {
     const [ cartBill, setCartBill ] = useState({});
 
     useEffect(()=>{
-        setCartBill(bill[0]);
+        setCartBill(bill);
+    },[])
+    useEffect(()=>{
+        setCartBill(bill);
     },[bill])
 
     return(
@@ -53,7 +56,7 @@ const CartInclude = ({open ,setOpen}) => {
             gap: 1
         }}>
             <Typography variant="h5" component="div">購物車明細</Typography>
-            {cartBill.items.map((value,index)=>(
+            {bill.items.map((value,index)=>(
                 <Card>
                 <CardContent>
                     <Box sx={{
@@ -90,7 +93,7 @@ const CartInclude = ({open ,setOpen}) => {
                 </Card>
             ))}
         </Box>
-            <Typography variant="body1" component="div">總金額：{Bills[0].total}</Typography>
+            <Typography variant="body1" component="div">總金額：{bill.total}</Typography>
             <Button sx={{width:"50%",alignSelf:"flex-end"}}
             variant="contained"
             onClick={()=>{handlePay()}}>結帳</Button>

@@ -40,6 +40,7 @@ const UpdateUserForm = () => {
         setPhone(userData.phoneNumber);
         setAddress(userData.address);
     },[])
+    
     //function define
     const Cancel = () => {
         setOpen(false);

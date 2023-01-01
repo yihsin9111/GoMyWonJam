@@ -21,7 +21,7 @@ const WebsiteProvider = (props) => {
     const [userData, setUserData]       = useState({});
     const [userBill, setUserBill]       = useState([]);
     const [shopping, setShopping]       = useState(false);
-    const [bill, setBill]                 = useState([]);
+    const [bill, setBill]                 = useState({});
     const [currentBillId, setCurrentBillId] = useState("ming_2022-12-30T09:14:22.000Z");
     const [categories, setCategories]       = useState([]);
     const [products, setProducts]           = useState([]);

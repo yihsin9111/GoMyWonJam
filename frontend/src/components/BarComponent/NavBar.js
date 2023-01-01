@@ -15,13 +15,17 @@ import { Dialog } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // react import
-import {useState, Fragment} from "react";
+import {useState, Fragment, useEffect } from "react";
 
 // Component Import 
 import BarDrawer from './barDrawer';
 import { drawerWidth } from './BarConstDef';
 import CartList from '../CartList';
 import CartInclude from './CartItem';
+
+//hooks import
+import { useWebsite } from '../../containers/hooks/WebsiteContext';
+import useBackend from '../../containers/hooks/useBackend';
 
 // styled component
 const AppBar = styled(MuiAppBar, {
@@ -46,13 +50,22 @@ const NavBar = ({open, setOpen}) => {
     // set state
     const [anchorEl, setAnchorEl] = useState(null);
     const [openCart, setOpenCart] = useState(false);
+    
+    //advoid undefined list of items rendered.
+    const { bill, currentBillId } = useWebsite();
+    const { GetBill } = useBackend();
 
     // set theme
     const theme = useTheme();
 
-    const handleCart = () => {
-        setOpenCart(true);
-        console.log("open cart")
+    useEffect(()=>{
+      GetBill(currentBillId);
+    },[])
+    
+    const handleCart = async() => {
+      await GetBill(currentBillId);
+      setOpenCart(true);
+      console.log("open cart", bill, bill.length);
     };
     
     const handleDrawer = () => {
