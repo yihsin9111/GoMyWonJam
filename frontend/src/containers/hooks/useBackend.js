@@ -73,9 +73,9 @@ const useBackend = () => {
         console.log("adding item to bill...");
         sendData(["AddItemToBill",{BillId,item}]);
     }
-    const GetItemsFromBill = (BillId)=>{
-        console.log('fetching items in bill...');
-        sendData(["GetItemsFromBill",BillId]);
+    const GetBill = (BillId)=>{
+        console.log('fetching bill by bill id...');
+        sendData(["GetBill",BillId]);
     }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
@@ -122,7 +122,7 @@ const useBackend = () => {
 
     return {
         AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
-        AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetItemsFromBill,
+        AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetBill,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
         DeleteBill, DeleteCategory, DeleteUser, DeleteProduct
     };

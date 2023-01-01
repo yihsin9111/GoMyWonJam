@@ -48,4 +48,15 @@ const GetUserBill = async(userLineId, ws)=>{
     })
 }
 
-export {GetCategories, GetProductsByCategory, GetUserData, GetUserBill}
+const GetBill = async(billId, ws)=>{
+    BillModel.find({billId}, async function(err, obj){
+        if(obj.length){
+            sendData(["bill",obj],ws);
+        }
+        else{
+            sendData(["bill",[]],ws);
+        }
+    })
+}
+
+export {GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill}

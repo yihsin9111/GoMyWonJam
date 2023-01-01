@@ -11,6 +11,11 @@ import {Card, CardContent, CardActionArea, Typography, Divider} from "@mui/mater
 //test data import
 import Bills from '../../test datas/Bills';
 
+//hooks import
+import { useState, useEffect } from 'react';
+import useBackend from '../../containers/hooks/useBackend';
+import { useWebsite } from '../../containers/hooks/WebsiteContext';
+
 //functional component
 const CartInclude = ({open ,setOpen}) => {
 
@@ -22,6 +27,15 @@ const CartInclude = ({open ,setOpen}) => {
         setOpen(false);
         navigate("/check");
     }
+
+    //fetch data
+    const { GetBill } = useBackend();
+    const { bill, currentBillId } = useWebsite();
+    const [ cartBill, setCartBill ] = useState({});
+
+    useEffect(()=>{
+        setCartBill(bill[0]);
+    },[bill])
 
     return(
     <Box>
@@ -39,7 +53,7 @@ const CartInclude = ({open ,setOpen}) => {
             gap: 1
         }}>
             <Typography variant="h5" component="div">購物車明細</Typography>
-            {Bills[0].items.map((value,index)=>(
+            {cartBill.items.map((value,index)=>(
                 <Card>
                 <CardContent>
                     <Box sx={{

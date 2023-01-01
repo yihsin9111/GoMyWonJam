@@ -45,7 +45,7 @@ const UpdateUserForm = () => {
         setOpen(false);
     }
 
-    const onAddCategory = ()=>{
+    const onUpdateUser = ()=>{
         const newUser = {lineId:userLineId, name, address, phoneNumber:phone};
         UpdateUser(newUser);
         setOpen(false);
@@ -103,7 +103,7 @@ const UpdateUserForm = () => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onAddCategory()}}>確認</Button>
+            <Button onClick={()=>{onUpdateUser()}}>確認</Button>
             </DialogActions>
         </Dialog>
         </>

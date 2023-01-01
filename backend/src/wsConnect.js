@@ -1,6 +1,6 @@
 import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill } from './functions/AddFunc'
 import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
-import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill } from './functions/GetFunc';
+import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct } from './functions/DeleteFunc'
 
 //helper functions
@@ -54,6 +54,10 @@ export default {
             }
             case 'GetUserBill':{
                 GetUserBill(payload,ws);
+                break;
+            }
+            case 'GetBill':{
+                GetBill(payload,ws);
                 break;
             }
 
