@@ -101,17 +101,7 @@ const BarDrawer = ({open, setOpen, theme}) => {
               <ListItemText primary={"首頁"} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"我的主頁"} disablePadding onClick={()=>{navigateToPersonal()}}>
-            <ListItemButton>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary={"我的主頁"} />
-            </ListItemButton>
-          </ListItem>
-          {openPersonal? 
-            (<>
-              <ListItem key={"基本資料"} disablePadding onClick={()=>{navigateToPersonal()}}>
+          <ListItem key={"基本資料"} disablePadding onClick={()=>{navigateToPersonal()}}>
                 <ListItemButton>
                   <ListItemIcon>
                     <PersonIcon />
@@ -127,18 +117,6 @@ const BarDrawer = ({open, setOpen, theme}) => {
                   <ListItemText primary={"我的訂單"} />
                 </ListItemButton>
               </ListItem>
-            </>)
-            :<></>}
-          {/* {['首頁', '我的主頁'].map((text, index) => (
-            <ListItem key={"首頁"} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <AccountCircleIcon />}
-                </ListItemIcon>
-                <ListItemText primary={"首頁"} />
-              </ListItemButton>
-            </ListItem>
-          ))} */}
         </List>
         <Divider />
         <List>
