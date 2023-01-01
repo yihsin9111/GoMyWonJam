@@ -15,7 +15,7 @@ import Receipt from '../components/PersonalComponent/Receipt';
 import Bills from "../test datas/Bills"
 import { Grid } from 'antd';
 import Item from 'antd/es/list/Item';
-import { isEnumType } from 'graphql';
+//import { isEnumType } from 'graphql';
 import Input from 'antd/es/input/Input';
 
 //functional component

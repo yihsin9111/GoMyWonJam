@@ -27,7 +27,7 @@ const PersonalPage = () => {
 
     //function define
     const handleAdjustInform = () => {
-
+        setOpen(true)
     }
 
     //return
