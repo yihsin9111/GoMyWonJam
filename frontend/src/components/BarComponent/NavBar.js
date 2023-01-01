@@ -9,16 +9,19 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
+import { Dialog } from '@mui/material';
 
 // mui icon import
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // react import
-import {useState} from "react";
+import {useState, Fragment} from "react";
 
 // Component Import 
 import BarDrawer from './barDrawer';
 import { drawerWidth } from './BarConstDef';
+import CartList from '../CartList';
+import CartInclude from './CartItem';
 
 // styled component
 const AppBar = styled(MuiAppBar, {
@@ -42,12 +45,14 @@ const AppBar = styled(MuiAppBar, {
 const NavBar = ({open, setOpen}) => {
     // set state
     const [anchorEl, setAnchorEl] = useState(null);
+    const [openCart, setOpenCart] = useState(false);
 
     // set theme
     const theme = useTheme();
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleCart = () => {
+        setOpenCart(true);
+        console.log("open cart")
     };
     
     const handleDrawer = () => {
@@ -76,16 +81,26 @@ const NavBar = ({open, setOpen}) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             GoMyWonJam
           </Typography>
-          <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
+          <Fragment>
+            <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={()=>{handleCart()}}
+                  color="inherit"
+                >
+                  <ShoppingCartIcon />
+            </IconButton>
+            <Dialog 
+              open={openCart} 
+              onClose={()=>{setOpenCart(false)}} 
+              fullWidth={true}
               >
-                <ShoppingCartIcon />
-              </IconButton>
+              <CartInclude open={openCart} setOpen={setOpenCart} />
+            </Dialog>
+            {/* <CartList open={openCart} setOpen={setOpenCart} /> */}
+          </Fragment>
         </Toolbar>
       </AppBar>
     </Box>
