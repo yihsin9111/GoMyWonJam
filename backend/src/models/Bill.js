@@ -9,6 +9,8 @@ const BillSchema = Schema({
     package: { type: String },
     payment: { type: String },
     address: { type: String },
+    receiver: { type:String },
+    phone:    { type:String },
     status:  { type: Number, default:0} 
 }, {
     collection: 'Bill',

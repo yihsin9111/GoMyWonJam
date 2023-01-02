@@ -29,13 +29,6 @@ const PersonalPage = () => {
     useEffect(()=>{
         GetUserData(userLineId);
     },[])
-    // useEffect(()=>{
-    //     GetUserData(userLineId);
-    // },[userData])
-    useEffect(()=>{
-        GetUserData(userLineId);
-        setRelog(false);
-    },[relog])
 
     //return
     return(

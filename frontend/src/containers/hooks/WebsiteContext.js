@@ -85,6 +85,7 @@ const WebsiteProvider = (props) => {
             }
             case "userBill":{
                 setUserBill(payload);
+                console.log('user bill fetched',)
                 break;
             }
             case "bill":{

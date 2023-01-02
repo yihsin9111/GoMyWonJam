@@ -1,5 +1,5 @@
-import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill } from './functions/AddFunc'
-import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
+import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill } from './functions/AddFunc'
+import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
 import { getStores } from './functions/711Func';
@@ -40,6 +40,13 @@ export default {
                 break;
             }
 
+            //Confirm functions
+            case 'ConfirmBill':{
+                ConfirmBill(payload,ws);
+                GetBill(payload.billId,ws);
+                break;
+            }
+
             //Get functions
             case 'GetCategories':{
                 GetCategories(ws);
@@ -73,6 +80,11 @@ export default {
             } 
             case 'UpdateProduct':{
                 UpdateProduct(payload,ws);
+                break;
+            }
+            case 'UpdateBillStatus':{
+                UpdateBillStatus(payload,ws);
+                GetUserBill('all',ws);
                 break;
             }
 

@@ -84,9 +84,9 @@ const useBackend = () => {
         sendData(["AddBillToUser",user.userLineId])
     }
 
-    const ConfirmBill = ()=>{
+    const ConfirmBill = (BillInfo)=>{
         console.log("confirming bill...")
-        sendData(["ConfirmBill"])
+        sendData(["ConfirmBill",BillInfo])
     }
     
     //return a list of bill based on input filters
@@ -99,6 +99,12 @@ const useBackend = () => {
     const UpdateBillAddress = (userLineId, billId, newAddr)=>{
         console.log("Updating Bill Address...");
         sendData(["UpdateBillAddress",{billId, newAddr}]);
+    }
+
+    //manager update status
+    const UpdateBillStatus = (task, billId, oldStatus)=>{
+        console.log("updating bill status...");
+        sendData(["UpdateBillStatus",{task,billId,oldStatus}]);
     }
 
     //---delete functions--//
@@ -131,9 +137,10 @@ const useBackend = () => {
    
 
     return {
-        AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
-        AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetBill,
-        AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
+        AddUser, UpdateUser, GetUserData,
+        AddCategory, UpdateCategory, GetProductsByCategory, GetCategories, AddProductToCategory, 
+        UpdateProduct, GetProductById, GetBill, GetUserBill, UpdateBillStatus,
+        AddItemToBill, AddBillToUser,  ConfirmBill , FindBill, UpdateBillAddress,
         DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores
     };
 };

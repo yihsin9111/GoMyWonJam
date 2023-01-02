@@ -12,8 +12,26 @@ import ModifyBills from "../components/ManagerComponent/ModifyBills";
 //router import
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+//hooks import
+import { useEffect } from 'react';
+import useBackend from "../containers/hooks/useBackend";
+import { useWebsite } from "../containers/hooks/WebsiteContext";
+
+
 //functional component
 const ManagerPage = () => {
+    
+    //fetch backend data
+    const {GetUserBill} = useBackend();
+    const {UserBill} = useWebsite();
+
+    useEffect(()=>{
+        GetUserBill('all');
+    },[])
+    useEffect(()=>{
+        GetUserBill('all');
+    },[UserBill])
+
     //set state
     const [open, setOpen] = useState([false, false, false, false]);
     const [atWhich, setAtWhich] = useState(0);

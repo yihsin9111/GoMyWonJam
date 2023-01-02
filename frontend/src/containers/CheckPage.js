@@ -45,9 +45,10 @@ const CheckPage = () => {
     const {confirmBill, GetStores} = useBackend();
 
     React.useEffect(()=>{
+        console.log('use effect called.');
         setPhone(userData.phoneNumber);
         setName(userData.name);
-        setAddress(userData.address);
+        setValue(userData.address);
     },[])
 
     //function define
@@ -67,6 +68,7 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
+        setModified(true);
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -75,18 +77,15 @@ const CheckPage = () => {
         }
     }
     const onHandleCheckout=()=>{
-        console.log('checking out...');
-        console.log('handling checkout:',
-         PackageOption,PaymentOption,Phone,name)
         const BillInfo = {
-            billId : currentBillId,
+            billId  : currentBillId,
             package : PackageOption,
             payment : PaymentOption,
             phone   : Phone,
-            name    : name,
-            address : address,
+            receiver    : name,
+            address : value,
+            total   :total,
         }
-        console.log("Bill Info: ", BillInfo)
         confirmBill(BillInfo);
     }
 
@@ -158,6 +157,7 @@ const CheckPage = () => {
                     disabled={Infm.state}
                     //defaultValue="小名"
                     onChange={(e)=>{handleName(e)}}
+                    value={name}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
@@ -170,6 +170,7 @@ const CheckPage = () => {
                     defaultValue={Phone}
                     onChange={(e)=>{handlePhone(e)}}
                     inputMode="tel"
+                    value={Phone}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
@@ -214,7 +215,7 @@ const CheckPage = () => {
                     id="ReceiverAddress"
                     margin="dense"
                     disabled={Infm.state}
-                    options={}
+                    options={["台大","師大"]}
                     //defaultValue={"小名"}
                     // options={[1,3,6,5,7]}
                     sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
