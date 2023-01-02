@@ -6,6 +6,7 @@ import { IconButton, ListItem, ListItemText, Box, Divider, Card, List } from "@m
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 //component import
 import AddProductForm from "./AddProductForm";
@@ -40,7 +41,7 @@ const CategoryListItem = ({item, }) =>{
                 <IconButton
                     onClick={()=>{handleExpand()}}
                 >
-                    <ExpandMoreIcon />
+                    {open? <ExpandLessIcon />:<ExpandMoreIcon />}
                 </IconButton>
                 <IconButton
                     onClick={()=>{handleModify()}}

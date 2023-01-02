@@ -11,7 +11,7 @@ import CategoryList from "./CategoryList";
 
 
 //functional component
-const AppendProduct = () => {
+const ModifyProduct = () => {
     //set state
 
 
@@ -27,7 +27,7 @@ const AppendProduct = () => {
                 <Grid container direction="row" justifyContent="space-between">
                     <Grid item>
                         <Typography variant="h6" component="div">
-                            商品種類管理
+                            商品管理
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -37,8 +37,6 @@ const AppendProduct = () => {
                 </Grid>
                 <Divider />
                 <CategoryList />
-
-                <AddProductForm />
             </Box>
 
         </Box>
@@ -46,4 +44,4 @@ const AppendProduct = () => {
 }
 
 //export 
-export default AppendProduct;
+export default ModifyProduct;

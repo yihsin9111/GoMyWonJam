@@ -58,7 +58,7 @@ const BarDrawer = ({open, setOpen, theme}) => {
     const navigate = useNavigate();
     
     const navigateToMain = () => {
-      navigate("/");
+      navigate("/buying");
       setOpenPersonal(false);
     }
 

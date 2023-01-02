@@ -5,8 +5,9 @@ import {useState} from "react";
 import { Typography, Box, Chip, Divider, Stack } from '@mui/material';
 
 //component import 
-import AppendProduct from '../components/ManagerComponent/AppendProduct';
-import AdjustProduct from "../components/ManagerComponent/AdjustProduct";
+import ModifyProduct from '../components/ManagerComponent/ModifyProduct';
+import ModifyBills from "../components/ManagerComponent/ModifyBills";
+
 
 //router import
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -38,15 +39,13 @@ const ManagerPage = () => {
             </Typography>
             <Divider />
             <Stack direction="row" spacing={1}>
-                <Chip label="商品種類" variant="outlined" onClick={()=>{handleClick(0)}} />
-                <Chip label="修改商品" variant="outlined" onClick={()=>{handleClick(1)}} />
-                <Chip label="更新訂單狀態" variant="outlined" onClick={()=>{handleClick(2)}} />
-                <Chip label="修改訂單" variant="outlined" onClick={()=>{handleClick(3)}} />
+                <Chip label="商品管理" variant="outlined" onClick={()=>{handleClick(0)}} />
+                <Chip label="訂單管理" variant="outlined" onClick={()=>{handleClick(1)}} />
+                <Chip label="買家管理" variant="outlined" onClick={()=>{handleClick(2)}} />
             </Stack>
-            {open[0]? <AppendProduct />:<></>}
-            {open[1]? <AdjustProduct />:<></>}
-            {open[2]? <AppendProduct />:<></>}
-            {open[3]? <AppendProduct />:<></>}
+            {open[0]? <ModifyProduct />:<></>}
+            {open[1]? <ModifyBills />:<></>}
+            {open[2]? <div>Not Yet</div>:<></>}
         </Box>
     )
 }

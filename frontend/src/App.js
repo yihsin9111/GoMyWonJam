@@ -11,6 +11,7 @@ import PersonalPage from "./containers/PersonalPage";
 import BillPage from "./containers/BillPage";
 import ManagerPage from "./containers/ManagerPage";
 import CheckPage from "./containers/CheckPage";
+import Login from "./containers/Login";
 
 // Bar Component Import
 import NavBar from "./components/BarComponent/NavBar";
@@ -33,7 +34,8 @@ function App() {
       <Main open={open}>
         <DrawerHeader>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/buying" element={<MainPage />} />
           <Route path="/check" element={<CheckPage />} />
           <Route path="/personal" element={<PersonalPage />} />
           <Route path="/personal/bills" element={<BillPage />} />

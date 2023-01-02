@@ -55,11 +55,11 @@ function ProductsTabs() {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" variant="fullWidth">
             <Tab label='all' value='all'/>
-            {categories.map((label)=>(<Tab label={label} value={label} />))}
+            {categories.map((label,index)=>(<Tab label={label} value={label} key={index}/>))}
           </TabList>
         </Box>
-        {categories.map((label)=>(
-          <TabPanel value={label} key={label}>
+        {categories.map((label, index)=>(
+          <TabPanel value={label} key={index}>
             <Grid container key="1">
                 <Box
                   sx={{
@@ -69,10 +69,6 @@ function ProductsTabs() {
                     gridTemplateColumns: { md: '1fr 1fr 1fr' },
                     gap: 2,
                   }}>
-                    {/* {products.map((value,index)=>(
-                      <Grid item>
-                        <ProductCard item={value} key={index} />
-                      </Grid>))} */}
                 </Box>
             </Grid>
             {products.length?

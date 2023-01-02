@@ -60,7 +60,7 @@ const CartInclude = ({open ,setOpen}) => {
         }}>
             <Typography variant="h5" component="div">購物車明細</Typography>
             {bill.items.map((value,index)=>(
-                <Card>
+                <Card key={index}>
                 <CardContent>
                     <Box sx={{
                     display: "grid",
@@ -79,9 +79,9 @@ const CartInclude = ({open ,setOpen}) => {
                         <Typography variant="body2" component="div">數量：{value.number}</Typography>
                         <Typography variant="body2" component="div">金額：{value.price*value.number}</Typography>
                     </Box>
-                    <CardActionArea sx={{
+                    <Box sx={{
                     display: "flex",
-                    alignContent: "flex-end"
+                    justifyContent: "center",
                     }}>
                     <Button sx={{width:"50%",alignSelf:"flex-end"}}
                     variant="outlined"
@@ -90,8 +90,7 @@ const CartInclude = ({open ,setOpen}) => {
                     //delete function
                     onClick={(e)=>{onDeleteItemFromBill(e.target.value)}}
                     >刪除此商品</Button>
-                    {/* <Divider></Divider> */}
-                    </CardActionArea>
+                    </Box>
                     </Box>
                 </CardContent>
                 </Card>
