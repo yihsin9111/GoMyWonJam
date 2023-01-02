@@ -49,7 +49,7 @@ const ManageBill = ({item}) => {
             }}>
                 <Grid container direction="row" justifyContent="space-between">
                     <Typography variant="h6" component="div">
-                        訂單編號：{item.userLineId}
+                        訂單編號：{item.billId}
                     </Typography>
                     <Grid item>
                         <IconButton

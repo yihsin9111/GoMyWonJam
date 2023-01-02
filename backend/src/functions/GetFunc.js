@@ -33,7 +33,7 @@ const GetProductsByCategory = async(category, ws)=>{
 }
 
 const GetUserData = async(userLineId, ws)=>{
-    UserModel.find({userLineId:userLineId}, async function(err, obj){
+    UserModel.find({lineId:userLineId}, async function(err, obj){
         if(obj.length){
             sendData(["userData",obj[0]], ws);
             sendData(["userAvaliable", true], ws);

@@ -1,5 +1,6 @@
 //react import 
 import React from 'react'
+import {useNavigate} from "react-router-dom";
 
 //mui import 
 import { Card, CardContent, Typography } from "@mui/material";
@@ -42,7 +43,8 @@ const CheckPage = () => {
     
     //hooks
     const {bill, total, currentBillId, userData, stores} = useWebsite();
-    const {confirmBill, GetStores} = useBackend();
+    const {ConfirmBill, GetStores} = useBackend();
+    const navigate = useNavigate();
 
     React.useEffect(()=>{
         console.log('use effect called.');
@@ -68,7 +70,7 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
-        setModified(true);
+        // setModified(true);
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -86,7 +88,8 @@ const CheckPage = () => {
             address : value,
             total   :total,
         }
-        confirmBill(BillInfo);
+        ConfirmBill(BillInfo);
+        navigate("/");
     }
 
     const setFieldValue = (value) => {
@@ -192,7 +195,15 @@ const CheckPage = () => {
                         </MenuItem>
                     ))}
                 </TextField>
+                {/* <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Movie" />}
+                    /> */}
                 <TextField
+                    autoComplete='off'
                     id="outlined-select-category"
                     select
                     required

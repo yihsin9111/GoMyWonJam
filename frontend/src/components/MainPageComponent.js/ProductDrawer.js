@@ -14,6 +14,7 @@ import {useState} from "react";
 import useBackend from "../../containers/hooks/useBackend";
 import { useWebsite } from "../../containers/hooks/WebsiteContext";
 import { useNavigate } from "react-router-dom";
+import { SelectUnstyledContext } from "@mui/base";
 
 // functional component
 const ProductDrawer = ({item, handleClose}) => {
@@ -25,7 +26,7 @@ const ProductDrawer = ({item, handleClose}) => {
 
     //import backend functions
     const {AddItemToBill} = useBackend();
-    const {iflog} = useWebsite();
+    const {iflog, setUserBill, currentBillId} = useWebsite();
 
     //useNavigate
     const navigate = useNavigate();
@@ -35,9 +36,10 @@ const ProductDrawer = ({item, handleClose}) => {
     // currentBillId: ming_2022-12-30T09:14:22.000Z
     const onAddItemToBill = (name, price, option, number, note)=>{
         const item = {name, price, option, number, note}
-        const BillId = 'ming_2022-12-30T09:14:22.000Z'
-        console.log("adding item to bill", item, BillId);
-        AddItemToBill(BillId, item);
+        // const BillId = 'ming_2022-12-30T09:14:22.000Z'
+        console.log("adding item to bill", item, currentBillId);
+        AddItemToBill(currentBillId, item);
+        setUserBill([]);
     }
 
     // function
@@ -84,7 +86,27 @@ const ProductDrawer = ({item, handleClose}) => {
                     defaultValue:1,
                     startAdornment: <InputAdornment position="start"></InputAdornment>,
                     }}
-                    onChange={(e)=>{setNumber(e.target.value)}}
+                    onChange={(e)=>{
+                        if (e.target.value <= 0 && !isNaN(e.target.value)){
+                            if(isNaN(e.target.value)){
+                                setNumber(0);
+                            }
+                            else{
+                                if(e.target.value >= 0){
+                                    setNumber(e.target.value);
+                                }
+                                //else{
+                                  //  setNumber(0);
+                                //}
+                            }
+                        }
+                        else if(isNaN(e.target.value)){
+                            setNumber(0);
+                        }
+                        else{
+                            setNumber(e.target.value);
+                        }
+                            }}
                     value={number}
                 />
                 <FormControl sx={{ m: 1, minWidth: 120 }}>

@@ -14,9 +14,11 @@ const sendData =  async(data) =>{
 const useBackend = () => {
 
     //--User handling functions--//
-    const AddUser = (name, lineId, address, phoneNumber) => {
+    const AddUser = (name, lineId) => {
         console.log("Adding User...");
-        const User = {name, lineId, address, phoneNumber};
+        const User = {
+            name: name, 
+            lineId: lineId};
         sendData(["AddUser",User]);
     }
     const UpdateUser = (user) => {
@@ -79,9 +81,9 @@ const useBackend = () => {
     }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
-    const AddBillToUser = (user)=>{
+    const AddBillToUser = (id)=>{
         console.log("Adding Bill to User..."); 
-        sendData(["AddBillToUser",user.userLineId])
+        sendData(["AddBillToUser",id])
     }
 
     const ConfirmBill = (BillInfo)=>{

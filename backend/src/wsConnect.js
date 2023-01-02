@@ -19,7 +19,7 @@ export default {
         switch (task) {
             //Add functions
             case 'AddUser':{
-                AddUser(payload);
+                AddUser(payload, ws);
                 break;
             }
             case 'AddCategory':{
@@ -71,7 +71,7 @@ export default {
 
             //Update functions
             case 'UpdateUser':{
-                UpdateUser(payload);
+                UpdateUser(payload, ws);
                 break;
             }
             case 'UpdateCategory':{
@@ -79,7 +79,7 @@ export default {
                 break;
             } 
             case 'UpdateProduct':{
-                UpdateProduct(payload,ws);
+                UpdateProduct(payload, ws);
                 break;
             }
             case 'UpdateBillStatus':{
@@ -90,7 +90,7 @@ export default {
 
             //delete functions
             case 'DeleteUser':{
-                DeleteUser(payload);
+                DeleteUser(payload, ws);
                 break;
             }
             case 'DeleteCategory':{

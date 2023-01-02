@@ -29,7 +29,7 @@ const appendProduct = (category, product) => {
     })
 }
 
-const AddUser = (User)=>{
+const AddUser = (User, ws)=>{
     UserModel.find({lineId:User.lineId}, async function(err, obj){
         if(obj.length){
             console.log('This LineId has already registered.');
@@ -39,9 +39,16 @@ const AddUser = (User)=>{
             await new UserModel({
                 name:       User.name,
                 lineId:     User.lineId,
-                address:    User.address,
-                phoneNumber:User.phoneNumber,
+                address:    "",
+                phoneNumber:"",
             }).save();
+            const newuser={
+                name: User.name,
+                lineId: User.lineId,
+                address: "",
+                phoneNumber: ""
+            }
+            sendData(["userData", newuser], ws);
         }
     })
 }
@@ -62,6 +69,7 @@ const AddBillToUser = async(userLineId,ws)=>{
     bill.billId = id
     sendData(["billId",id],ws);
     bill.save();
+    sendData(["bill", bill], ws);
 }
 
 const AddCategory = async(Category,ws)=>{

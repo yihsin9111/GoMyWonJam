@@ -6,31 +6,48 @@ import {Avatar, Box, Card, Divider, Grid, TextField, Typography, InputAdornment,
 
 //hook import
 import { useWebsite } from "./hooks/WebsiteContext";
+import useBackend from "./hooks/useBackend";
 
 //import navigate
 import { useNavigate } from "react-router-dom";
+
+// component import 
 
 //functional component 
 const Login = () => {
     //set state
     const [id, setId] = useState("");
     const [name, setName] = useState("");
+    const [open, setOpen] = useState(false);
 
     //hook import
-    const { checkManager } = useWebsite();
+    const { checkManager, iflog } = useWebsite();
+    const { GetUserData, AddUser, AddBillToUser } = useBackend();
 
     //navigate define
-    const navigate =useNavigate();
+    const navigate = useNavigate();
 
     //function define
     const handleLogin = () => {
         if(!id || !name){
             return
         }
+        GetUserData(id);
         const ifM=checkManager(name, id);
         console.log("if manager: ", ifM);
-        navigate("/buying")
+        console.log("if login: ", iflog);
+        if(iflog){
+            navigate("/")
+            AddBillToUser(id);
+        }
+        else{
+            AddUser(name, id);
+            GetUserData(id);
+            navigate("/");
+            AddBillToUser(id);
+        }   
 
+        
     }
 
     return(
@@ -57,7 +74,6 @@ const Login = () => {
             <Button variant="contained" onClick={()=>{handleLogin()}}>
                 登入
             </Button>
-
         </Box>
         // <Grid container justifyContent="center" direction="column">
         //     <Card>

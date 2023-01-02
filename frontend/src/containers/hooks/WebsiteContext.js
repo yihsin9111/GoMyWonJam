@@ -81,6 +81,9 @@ const WebsiteProvider = (props) => {
             }
             case "userData":{
                 setUserData(payload);
+                setuserLineId(payload.lineId);
+                setIflog(true);
+                console.log("userData: ", payload);
                 break;
             }
             case "userBill":{
@@ -90,10 +93,12 @@ const WebsiteProvider = (props) => {
             }
             case "bill":{
                 setBill(payload);
+                console.log("bill: ", payload);
                 break;
             }
             case 'billId':{
                 setCurrentBillId(payload);
+                setIflog(true);
                 break;
             }
             case "categories":{
@@ -128,7 +133,8 @@ const WebsiteProvider = (props) => {
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
-                ,deadlines,checkManager, isManager, iflog, setIflog, stores
+                ,deadlines,checkManager, isManager, iflog, setIflog, stores,
+                setUserBill
             }}
             {...props}
         />
