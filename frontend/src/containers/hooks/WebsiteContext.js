@@ -16,7 +16,8 @@ const WebsiteContext = createContext({
     products:   [],
     checkManager: {},
     iflog: false,
-    setIflog: {}
+    setIflog: {},
+    stores: []
 })
 
 const Managers =[
@@ -49,6 +50,7 @@ const WebsiteProvider = (props) => {
     const [products, setProducts]           = useState([]);
     const [total, setTotal]                 = useState(0);
     const [iflog, setIflog]                 = useState(false);
+    const [stores, setStores]               = useState([]);
 
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
@@ -111,6 +113,10 @@ const WebsiteProvider = (props) => {
                 setIflog(payload);
                 break;
             }
+            case "GotStores": {
+                setStores(payload);
+                break;
+            }
             default : break;
         }
     }
@@ -121,7 +127,7 @@ const WebsiteProvider = (props) => {
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
-                ,deadlines,checkManager, isManager, iflog, setIflog
+                ,deadlines,checkManager, isManager, iflog, setIflog, stores
             }}
             {...props}
         />

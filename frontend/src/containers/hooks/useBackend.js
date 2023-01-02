@@ -122,13 +122,19 @@ const useBackend = () => {
         console.log('deleting item from bill...');
         sendData(["DeleteItemFromBill",{billId,i}]);
     }
+
+    // get stores
+    const GetStores=(county)=>{
+        console.log('get county...');
+        sendData(["GetStores",county]);
+    }
    
 
     return {
         AddUser, UpdateUser, AddCategory, UpdateCategory, GetProductsByCategory, GetCategories,
         AddProductToCategory, UpdateProduct, GetProductById, GetUserData, GetBill,
         AddItemToBill, AddBillToUser, GetUserBill, FindBill, UpdateBillAddress,
-        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill,
+        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores
     };
 };
 

@@ -2,6 +2,7 @@ import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBil
 import { UpdateUser, UpdateBill, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
+import { getStores } from './functions/711Func';
 
 //helper functions
 const sendData = (data, ws) =>{
@@ -94,6 +95,10 @@ export default {
             }
             case 'DeleteItemFromBill':{
                 DeleteItemFromBill(payload, ws);
+                break;
+            }
+            case "GetStores":{
+                getStores(payload,ws);
                 break;
             }
         }
