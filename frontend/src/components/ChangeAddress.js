@@ -1,7 +1,5 @@
 import React from 'react'
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog'
-import {Card, Typography} from "@mui/material";
+import {Card, Typography, Box} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import {CardContent} from '@mui/material';
@@ -11,7 +9,6 @@ export default function ChangeAddress() {
     const [Phone, setPhone] = React.useState('');
     const [Value, setValue] = React.useState("");
     const [Name, setName] = React.useState("");
-    const [Open, setOpen] = React.useState(false);
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
     "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
@@ -21,13 +18,11 @@ export default function ChangeAddress() {
 
   const list = () => {
     return(
-    <Card sx={{width:"100%"}}>
         <CardContent sx={{
             display: "grid",
             gap: 1.5
         }}>
             <Typography variant="body1" sx={{gridColumnStart:1}}>收件人資訊</Typography>
-            <Button variant="contained" color="success" sx={{gridColumnStart:2}} onClick={(e)=>{setOpen(false)}}>確認</Button>
             <Autocomplete
             disablePortal
             id="COUNTY"
@@ -68,19 +63,11 @@ export default function ChangeAddress() {
             >
             </TextField>
         </CardContent>
-    </Card>)};
+    )};
 
   return (
-    <>
-    <Button onClick={()=>{setOpen(true)}}>
-        test
-    </Button>
-    <Dialog
-        open={Open}
-        fullWidth={true}
-        >
-            {list()}
-    </Dialog>
-    </>
+    <Box sx={{width:"100%"}}>
+        {list()}
+    </Box>
   );
 }

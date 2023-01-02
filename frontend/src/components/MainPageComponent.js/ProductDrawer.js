@@ -12,6 +12,8 @@ import ListItemText from '@mui/material/ListItemText';
 // react import
 import {useState} from "react";
 import useBackend from "../../containers/hooks/useBackend";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+import { useNavigate } from "react-router-dom";
 
 // functional component
 const ProductDrawer = ({item, handleClose}) => {
@@ -23,6 +25,10 @@ const ProductDrawer = ({item, handleClose}) => {
 
     //import backend functions
     const {AddItemToBill} = useBackend();
+    const {iflog} = useWebsite();
+
+    //useNavigate
+    const navigate = useNavigate();
 
     // handle add item to bill
     // suppose global state known. default: userLineId:ming
@@ -104,6 +110,10 @@ const ProductDrawer = ({item, handleClose}) => {
                 variant="outlined"
                 onClick={()=>{
                     handleClose(false);
+                    if(!iflog){
+                        navigate("/login")
+                        return
+                    }
                     onAddItemToBill(item.name, item.price, optionChosed, number, note);
                 }}>加入購物車</Button>
             </Box>

@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "@mui/x-date-pickers": "^5.0.12",
-    "antd": "^4.24.2"
+    "antd": "^4.24.2",
+    "cheerio": "^1.0.0-rc.12",
+    "request": "^2.88.2"
   },
   "name": "GoMyWonJam",
   "version": "1.0.0",

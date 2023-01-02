@@ -21,7 +21,7 @@ import { useWebsite } from "../../containers/hooks/WebsiteContext";
 import useBackend from "../../containers/hooks/useBackend";
 
 //functional component
-const CategoryListItem = ({item,ind}) =>{
+const CategoryListItem = ({item, ind, atwhich, setAtwhich}) =>{
     
     //set state
     const [open, setOpen] = useState(false)
@@ -48,6 +48,17 @@ const CategoryListItem = ({item,ind}) =>{
     }
 
     const handleExpand = () => {
+        if(open){
+            setOpen(!open);
+            setAtwhich(-1);
+        }
+        if(atwhich===-1){
+            setAtwhich(ind);
+        }
+        else if (!(atwhich===ind)){
+            alert("請先關掉一個商品分類再開啟下一個")
+            return
+        }
         console.log("handle expand");
         setOpen(!open);
     }

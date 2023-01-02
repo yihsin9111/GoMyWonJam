@@ -24,6 +24,9 @@ import Input from 'antd/es/input/Input';
 import { useWebsite } from './hooks/WebsiteContext'; 
 import useBackend from './hooks/useBackend';
 
+//711
+//import {getStories} from '../../../backend/src/711/711stores';
+
 //functional component
 const CheckPage = () => {
     //set state
@@ -33,11 +36,13 @@ const CheckPage = () => {
     const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
     const [value, setValue] = React.useState("");
     const [name, setName] = React.useState('');
-    const [modified, setModified] = React.useState(false);
+    const [appearAddress, setAAddress] = React.useState("");
+    const [address, setAddress] = React.useState('');
+    const [county, setCounty] = React.useState("");
     
     //hooks
-    const {bill, total, currentBillId, userData} = useWebsite();
-    const {ConfirmBill} = useBackend();
+    const {bill, total, currentBillId, userData, stores} = useWebsite();
+    const {confirmBill, GetStores} = useBackend();
 
     React.useEffect(()=>{
         console.log('use effect called.');
@@ -81,8 +86,7 @@ const CheckPage = () => {
             address : value,
             total   :total,
         }
-        console.log('checking out...',BillInfo);
-        ConfirmBill(BillInfo);
+        confirmBill(BillInfo);
     }
 
     const setFieldValue = (value) => {
@@ -146,6 +150,7 @@ const CheckPage = () => {
                 <Typography variant="body1" sx={{gridColumnStart:1}}>收件人資訊</Typography>
                 <Button variant="contained" color={Infm.color} onClick={(e)=>handleInfmChange()} sx={{gridColumnStart:2}}>{Infm.btn}</Button>
                 <TextField
+                    required
                     id="ReceiverName"
                     margin="dense"
                     label="姓名"
@@ -157,6 +162,7 @@ const CheckPage = () => {
                 >
                 </TextField>
                 <TextField
+                    required
                     id="ReceiverPhone"
                     margin="dense"
                     label="手機"
@@ -168,32 +174,57 @@ const CheckPage = () => {
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
-                <Autocomplete
-                    disablePortal
-                    id="COUNTY"
-                    margin='dense'
-                    disabled={Infm.state}
-                    options={CountyOption}
+                <TextField
+                    id="outlined-select-category"
+                    select
+                    required
+                    margin="dense"
+                    label="縣市"
+                    value={county}
+                    onChange={(e)=>{setCounty(e.target.value);GetStores(e.target.value)}}
                     sx={{gridColumnStart:1,gridColumnEnd:2}}
-                    //value={address}
-                    renderInput={(params) => <TextField {...params} label="台灣縣市" 
-                    helperText="輸入門市所在縣市"/>}
+                    helperText="輸入縣市所在門市"
+                    disabled={Infm.state}
                 >
-                </Autocomplete>
-                <Autocomplete
+                    {CountyOption.map((option) => (
+                        <MenuItem key={option} value={option}>
+                        {option}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    id="outlined-select-category"
+                    select
+                    required
+                    margin="dense"
+                    label="門市"
+                    value={appearAddress}
+                    onChange={(e)=>{setAAddress(e.target.value);setAddress(e.target.value)}}
+                    sx={{gridColumnStart:2,gridColumnEnd:3}}
+                    helperText="輸入 店號/門市名稱/道路名稱 查找"
+                    disabled={Infm.state}
+                >
+                    {stores.map((option) => (
+                        <MenuItem key={option.name} value={option.id}>
+                        {option.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                {/* <Autocomplete
                     disablePortal
                     id="ReceiverAddress"
                     margin="dense"
                     disabled={Infm.state}
                     options={["台大","師大"]}
-                    value={value}
                     //defaultValue={"小名"}
-                    sx={{gridColumnStart:2,gridColumnEnd:3}}
+                    // options={[1,3,6,5,7]}
+                    sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
                     onChange={(e, option) => setFieldValue(option)}
                     renderInput={(params) => <TextField {...params} label="門市" 
-                    helperText="輸入 店號/門市名稱/道路名稱 查找"/>}
+                    helperText="輸入 店號/門市名稱/道路名稱 查找" required/>}
+
                 >
-                </Autocomplete>
+                </Autocomplete> */}
                 <Button variant="contained" 
                     disabled={!Infm.state} 
                     onClick={onHandleCheckout}
