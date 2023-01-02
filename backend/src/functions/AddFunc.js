@@ -46,7 +46,7 @@ const AddUser = (User)=>{
     })
 }
 
-const AddBillToUser = async(userLineId)=>{
+const AddBillToUser = async(userLineId,ws)=>{
     console.log('adding bill to user', userLineId)
     const bill = await new BillModel({
         userLineId: userLineId,
@@ -60,7 +60,7 @@ const AddBillToUser = async(userLineId)=>{
   
     const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
     bill.billId = id
-
+    sendData(["billId",id],ws);
     bill.save();
 }
 

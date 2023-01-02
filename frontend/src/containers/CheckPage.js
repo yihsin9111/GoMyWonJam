@@ -22,6 +22,7 @@ import Input from 'antd/es/input/Input';
 
 //hooks import
 import { useWebsite } from './hooks/WebsiteContext'; 
+import useBackend from './hooks/useBackend';
 
 //functional component
 const CheckPage = () => {
@@ -31,9 +32,18 @@ const CheckPage = () => {
     const [Phone, setPhone] = React.useState('');
     const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
     const [value, setValue] = React.useState("");
+    const [name, setName] = React.useState('');
+    const [address, setAddress] = React.useState('');
     
     //hooks
-    const {bill, total} = useWebsite();
+    const {bill, total, currentBillId, userData} = useWebsite();
+    const {confirmBill} = useBackend();
+
+    React.useEffect(()=>{
+        setPhone(userData.phoneNumber);
+        setName(userData.name);
+        setAddress(userData.address);
+    },[])
 
     //function define
     const handlePackage = (event) => {
@@ -45,8 +55,11 @@ const CheckPage = () => {
     };
 
     const handlePhone = (e) => {
-          setPhone(Phone+e.target.value);
-      };
+          setPhone(e.target.value);
+    };
+    const handleName = (e)=> {
+        setName(e.target.value);  
+    }
 
     const handleInfmChange=()=>{
         if(Infm.state){
@@ -56,11 +69,25 @@ const CheckPage = () => {
             setInfm({btn:"修改",state:true,color:"error"})
         }
     }
+    const onHandleCheckout=()=>{
+        console.log('checking out...');
+        console.log('handling checkout:',
+         PackageOption,PaymentOption,Phone,name)
+        const BillInfo = {
+            billId : currentBillId,
+            package : PackageOption,
+            payment : PaymentOption,
+            phone   : Phone,
+            name    : name,
+            address : address,
+        }
+        confirmBill(BillInfo);
+    }
 
     const setFieldValue = (value) => {
         setValue(value);
         console.log(value)
-      };
+    };
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
     "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
@@ -123,7 +150,7 @@ const CheckPage = () => {
                     label="姓名"
                     disabled={Infm.state}
                     //defaultValue="小名"
-                    onChange={(e)=>{handlePackage(e)}}
+                    onChange={(e)=>{handleName(e)}}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
@@ -162,7 +189,11 @@ const CheckPage = () => {
                     helperText="輸入 店號/門市名稱/道路名稱 查找"/>}
                 >
                 </Autocomplete>
-                <Button variant="contained" disabled={!Infm.state} sx={{gridColumnStart:1,gridColumnEnd:3}}>結帳</Button>
+                <Button variant="contained" 
+                    disabled={!Infm.state} 
+                    onClick={onHandleCheckout}
+                    sx={{gridColumnStart:1,gridColumnEnd:3}}>
+                    結帳</Button>
             </CardContent>
         </Card>
     )

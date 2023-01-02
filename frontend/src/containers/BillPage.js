@@ -10,6 +10,7 @@ import Bill from "../components/PersonalComponent/Bill";
 import Bills from "../test datas/Bills";
 
 //hooks import
+import { useEffect } from 'react';
 import { useWebsite } from "./hooks/WebsiteContext";
 import useBackend from "./hooks/useBackend";
 
@@ -20,8 +21,15 @@ const BillPage = () => {
     //set state
 
     //function define
-    const { userBill } = useWebsite();
+    const { userBill, userLineId } = useWebsite();
     const { GetUserBill } = useBackend();
+
+    useEffect(()=>{
+        GetUserBill(userLineId);
+    },[])
+    useEffect(()=>{
+        console.log('user bill',userLineId,userBill);
+    },[userBill])
     
     //return
     return(
@@ -30,7 +38,7 @@ const BillPage = () => {
             display: "grid",
             gap: 2
             }}>
-            {Bills.map((value, index) => (
+            {userBill.map((value, index) => (
                 <Bill item={value} key={index}/>
             ))}
         </Box>

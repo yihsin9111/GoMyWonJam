@@ -30,7 +30,7 @@ export default {
                 break;
             }
             case 'AddBillToUser':{
-                AddBillToUser(payload);
+                AddBillToUser(payload,ws);
                 break;
             }
             case 'AddItemToBill':{

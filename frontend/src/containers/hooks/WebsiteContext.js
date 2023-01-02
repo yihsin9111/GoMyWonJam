@@ -86,6 +86,10 @@ const WebsiteProvider = (props) => {
                 setBill(payload);
                 break;
             }
+            case 'billId':{
+                setCurrentBillId(payload);
+                break;
+            }
             case "categories":{
                 setCategories(payload);
                 console.log('catagories set to:',payload);

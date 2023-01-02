@@ -11,9 +11,22 @@ import Receipt from "../PersonalComponent/Receipt";
 import TimeLine from "../PersonalComponent/TimeLine";
 import UpdateBillForm from "./UpdateBillForm";
 
+//import hooks
+import { useEffect } from 'react'; 
+import useBackend from "../../containers/hooks/useBackend";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+
 //functional component
 const ManageBill = ({item}) => {
     //set state
+
+    //fetch backend data
+    const {GetUserBill} = useBackend();
+    const {UserBill, isManager} = useWebsite();
+
+    useEffect(()=>{
+
+    },[])
 
     //function define
     const handleEdit = () => {

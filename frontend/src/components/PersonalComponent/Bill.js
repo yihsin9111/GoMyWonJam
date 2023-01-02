@@ -11,9 +11,13 @@ import { Typography, List, Button } from "@mui/material";
 import Receipt from "./Receipt";
 import TimeLine from "./TimeLine";
 
+//import hooks
+
 //functional component
 const Bill = ({item, id}) => {
     //set state
+    //fetch backend data
+   
 
     //function define
 
@@ -30,7 +34,7 @@ const Bill = ({item, id}) => {
                 gap: 1.5
             }}>
             <Typography variant="h6" component="div">
-                訂單編號：{item.userLineId}
+                訂單編號：{item.billId}
             </Typography>
             <Box sx={{
                 width: "100%",
