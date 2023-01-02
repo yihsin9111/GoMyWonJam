@@ -9,7 +9,6 @@ import EditIcon from '@mui/icons-material/Edit';
 //component import
 import Receipt from "../PersonalComponent/Receipt";
 import TimeLine from "../PersonalComponent/TimeLine";
-import UpdateBillForm from "./UpdateBillForm";
 
 //import hooks
 import { useEffect } from 'react'; 
@@ -21,7 +20,7 @@ const ManageBill = ({item}) => {
     //set state
 
     //fetch backend data
-    const {UpdateBillStatus} = useBackend();
+    const {UpdateBillStatus, ConfirmBill} = useBackend();
 
     //function define
     const handleEdit = () => {

@@ -13,6 +13,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 //component import 
 import Receipt from '../components/PersonalComponent/Receipt';
 
+//navigate import
+import { useNavigate } from 'react-router-dom';
+
 //test Data
 import Bills from "../test datas/Bills"
 import { Grid } from 'antd';
@@ -42,7 +45,8 @@ const CheckPage = () => {
     
     //hooks
     const {bill, total, currentBillId, userData, stores} = useWebsite();
-    const {confirmBill, GetStores} = useBackend();
+    const {ConfirmBill, GetStores} = useBackend();
+    const navigate = useNavigate();
 
     React.useEffect(()=>{
         console.log('use effect called.');
@@ -68,7 +72,7 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
-        setModified(true);
+        //setModified(true);
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -76,6 +80,7 @@ const CheckPage = () => {
             setInfm({btn:"修改",state:true,color:"error"})
         }
     }
+
     const onHandleCheckout=()=>{
         const BillInfo = {
             billId  : currentBillId,
@@ -86,13 +91,10 @@ const CheckPage = () => {
             address : value,
             total   :total,
         }
-        confirmBill(BillInfo);
+        ConfirmBill(BillInfo);
+        navigate("/personal/bills")
     }
 
-    const setFieldValue = (value) => {
-        setValue(value);
-        console.log(value)
-    };
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
     "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
