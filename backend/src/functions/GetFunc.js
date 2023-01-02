@@ -47,6 +47,7 @@ const GetUserBill = async(userLineId, ws)=>{
     let query = userLineId==='all'? {}:{userLineId}
     BillModel.find(query, async function(err, obj){
         if(obj.length){
+            console.log('in get user bill', obj);
             sendData(["userBill",obj],ws);
         }
         else{

@@ -9,8 +9,16 @@ import ManageBill from "./ManageBill";
 //test data import 
 import Bills from "../../test datas/Bills";
 
+//hooks import
+import { useEffect } from 'react';
+import useBackend from "../../containers/hooks/useBackend";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+
 //functional component
 const ModifyBills = () => {
+
+    const {userBill} = useWebsite();
+
     return(
         <Box>
             <Box sx={{
@@ -29,7 +37,7 @@ const ModifyBills = () => {
                     display: "grid",
                     gap: 1
                 }}>
-                    {Bills.map((value, index)=>(
+                    {userBill.map((value, index)=>(
                         <ManageBill item={value} key={index} />
                     ))}
                 </List>

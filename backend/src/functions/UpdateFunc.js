@@ -37,8 +37,22 @@ const UpdateProduct = async(product, ws)=>{
 }
 
 //bill modify handling functions
+const UpdateBillStatus = async(payload,ws)=>{
+    console.log('updating bill...',payload);
+    BillModel.find({billId:payload.billId}, async function(err, obj){
+        if(obj.length){
+            if(payload.task==='add' && payload.oldStatus<4){
+                obj[0].status += 1
+            }
+            if(payload.task==='minus' && payload.oldStatus>0){
+                console.log('minus task');
+                obj[0].status -= 1
+            }
+            await obj[0].save();
+        }
+    })
+}
 
 
 
-
-export {UpdateUser, UpdateCategory, UpdateProduct}
+export {UpdateUser, UpdateCategory, UpdateProduct, UpdateBillStatus}

@@ -107,4 +107,22 @@ const AddItemToBill = (BillId, item) => {
     })
 }
 
-export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill}
+const ConfirmBill = (BillInfo, ws)=>{
+    console.log('confirming bill...');
+    BillModel.find({billId:BillInfo.billId}, async function(err, obj){
+        if(obj.length){
+            console.log('bill found :)');
+            obj[0].package=BillInfo.package;
+            obj[0].payment=BillInfo.payment;
+            obj[0].address=BillInfo.address;
+            obj[0].receiver=BillInfo.receiver;
+            obj[0].phone=BillInfo.phone;
+            obj[0].status=1 ;
+            obj[0].total=BillInfo.total;
+            await obj[0].save();
+        }
+        else console.log('bill not found ;_;');
+    })
+}
+
+export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill}

@@ -33,16 +33,17 @@ const CheckPage = () => {
     const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
     const [value, setValue] = React.useState("");
     const [name, setName] = React.useState('');
-    const [address, setAddress] = React.useState('');
+    const [modified, setModified] = React.useState(false);
     
     //hooks
     const {bill, total, currentBillId, userData} = useWebsite();
-    const {confirmBill} = useBackend();
+    const {ConfirmBill} = useBackend();
 
     React.useEffect(()=>{
+        console.log('use effect called.');
         setPhone(userData.phoneNumber);
         setName(userData.name);
-        setAddress(userData.address);
+        setValue(userData.address);
     },[])
 
     //function define
@@ -62,6 +63,7 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
+        setModified(true);
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -70,18 +72,17 @@ const CheckPage = () => {
         }
     }
     const onHandleCheckout=()=>{
-        console.log('checking out...');
-        console.log('handling checkout:',
-         PackageOption,PaymentOption,Phone,name)
         const BillInfo = {
-            billId : currentBillId,
+            billId  : currentBillId,
             package : PackageOption,
             payment : PaymentOption,
             phone   : Phone,
-            name    : name,
-            address : address,
+            receiver    : name,
+            address : value,
+            total   :total,
         }
-        confirmBill(BillInfo);
+        console.log('checking out...',BillInfo);
+        ConfirmBill(BillInfo);
     }
 
     const setFieldValue = (value) => {
@@ -151,6 +152,7 @@ const CheckPage = () => {
                     disabled={Infm.state}
                     //defaultValue="小名"
                     onChange={(e)=>{handleName(e)}}
+                    value={name}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
@@ -162,18 +164,20 @@ const CheckPage = () => {
                     defaultValue={Phone}
                     onChange={(e)=>{handlePhone(e)}}
                     inputMode="tel"
+                    value={Phone}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}
                 >
                 </TextField>
                 <Autocomplete
-                disablePortal
-                id="COUNTY"
-                margin='dense'
-                disabled={Infm.state}
-                options={CountyOption}
-                sx={{gridColumnStart:1,gridColumnEnd:2}}
-                renderInput={(params) => <TextField {...params} label="台灣縣市" 
-                helperText="輸入門市所在縣市"/>}
+                    disablePortal
+                    id="COUNTY"
+                    margin='dense'
+                    disabled={Infm.state}
+                    options={CountyOption}
+                    sx={{gridColumnStart:1,gridColumnEnd:2}}
+                    //value={address}
+                    renderInput={(params) => <TextField {...params} label="台灣縣市" 
+                    helperText="輸入門市所在縣市"/>}
                 >
                 </Autocomplete>
                 <Autocomplete
@@ -182,6 +186,7 @@ const CheckPage = () => {
                     margin="dense"
                     disabled={Infm.state}
                     options={["台大","師大"]}
+                    value={value}
                     //defaultValue={"小名"}
                     sx={{gridColumnStart:2,gridColumnEnd:3}}
                     onChange={(e, option) => setFieldValue(option)}

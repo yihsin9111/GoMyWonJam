@@ -21,12 +21,7 @@ const ManageBill = ({item}) => {
     //set state
 
     //fetch backend data
-    const {GetUserBill} = useBackend();
-    const {UserBill, isManager} = useWebsite();
-
-    useEffect(()=>{
-
-    },[])
+    const {UpdateBillStatus} = useBackend();
 
     //function define
     const handleEdit = () => {
@@ -34,11 +29,13 @@ const ManageBill = ({item}) => {
     }
 
     const handleStateForward = () => {
-        console.log("handle change state")
+        console.log("handle change state", item.status, item.billId);
+        UpdateBillStatus('add',item.billId,item.status);
     }
 
     const handleStateBackward = () => {
         console.log("handle backward")
+        UpdateBillStatus('minus',item.billId,item.status);
     }
 
     //return
