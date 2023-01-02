@@ -4,6 +4,14 @@ import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 
+import { GetCategories, GetProductsByCategory } from './GetFunc'
+
+//notice frontend 
+const sendData = (data, ws) =>{
+    ws.send(JSON.stringify(data));
+    console.log('send data called in getFunc.');
+}
+
 //helper functions
 const appendProduct = (category, product) => {
     CategoryModel.find({name:category}, async function(err, obj){
@@ -14,7 +22,7 @@ const appendProduct = (category, product) => {
         }
         else{
             console.log('category does not exist.');
-            const model = new CategoryModel({name:category}).save();
+            const model = new CategoryModel({name:category});
             model.products = [product];
             await model.save();
         }
@@ -56,7 +64,7 @@ const AddBillToUser = async(userLineId)=>{
     bill.save();
 }
 
-const AddCategory = (Category)=>{
+const AddCategory = async(Category,ws)=>{
     console.log(Category);
     CategoryModel.find({name:Category.cat_name}, async function(err, obj){
         if(obj.length){
@@ -65,11 +73,13 @@ const AddCategory = (Category)=>{
         else{
             console.log('creating new category...');
             await new CategoryModel({name:Category.cat_name, deadline:Category.deadLine,products:[]}).save();
+            await GetCategories(ws);
         }
     })
+    
 }
 
-const AddProductToCategory = (Product)=>{
+const AddProductToCategory = (Product,ws)=>{
     ProductModel.find({name:Product.name, category:Product.category}, async function(err, obj){
         if(obj.length){
             console.log('This product is already in the category.');
@@ -78,9 +88,11 @@ const AddProductToCategory = (Product)=>{
             console.log('creating new product...',Product);
             await new ProductModel(Product).save();
             appendProduct(Product.category, Product.name);
+            GetProductsByCategory(Product.category,ws);
         }
     })
 }
+
 const AddItemToBill = (BillId, item) => {
     console.log('adding item to bill...', item, BillId);
     BillModel.find({billId:BillId}, async function(err, obj){

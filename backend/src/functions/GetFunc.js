@@ -12,6 +12,11 @@ const GetCategories = async(ws)=>{
     const categories = await CategoryModel.aggregate([
         { $group: { _id: null, category_names: { $push: "$name" } } }])
     sendData(["categories",categories[0].category_names],ws);
+    
+    //send category deadlines
+    const deadlines = await CategoryModel.aggregate([
+        { $group: { _id: null, category_dl:{ $push:"$deadline" }}}])
+    sendData(["deadlines",deadlines[0].category_dl],ws);
 }
 
 const GetProductsByCategory = async(category, ws)=>{
@@ -51,7 +56,6 @@ const GetUserBill = async(userLineId, ws)=>{
 const GetBill = async(billId, ws)=>{
     BillModel.find({billId}, async function(err, obj){
         if(obj.length){
-            console.log('send bill',obj[0]);
             sendData(["bill",obj[0]],ws);
         }
         else{

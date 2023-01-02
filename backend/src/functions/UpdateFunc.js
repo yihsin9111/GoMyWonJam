@@ -3,6 +3,7 @@ import UserModel from '../models/User'
 import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
+import { GetCategories, GetProductsByCategory } from './GetFunc'
 
 const UpdateUser = (user)=>{
     UserModel.find({lineId:user.lineId}, async function(err, obj){
@@ -15,27 +16,24 @@ const UpdateUser = (user)=>{
         else console.log('user not found ;_;')
     })
 }
-const UpdateCategory = (category)=>{ //date not updated ?
-    CategoryModel.find({name:category.cat_name}, async function(err, obj){
-        if(obj.length){
-            obj[0].deadline = Date(category.deadLine);
-            await obj[0].save;
-            console.log(obj[0]);
-        }
-        else console.log('category does not exist ;_;')
-    })
+const UpdateCategory = async(category,ws)=>{ //date not updated ?
+    await CategoryModel.findOneAndUpdate({name:category.cat_name},{deadline:category.deadLine});
+    GetCategories(ws);
 }
-const UpdateProduct = (product)=>{
-    ProductModel.find({name:product.name,category:product.category}, async function(err, obj){
-        if(obj.length){
-            obj[0].URL = product.URL;
-            obj[0].price = product.price;
-            obj[0].note = product.note;
-            obj[0].product_type = product.product_type;
-            await obj[0].save;
-        }
-        else console.log('product does not exist ;_;')
-    })
+const UpdateProduct = async(product, ws)=>{
+    console.log('updating product...',product);
+    await ProductModel.findByIdAndUpdate({name:product.name,category:product.category},
+        {
+            name: product.name,
+            category: product.category,
+            URL: product.URL,
+            price: product.price,
+            note: product.note,
+            product_type: product.product_type,
+            option_type: product.option_type,
+            options: product.options
+        });
+    GetProductsByCategory(product.name, ws);
 }
 
 //bill modify handling functions

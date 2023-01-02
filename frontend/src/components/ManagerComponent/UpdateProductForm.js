@@ -1,5 +1,5 @@
 //react import 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 //mui import 
 import Button from '@mui/material/Button';
@@ -11,7 +11,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import dayjs from 'dayjs';
 import { MenuItem, Box, Divider, IconButton} from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 
 //component import
 import OptionTextField from "./OptionTextField";
@@ -44,10 +44,10 @@ const category = [
 
 
 //functional component
-const AddProductForm = () => {
+const UpdateProductForm = ({ind}) => {
     //call hook
-    const {AddProductToCategory} = useBackend();
-    const {categories}=useWebsite();
+    const {UpdateProduct} = useBackend();
+    const {products, categories} = useWebsite();
 
     //set state
     const [open, setOpen] = useState(false);
@@ -62,6 +62,17 @@ const AddProductForm = () => {
     const [optionNum, setOptionNum] = useState(0);
     const [options, setOptions] = useState([]);
 
+    useEffect(()=>{
+        setName(products[ind].name);
+        setWhichCategory(products[ind].category);
+        setPrice(products[ind].price);
+        setPhotoURL(products[ind].URL);
+        setNote(products[ind].note);
+        setType(products[ind].product_type);
+        setOptionType(products[ind].option_type);
+        setOptionNum(products[ind].options.length);
+        setOptions(products[ind].options);
+    },[products])
 
 
     //function define
@@ -111,7 +122,7 @@ const AddProductForm = () => {
             options: ops
         }
         console.log("Product: ", Product);
-        AddProductToCategory(Product);
+        UpdateProduct(Product);
         setOpen(false);
         
 
@@ -126,14 +137,14 @@ const AddProductForm = () => {
                 component="label"
                 onClick={()=>{setOpen(true)}}
                 >
-                <AddIcon />
+                <EditIcon />
             </IconButton>
         <Dialog 
             open={open} 
             onClose={()=>{setOpen(false)}} 
             fullWidth={true}
             >
-            <DialogTitle>增新商品品項</DialogTitle>
+            <DialogTitle>更新商品資訊</DialogTitle>
             <DialogContent sx={{
                 display: "grid",
                 gap: 1.5
@@ -254,7 +265,7 @@ const AddProductForm = () => {
                     gridTemplateColumns: "1fr 1fr"
                 }}>
                     {options.map((value,index)=>(
-                        <OptionTextField options={options} setOptions={setOptions}  num={index} key={index} isUpdate={false}/>
+                        <OptionTextField options={options} setOptions={setOptions}  num={index} key={index} isUpdate={true} />
                     ))}
                 </DialogContent>
                 </Box>:<></>}
@@ -269,11 +280,11 @@ const AddProductForm = () => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onAddProduct()}}>增新</Button>
+            <Button onClick={()=>{onAddProduct()}}>更新</Button>
             </DialogActions>
         </Dialog>
         </Box>
     )
 }
 
-export default AddProductForm;
+export default UpdateProductForm;

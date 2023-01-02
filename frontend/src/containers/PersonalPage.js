@@ -14,8 +14,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import User from "../test datas/User";
 
 //form component import
-import UpdateUserForm from '../components/PersonalComponent/LoginForm';
-
+import UpdateUserForm from '../components/PersonalComponent/UpdateUserForm';
 //functional component
 const PersonalPage = () => {
     

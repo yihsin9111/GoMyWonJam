@@ -1,5 +1,5 @@
 //react import
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 //mui import
 import {Box, Button, Typography, Divider, Grid} from "@mui/material"
@@ -9,11 +9,17 @@ import AddCategoryForm from "./AddCategoryForm";
 import AddProductForm from "./AddProductForm";
 import CategoryList from "./CategoryList";
 
+//hooks import
+import useBackend from "../../containers/hooks/useBackend";
 
 //functional component
 const AppendProduct = () => {
+    
     //set state
-
+    const {GetCategories} = useBackend();
+    useEffect(()=>{
+        GetCategories();
+    },[])
 
     //function define
 
