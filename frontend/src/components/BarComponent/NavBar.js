@@ -112,7 +112,6 @@ const NavBar = ({open, setOpen}) => {
                 >
                 <CartInclude open={openCart} setOpen={setOpenCart} />
               </Dialog>
-              {/* <CartList open={openCart} setOpen={setOpenCart} /> */}
             </Fragment>
           </Toolbar>
         </AppBar>

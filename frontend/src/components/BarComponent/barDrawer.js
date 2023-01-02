@@ -13,10 +13,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import HelpIcon from '@mui/icons-material/Help';
-import ContactsIcon from '@mui/icons-material/Contacts';
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 // navigation import 
@@ -25,8 +24,12 @@ import {useNavigate} from "react-router-dom";
 // Component Import
 import { drawerWidth } from './BarConstDef';
 
+//hook import
+import { useWebsite } from '../../containers/hooks/WebsiteContext';
+
 // react import 
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import ManageAccounts from '@mui/icons-material/ManageAccounts';
 
 
 // Styled Component
@@ -41,9 +44,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 // function component
 const BarDrawer = ({open, setOpen, theme}) => {
+    //hook import
+    const {isManager} = useWebsite();
 
     //set state
-    const [openPersonal, setOpenPersonal] = useState(false);
 
     //function define
     const handleDrawerOpen = () => {
@@ -59,17 +63,20 @@ const BarDrawer = ({open, setOpen, theme}) => {
     
     const navigateToMain = () => {
       navigate("/buying");
-      setOpenPersonal(false);
     }
 
     const navigateToPersonal = () => {
       navigate("/personal");
-      setOpenPersonal(true);
     }
 
     const navigateToBill = () => {
       navigate("/personal/bills");
     }
+
+    //useEffect
+    useEffect(()=>{
+      console.log("in barDrawer: ", isManager);
+    }, [isManager])
 
     //return
     return(
@@ -119,18 +126,16 @@ const BarDrawer = ({open, setOpen, theme}) => {
               </ListItem>
         </List>
         <Divider />
-        <List>
-          {['關於此網站', "增新按鍵", "Hi 譯心", "Hi 子緹"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+        {isManager? (<List>
+            <ListItem key={5} disablePadding>
+              <ListItemButton onClick={()=>{navigate("/manager")}}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InfoIcon/> : <HelpIcon />}
+                <ManageAccounts />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={"管理者頁面"} />
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
+        </List>):<></>}
       </Drawer>
     )
 }

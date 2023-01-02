@@ -14,7 +14,24 @@ const WebsiteContext = createContext({
     categories: [],
     deadlines:  [],
     products:   [],
+    checkManager: {}
 })
+
+const Managers =[
+    {
+        name: "Yishin",
+        id: "B10901121"
+    },
+    {
+        name: "Cs",
+        id: "B10901099"
+    }, 
+    {
+        name: "LZT",
+        id: "B10901099"
+    }
+
+]
 
 const WebsiteProvider = (props) => {
     const [status, setStatus]           = useState({});
@@ -29,6 +46,21 @@ const WebsiteProvider = (props) => {
     const [deadlines, setDeadlines]         = useState([]);
     const [products, setProducts]           = useState([]);
     const [total, setTotal]                 = useState(0);
+
+    const checkManager = (input_name, id) => {
+        const getName = Managers.find(({name})=>(name===input_name));
+        if(!getName){
+           return false
+        }
+        if(getName.id === id){
+            setIsManager(true);
+            return true
+        }
+        else{
+            return false
+        }
+
+    }
 
     client.onmessage = (byteString) => {
         const {data} = byteString;
@@ -78,7 +110,7 @@ const WebsiteProvider = (props) => {
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
-                ,deadlines
+                ,deadlines,checkManager, isManager
             }}
             {...props}
         />

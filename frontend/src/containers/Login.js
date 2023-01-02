@@ -4,6 +4,9 @@ import {useState} from "react";
 //mui import
 import {Avatar, Box, Card, Divider, Grid, TextField, Typography, InputAdornment, Button} from "@mui/material";
 
+//hook import
+import { useWebsite } from "./hooks/WebsiteContext";
+
 //import navigate
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +16,9 @@ const Login = () => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
 
+    //hook import
+    const { checkManager } = useWebsite();
+
     //navigate define
     const navigate =useNavigate();
 
@@ -21,6 +27,8 @@ const Login = () => {
         if(!id || !name){
             return
         }
+        const ifM=checkManager(name, id);
+        console.log("if manager: ", ifM);
         navigate("/buying")
 
     }

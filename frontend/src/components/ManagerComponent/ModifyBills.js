@@ -1,7 +1,13 @@
 //react import
 
 //mui import
-import {Grid, Typography, Box, Divider} from "@mui/material"
+import {Grid, Typography, Box, Divider, List} from "@mui/material"
+
+//component import 
+import ManageBill from "./ManageBill";
+
+//test data import 
+import Bills from "../../test datas/Bills";
 
 //functional component
 const ModifyBills = () => {
@@ -19,6 +25,14 @@ const ModifyBills = () => {
                     </Grid> 
                 </Grid>
                 <Divider />
+                <List sx={{
+                    display: "grid",
+                    gap: 1
+                }}>
+                    {Bills.map((value, index)=>(
+                        <ManageBill item={value} key={index} />
+                    ))}
+                </List>
             </Box>
 
         </Box>

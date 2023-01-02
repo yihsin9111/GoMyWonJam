@@ -4,7 +4,6 @@ import {useState} from "react";
 //mui import
 import { IconButton, ListItem, ListItemText, Box, Divider, Card, List } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
