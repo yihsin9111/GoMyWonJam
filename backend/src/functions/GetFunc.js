@@ -20,7 +20,8 @@ const GetCategories = async(ws)=>{
 }
 
 const GetProductsByCategory = async(category, ws)=>{
-    ProductModel.find({category:category}, async function(err, obj){
+    let query = category==='all'? {}:{category}
+    ProductModel.find(query, async function(err, obj){
         if(obj.length){
             sendData(["products",obj],ws);
         }
@@ -43,6 +44,7 @@ const GetUserData = async(userLineId, ws)=>{
 }
 
 const GetUserBill = async(userLineId, ws)=>{
+    let query = userLineId==='all'? {}:{category}
     BillModel.find({userLineId:userLineId}, async function(err, obj){
         if(obj.length){
             sendData(["userBill",obj],ws);

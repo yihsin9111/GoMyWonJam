@@ -58,9 +58,40 @@ function ProductsTabs() {
             {categories.map((label,index)=>(<Tab label={label} value={label} key={index}/>))}
           </TabList>
         </Box>
+  {/*the "all" tab*/}
+        <TabPanel value='all' key='all'>
+          <Grid container key='all'>
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: 'background.default',
+                    display: 'grid',
+                    gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                    gap: 2,
+                  }}>
+                </Box>
+            </Grid>
+            {products.length?
+              (<Grid container key="1">
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: 'background.default',
+                    display: 'grid',
+                    gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                    gap: 2,
+                  }}>
+                    {products.map((value,index)=>(
+                      <Grid item>
+                        <ProductCard item={value} key={index} />
+                      </Grid>))}
+                </Box>
+              </Grid>):<p>No product in this category : /</p>}
+        </TabPanel>
+  {/*end of the "all" tab*/}
         {categories.map((label, index)=>(
           <TabPanel value={label} key={index}>
-            <Grid container key="1">
+            <Grid container key={index}>
                 <Box
                   sx={{
                     p: 2,
