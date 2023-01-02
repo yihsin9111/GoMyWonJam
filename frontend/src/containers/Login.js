@@ -29,7 +29,7 @@ const Login = () => {
         }
         const ifM=checkManager(name, id);
         console.log("if manager: ", ifM);
-        navigate("/buying")
+        navigate("/")
 
     }
 

@@ -39,7 +39,7 @@ const CheckPage = () => {
     const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
     const [value, setValue] = React.useState("");
     const [name, setName] = React.useState('');
-    const [appearAddress, setAAddress] = React.useState("");
+    const [inputValue, setInputValue] = React.useState("");
     const [address, setAddress] = React.useState('');
     const [county, setCounty] = React.useState("");
     
@@ -88,10 +88,11 @@ const CheckPage = () => {
             payment : PaymentOption,
             phone   : Phone,
             receiver    : name,
-            address : value,
+            address : value.substring(0,6),
             total   :total,
         }
         ConfirmBill(BillInfo);
+        console.log("BillInfo", BillInfo)
         navigate("/personal/bills")
     }
 
@@ -115,6 +116,12 @@ const CheckPage = () => {
             </Box>
         )
     }
+
+    var a=[]
+
+    stores.map((option)=>(
+        a.push(option.name)
+    ))
         
     //return
     return(
@@ -194,7 +201,7 @@ const CheckPage = () => {
                         </MenuItem>
                     ))}
                 </TextField>
-                <TextField
+                {/* <TextField
                     id="outlined-select-category"
                     select
                     required
@@ -211,22 +218,25 @@ const CheckPage = () => {
                         {option.name}
                         </MenuItem>
                     ))}
-                </TextField>
-                {/* <Autocomplete
-                    disablePortal
+                </TextField> */}
+                <Autocomplete
                     id="ReceiverAddress"
                     margin="dense"
                     disabled={Infm.state}
-                    options={["台大","師大"]}
-                    //defaultValue={"小名"}
-                    // options={[1,3,6,5,7]}
+                    options={a}
                     sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
-                    onChange={(e, option) => setFieldValue(option)}
+                    value={value}
+                    onChange={(event, newValue) => {
+                    setValue(newValue);
+                    }}
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                    }}
                     renderInput={(params) => <TextField {...params} label="門市" 
                     helperText="輸入 店號/門市名稱/道路名稱 查找" required/>}
-
                 >
-                </Autocomplete> */}
+                </Autocomplete>
                 <Button variant="contained" 
                     disabled={!Infm.state} 
                     onClick={onHandleCheckout}
