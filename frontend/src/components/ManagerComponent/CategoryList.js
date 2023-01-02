@@ -10,7 +10,7 @@ import CategoryListItem from "./CategoryListItem";
 import Category from "../../test datas/Category";
 
 //hooks import
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useBackend from "../../containers/hooks/useBackend";
 import { useWebsite } from "../../containers/hooks/WebsiteContext";
 
@@ -18,6 +18,7 @@ const CategoryList = () => {
     
     //set state
     const { categories } = useWebsite();
+    const [atwhich, setAtwhich] = useState(-1);
 
     //return
     return(
@@ -26,7 +27,7 @@ const CategoryList = () => {
             gap: 1
         }}>
             {categories.map((value, index)=>(
-                <CategoryListItem  item={value} key={index} ind={index} />
+                <CategoryListItem  item={value} key={index} ind={index} atwhich={atwhich} setAtwhich={setAtwhich}/>
             ))}
         </List>
     )

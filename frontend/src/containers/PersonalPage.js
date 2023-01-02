@@ -21,6 +21,7 @@ const PersonalPage = () => {
     //backend function import
     const { userLineId, userData } = useWebsite();
     const { GetUserData } = useBackend();
+    const  [relog, setRelog] = useState(false);
 
     //set state
 
@@ -28,9 +29,13 @@ const PersonalPage = () => {
     useEffect(()=>{
         GetUserData(userLineId);
     },[])
+    // useEffect(()=>{
+    //     GetUserData(userLineId);
+    // },[userData])
     useEffect(()=>{
         GetUserData(userLineId);
-    },[userData])
+        setRelog(false);
+    },[relog])
 
     //return
     return(
@@ -50,7 +55,7 @@ const PersonalPage = () => {
                         flexDirection: "row"
                     }}>
                         <Typography variant="h5" component="div" color="text.primary">個人基本資料{" "}</Typography>
-                        <UpdateUserForm/>
+                        <UpdateUserForm setRelog={setRelog}/>
                     </Box>
                         <Typography variant="body1" color="text.secondary">
                             名稱：{userData.name}

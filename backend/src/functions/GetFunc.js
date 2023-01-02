@@ -36,9 +36,11 @@ const GetUserData = async(userLineId, ws)=>{
     UserModel.find({userLineId:userLineId}, async function(err, obj){
         if(obj.length){
             sendData(["userData",obj[0]], ws);
+            sendData(["userAvaliable", true], ws);
         }
         else{
             console.log("user not found ;_;");
+            sendData(["userAvaliable", false], ws);
         }
     })
 }

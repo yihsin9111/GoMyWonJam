@@ -34,8 +34,8 @@ function App() {
       <Main open={open}>
         <DrawerHeader>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/buying" element={<MainPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/check" element={<CheckPage />} />
           <Route path="/personal" element={<PersonalPage />} />
           <Route path="/personal/bills" element={<BillPage />} />

@@ -14,7 +14,9 @@ const WebsiteContext = createContext({
     categories: [],
     deadlines:  [],
     products:   [],
-    checkManager: {}
+    checkManager: {},
+    iflog: false,
+    setIflog: {}
 })
 
 const Managers =[
@@ -46,6 +48,7 @@ const WebsiteProvider = (props) => {
     const [deadlines, setDeadlines]         = useState([]);
     const [products, setProducts]           = useState([]);
     const [total, setTotal]                 = useState(0);
+    const [iflog, setIflog]                 = useState(false);
 
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
@@ -104,6 +107,10 @@ const WebsiteProvider = (props) => {
                 console.log('deadlines set to',payload);
                 break;
             }
+            case "userAvaliable":{
+                setIflog(payload);
+                break;
+            }
             default : break;
         }
     }
@@ -114,7 +121,7 @@ const WebsiteProvider = (props) => {
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
-                ,deadlines,checkManager, isManager
+                ,deadlines,checkManager, isManager, iflog, setIflog
             }}
             {...props}
         />
