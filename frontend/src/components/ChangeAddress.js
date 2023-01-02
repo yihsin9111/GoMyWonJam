@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import {CardContent} from '@mui/material';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
 
 import { useWebsite } from '../containers/hooks/WebsiteContext'; 
 import useBackend from '../containers/hooks/useBackend';
@@ -56,24 +57,30 @@ const ChangeAddress=({setOpen})=>{
             gap: 1.5
         }}>
             <Typography variant="body1" sx={{gridColumnStart:1}}>收件人資訊</Typography>
-            <Autocomplete
-            id="COUNTY"
-            margin='dense'
-            options={CountyOption}
-            sx={{gridColumnStart:1,gridColumnEnd:2}}
-            value={county}
-            onChange={(e)=>{setCounty(e.target.value);GetStores(e.target.value)}}
-            renderInput={(params) => <TextField {...params} label="台灣縣市" 
-            helperText="輸入門市所在縣市"/>}
-            >
-            </Autocomplete>
+            <TextField
+                    id="outlined-select-category"
+                    select
+                    required
+                    margin="dense"
+                    label="縣市"
+                    value={county}
+                    onChange={(e)=>{setCounty(e.target.value);GetStores(e.target.value)}}
+                    sx={{gridColumnStart:1,gridColumnEnd:2}}
+                    helperText="輸入縣市所在門市"
+                >
+                    {CountyOption.map((option) => (
+                        <MenuItem key={option} value={option}>
+                        {option}
+                        </MenuItem>
+                    ))}
+                </TextField>
             <Autocomplete
                 disablePortal
                 id="ReceiverAddress"
                 margin="dense"
                 options={a}
                 //defaultValue={"小名"}
-                sx={{gridColumnStart:2,gridColumnEnd:3}}
+                sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
                 value={value}
                 onChange={(event, newValue) => {
                 setValue(newValue);
@@ -113,7 +120,7 @@ const ChangeAddress=({setOpen})=>{
         {list()}
         <Button variant="contained"
         color="success"
-        onClick={()=>{setOpen(false)}}
+        onClick={()=>{setOpen(false);onHandleChangeAddr()}}
         >確認</Button>
     </Box>
   );
