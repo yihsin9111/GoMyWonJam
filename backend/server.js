@@ -5,12 +5,25 @@ import WebSocket from 'ws'
 import mongo from './src/mongo'
 import wsConnect from './src/wsConnect'
 
+//deploy
+import path from "path";
+//import express from "express";
+import cors from "cors";
+
 mongo.connect()
 
 const app = express()                               //create app middleware
 const server = http.createServer(app)               //use http protocol to create server
 const wss = new WebSocket.Server({server})   //
 const db = mongoose.connection
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "../frontend", "build")));
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
+  });
+}
 
 db.once('open', ()=> {
     console.log("MongoDB connected!");
@@ -23,4 +36,7 @@ db.once('open', ()=> {
 })
 
 const PORT = process.env.PORT || 4000;
+if (process.env.NODE_ENV === "development") {
+    app.use(cors());
+   }
 server.listen(PORT, ()=>{console.log(`GoMyWonJam listening on port ${PORT}!`)})
