@@ -1,13 +1,12 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog'
 import {Typography} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
 //test Data
-import Bills from "../test datas/Bills.js"
+//import Bills from "../test datas/Bills.js"
 
 const members = ["S.Coups","Jeonghan","Joshua",
 "Jun","Hoshi","Wonwoo","Woozi",
@@ -49,15 +48,12 @@ const choosePage=(number,name)=>{
     )
 }
 
-export default function SortDialog({openCart, setOpenCart}) {
-
-  const [Open, setOpen] = React.useState(false);
-  const [Submit,setSubmit] = React.useState(false);
+export default function SortDialog({item}) {
 
   const list = () => {
     return(
-        <Box sx={{}}>
-            {Bills[0].items.map((value,index)=>{
+        <Box>
+            {item.map((value,index)=>{
                 if (value.product_type) {
                     for(let i=0;i<value.number;i++){
                         return(
@@ -73,18 +69,7 @@ export default function SortDialog({openCart, setOpenCart}) {
 
   return (
     <>
-    <Button onClick={()=>{setOpen(true)}} disabled={Submit}>
-        test
-    </Button>
-    <Dialog
-            open={Open}
-            fullWidth={true}
-          >
             {list()}
-        <Box sx={{display:"grid"}}>
-            <Button variant="contained" color="success" onClick={(e)=>{setSubmit(true);setOpen(false)}}>提交</Button>
-        </Box>
-    </Dialog>
     </>
   );
 }
