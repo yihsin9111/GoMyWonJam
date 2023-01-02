@@ -28,9 +28,6 @@ const PersonalPage = () => {
     useEffect(()=>{
         GetUserData(userLineId);
     },[])
-    useEffect(()=>{
-        GetUserData(userLineId);
-    },[userData])
 
     //return
     return(

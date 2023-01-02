@@ -28,6 +28,9 @@ const ManagerPage = () => {
     useEffect(()=>{
         GetUserBill('all');
     },[])
+    useEffect(()=>{
+        GetUserBill('all');
+    },[UserBill])
 
     //set state
     const [open, setOpen] = useState([false, false, false, false]);

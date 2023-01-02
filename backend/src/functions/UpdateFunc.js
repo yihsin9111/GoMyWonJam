@@ -3,7 +3,7 @@ import UserModel from '../models/User'
 import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
-import { GetCategories, GetProductsByCategory } from './GetFunc'
+import { GetCategories, GetProductsByCategory, GetUserBill, GetUserData } from './GetFunc'
 
 const UpdateUser = (user)=>{
     UserModel.find({lineId:user.lineId}, async function(err, obj){
@@ -12,6 +12,7 @@ const UpdateUser = (user)=>{
             obj[0].address = user.address;
             obj[0].phoneNumber = user.phoneNumber;
             await obj[0].save();
+            GetUserData(user.lineId,ws);
         }
         else console.log('user not found ;_;')
     })
@@ -49,6 +50,7 @@ const UpdateBillStatus = async(payload,ws)=>{
                 obj[0].status -= 1
             }
             await obj[0].save();
+            GetUserBill('all',ws);
         }
     })
 }

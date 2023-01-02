@@ -10,7 +10,7 @@ import ManageBill from "./ManageBill";
 import Bills from "../../test datas/Bills";
 
 //hooks import
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useBackend from "../../containers/hooks/useBackend";
 import { useWebsite } from "../../containers/hooks/WebsiteContext";
 
@@ -18,6 +18,15 @@ import { useWebsite } from "../../containers/hooks/WebsiteContext";
 const ModifyBills = () => {
 
     const {userBill} = useWebsite();
+    const [renderBill, setRenderBill] = useState([]);
+
+    useEffect(()=>{
+        setRenderBill(userBill);
+    },[])
+    useEffect(()=>{
+        console.log('userBill modified.',userBill);
+        setRenderBill(userBill);
+    },[userBill])
 
     return(
         <Box>
@@ -37,7 +46,7 @@ const ModifyBills = () => {
                     display: "grid",
                     gap: 1
                 }}>
-                    {userBill.map((value, index)=>(
+                    {renderBill.map((value, index)=>(
                         <ManageBill item={value} key={index} />
                     ))}
                 </List>
