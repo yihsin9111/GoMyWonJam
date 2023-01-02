@@ -2,6 +2,7 @@ import BillModel from '../models/Bill'
 import UserModel from '../models/User'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
+import { GetCategories, GetProductsByCategory } from './GetFunc'
 
 const sendData = (data, ws) =>{
     ws.send(JSON.stringify(data));
@@ -14,11 +15,16 @@ const DeleteUser = (userLineId)=>{
 const DeleteBill = (billId)=>{
     BillModel.deleteMany({billId})
 }
-const DeleteCategory = (name)=>{
-    CategoryModel.deleteMany({name})
+const DeleteCategory = async(name,ws)=>{
+    console.log('deleting category with name',name);
+    await CategoryModel.deleteMany({name});
+    await ProductModel.deleteMany({category:name});
+    GetCategories(ws);
 }
-const DeleteProduct = (category, name)=>{
-    ProductModel.deleteMany({name, category})
+const DeleteProduct = async(category, name, ws)=>{
+    console.log('deleting product...');
+    await ProductModel.deleteMany({name, category});
+    GetProductsByCategory(category,ws);
 }
 const DeleteItemFromBill = (payload, ws)=>{
     BillModel.find({billId:payload.billId}, async function(err, obj){

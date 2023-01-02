@@ -57,9 +57,9 @@ const useBackend = () => {
         sendData(["AddProductToCategory",Product]);
     }
 
-    const UpdateProduct = (ProductId, newProduct)=>{
+    const UpdateProduct = (newProduct)=>{
         console.log("Updating Product...");
-        sendData(["UpDateProduct",{ProductId, newProduct}]);
+        sendData(["UpdateProduct",newProduct]);
     }
 
     const GetProductById = (ProductId) =>{

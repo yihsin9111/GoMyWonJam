@@ -9,8 +9,15 @@ import CategoryListItem from "./CategoryListItem";
 //testData import 
 import Category from "../../test datas/Category";
 
+//hooks import
+import { useEffect } from 'react'
+import useBackend from "../../containers/hooks/useBackend";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+
 const CategoryList = () => {
+    
     //set state
+    const { categories } = useWebsite();
 
     //return
     return(
@@ -18,8 +25,8 @@ const CategoryList = () => {
             display: "grid",
             gap: 1
         }}>
-            {Category.map((value, index)=>(
-                <CategoryListItem item={value} key={index} />
+            {categories.map((value, index)=>(
+                <CategoryListItem  item={value} key={index} ind={index} />
             ))}
         </List>
     )

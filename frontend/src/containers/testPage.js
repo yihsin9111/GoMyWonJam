@@ -169,15 +169,7 @@ const TestPage = ()=>{
     <Form {...layout} form={productForm} name="control-hooks">
         Product
         <Form.Item name="category" label="Category" rules={[{ required: true }]}>
-            <Select options={[
-            {
-            value: 'jack',
-            label: 'Jack',
-            },
-            {
-            value: 'lucy',
-            label: 'Lucy',
-            }]}/>
+            <Input />
         </Form.Item>
         <Form.Item name="name" label="Name" rules={[{ required: true }]}>
             <Input />

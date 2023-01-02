@@ -22,11 +22,11 @@ export default {
                 break;
             }
             case 'AddCategory':{
-                AddCategory(payload);
+                AddCategory(payload, ws);
                 break;
             }
             case 'AddProductToCategory':{
-                AddProductToCategory(payload);
+                AddProductToCategory(payload,ws);
                 break;
             }
             case 'AddBillToUser':{
@@ -67,11 +67,11 @@ export default {
                 break;
             }
             case 'UpdateCategory':{
-                UpdateCategory(payload);
+                UpdateCategory(payload,ws);
                 break;
             } 
             case 'UpdateProduct':{
-                UpdateProduct(product);
+                UpdateProduct(payload,ws);
                 break;
             }
 
@@ -81,11 +81,11 @@ export default {
                 break;
             }
             case 'DeleteCategory':{
-                DeleteCategory(payload);
+                DeleteCategory(payload,ws);
                 break;
             } 
             case 'DeleteProduct':{
-                DeleteProduct(product);
+                DeleteProduct(payload.category,payload.name,ws);
                 break;
             }
             case 'DeleteBill':{

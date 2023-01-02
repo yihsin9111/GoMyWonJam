@@ -11,14 +11,33 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 //component import
 import AddProductForm from "./AddProductForm";
 import ProductinCat from "./ProductsinCategory";
+import UpdateCategoryForm from "./UpdateCategoryForm";
 
 //test data improt 
 import Products from "../../test datas/Products";
 
+//import hooks
+import { useEffect } from 'react'
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+import useBackend from "../../containers/hooks/useBackend";
+
 //functional component
-const CategoryListItem = ({item, }) =>{
+const CategoryListItem = ({item,ind}) =>{
+    
     //set state
     const [open, setOpen] = useState(false)
+
+    //fetch backend data
+    const { products, deadlines, categories } = useWebsite();
+    const { GetProductsByCategory, DeleteCategory } = useBackend();
+
+    useEffect(()=>{
+        GetProductsByCategory(item);
+    },[open])
+    useEffect(()=>{
+        GetProductsByCategory(item);   
+    },[categories])
+
     //function define
     const handleModify = () => {
         console.log("handlemodify");
@@ -26,6 +45,7 @@ const CategoryListItem = ({item, }) =>{
 
     const handleDelete = () => {
         console.log("handle Delete");
+        DeleteCategory(item);
     }
 
     const handleExpand = () => {
@@ -33,25 +53,26 @@ const CategoryListItem = ({item, }) =>{
         setOpen(!open);
     }
 
+    const convertDate = (dateString)=>{
+        const date = new Date(dateString);
+        return date.toString();
+    }
+
     //return
     return(
         <Card sx={{width: "100%"}}>
             <ListItem>
-                <ListItemText primary={item.name} secondary={item.deadline} />
+                <ListItemText primary={item} secondary={convertDate(deadlines[ind])} />
                 <IconButton
                     onClick={()=>{handleExpand()}}
                 >
                     {open? <ExpandLessIcon />:<ExpandMoreIcon />}
                 </IconButton>
-                <IconButton
-                    onClick={()=>{handleModify()}}
-                >
-                    <EditIcon />
-                </IconButton>
+                <UpdateCategoryForm oldData={{name:item, deadline:deadlines[ind]}}/>
                 <IconButton
                     onClick={()=>{handleDelete()}}
                 >
-                    <DeleteIcon />
+                    <DeleteIcon/>
                 </IconButton>
                 {open? <AddProductForm />:<></>}
             </ListItem>
@@ -59,8 +80,8 @@ const CategoryListItem = ({item, }) =>{
             <Box sx={{width: "100%"}}>
                 <Divider />
                 <List>
-                {Products.map((value, index)=>(
-                    <ProductinCat item={value} key={index} />
+                {products.map((value, index)=>(
+                    <ProductinCat item={value} key={index} ind={index} />
                 ))}
                 </List>
             </Box>
