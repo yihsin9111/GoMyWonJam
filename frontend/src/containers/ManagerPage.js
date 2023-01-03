@@ -59,11 +59,9 @@ const ManagerPage = () => {
             <Stack direction="row" spacing={1}>
                 <Chip label="商品管理" variant="outlined" onClick={()=>{handleClick(0)}} />
                 <Chip label="訂單管理" variant="outlined" onClick={()=>{handleClick(1)}} />
-                <Chip label="買家管理" variant="outlined" onClick={()=>{handleClick(2)}} />
             </Stack>
             {open[0]? <ModifyProduct />:<></>}
             {open[1]? <ModifyBills />:<></>}
-            {open[2]? <div>Not Yet</div>:<></>}
         </Box>
     )
 }

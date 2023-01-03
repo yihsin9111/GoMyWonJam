@@ -5,14 +5,18 @@ const sendData = (data, ws) =>{
     console.log('send data called in getFunc.');
 }
 
-const renewTBill = (lineId, ws) => {
+const renewTBill = (payload, ws) => {
     console.log("renew TBill");
-    TemporaryBillModel.find({userLineId: lineId}, async function(err, obj){
+    TemporaryBillModel.find({userLineId: payload.lineId}, async function(err, obj){
         if(obj.length){
             console.log('Bill found. adding item to bill...');
-            obj[0].items = []
-            await obj[0].save();
+            obj[0].ItemList.splice(payload.i,1);
+            console.log("renew obj[0]: ", obj[0]);
             sendData(["bill", obj[0]], ws);
+            obj[0].save();
+            // obj[0].items = []
+            // await obj[0].save();
+            
 
         }
         else{
@@ -25,10 +29,27 @@ const AddItemToTBill = (lineId, item ,ws) => {
     console.log('adding item to bill...', item, lineId);
     TemporaryBillModel.find({userLineId: lineId}, async function(err, obj){
         if(obj.length){
+            console.log("obj[0]: ", obj[0]);
+            const item_cat = item.category;
+            const index_cat = obj[0].ItemList.findIndex(function (element) {
+                return element.category === item_cat
+            })
+            console.log("index_cat: ", index_cat);
+            if(index_cat === -1){
+                obj[0].ItemList[obj[0].ItemList.length] = {
+                    category: item_cat,
+                    items: [item]
+                }
+            }
+            else{
+                obj[0].ItemList[index_cat].items.push(item);
+            }
             console.log('Bill found. adding item to bill...');
-            obj[0].items = [...obj[0].items, item]
-            await obj[0].save();
             sendData(["bill", obj[0]], ws);
+            console.log("new obj: ", obj[0].ItemList);
+            await obj[0].save();
+            
+            
         }
         else{
             console.log('Bill not found ;_;');
@@ -40,6 +61,7 @@ const AddItemToTBill = (lineId, item ,ws) => {
 const getTBill = (lineId, ws) => {
     TemporaryBillModel.find({userLineId: lineId}, async function(err, obj){
         if(obj.length){
+            
             console.log(obj[0]);
             sendData(["bill", obj[0]], ws);
         }
@@ -60,7 +82,10 @@ const getTBill = (lineId, ws) => {
 const DeleteItemFromTBill = (payload, ws)=>{
     TemporaryBillModel.find({userLineId:payload.lineId}, async function(err, obj){
         if(obj.length){
-            obj[0].items.splice(payload.i,1);
+            const index_cat = obj[0].ItemList.findIndex(function (element) {
+                return element.category === payload.category
+            })
+            obj[0].ItemList[index_cat].items.splice(payload.i,1);
             await obj[0].save();
             console.log(obj[0]);
             sendData(["bill",obj[0]],ws);

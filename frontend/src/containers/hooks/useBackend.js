@@ -143,8 +143,8 @@ const useBackend = () => {
         console.log("at getTBill: ", lineId);
         sendData(["getTBill", lineId]);
     }
-    const renewTBill=(lineId)=>{
-        sendData(["renewTBill", lineId]);
+    const renewTBill=(lineId, category)=>{
+        sendData(["renewTBill", {lineId, category}]);
     }
 
     const AddItemToTBill=(lineId, item)=>{
@@ -152,9 +152,9 @@ const useBackend = () => {
         sendData(["AddItemToTBill", {lineId, item}]);
     }
 
-    const DeleteItemFromTBill=(lineId, i)=>{
+    const DeleteItemFromTBill=(lineId, category, i)=>{
         console.log("delete item from tbill");
-        sendData(["DeleteItemFromTBill", {lineId, i}]);
+        sendData(["DeleteItemFromTBill", {lineId, category, i}]);
     }
 
    

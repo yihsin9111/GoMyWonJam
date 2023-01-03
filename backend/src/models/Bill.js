@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const BillSchema = Schema({
     userLineId: { type: String, required: true },
+    category: {type: String, required: true},
     billId:  { type:String },
     items:   [{ type: {name: String, price: Number, number: Number, option: String, note:String}}],
     total:   { type: Number },

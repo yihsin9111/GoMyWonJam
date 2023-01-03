@@ -54,7 +54,7 @@ const UpdateUserForm = ({setRelog}) => {
         const newUser = {
             lineId:userLineId, 
             name:name, 
-            address:address.substring(0,6), 
+            address:address, 
             phoneNumber:phone};
         UpdateUser(newUser);
         setRelog(true);

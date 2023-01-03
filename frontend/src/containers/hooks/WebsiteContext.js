@@ -17,7 +17,11 @@ const WebsiteContext = createContext({
     checkManager: {},
     iflog: false,
     setIflog: {},
-    stores: []
+    stores: [],
+    paywhich: 0,
+    setPaywhich: {},
+    setTotal: {}
+
 })
 
 const Managers =[
@@ -51,6 +55,7 @@ const WebsiteProvider = (props) => {
     const [total, setTotal]                 = useState(0);
     const [iflog, setIflog]                 = useState(false);
     const [stores, setStores]               = useState([]);
+    const [paywhich, setPaywhich]           = useState(0);
 
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
@@ -66,6 +71,17 @@ const WebsiteProvider = (props) => {
         }
 
     }
+
+    useEffect(()=>{
+        let newUserBill = [...userBill];
+        newUserBill.sort(function(a,b){
+            let a_value = parseInt(a.billId.split("_")[1]);
+            let b_value = parseInt(b.billId.split("_")[1]);
+            return (a_value - b_value)*(-1);
+        })
+        setUserBill(newUserBill);
+
+    },userBill)
 
     client.onmessage = (byteString) => {
         const {data} = byteString;
@@ -132,7 +148,7 @@ const WebsiteProvider = (props) => {
                 status, userLineId, userData,  
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
-                ,deadlines,checkManager, isManager, iflog, setIflog, stores,
+                ,deadlines,checkManager, isManager, iflog, setIflog, stores, paywhich, setPaywhich,
                 setUserBill
             }}
             {...props}

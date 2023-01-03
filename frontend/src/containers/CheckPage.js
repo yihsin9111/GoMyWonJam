@@ -44,7 +44,7 @@ const CheckPage = () => {
     const [county, setCounty] = React.useState("");
     
     //hooks
-    const {bill, total, currentBillId, userData, stores, userLineId} = useWebsite();
+    const {bill, total, userData, stores, userLineId, paywhich} = useWebsite();
     const {ConfirmBill, GetStores, AddBillToUser, renewTBill} = useBackend();
     const navigate = useNavigate();
 
@@ -97,10 +97,11 @@ const CheckPage = () => {
             receiver    : name,
             address : value,
             total   :total,
-            items   :[...bill.items]
+            items   :[...bill.ItemList[paywhich].items],
+            category: bill.ItemList[paywhich].category
         }
         ConfirmBill(BillInfo, userLineId);
-        renewTBill(userLineId);
+        renewTBill(userLineId, paywhich);
         console.log("renewTBill");
         navigate("/");
     }
@@ -116,7 +117,7 @@ const CheckPage = () => {
         return(
             <Box sx={{display:"grid",gap:1.5,gridColumnStart:1,gridColumnEnd:3}}>
                 <Typography variant='h5'>結帳</Typography>
-                <Receipt item={bill.items||[]} />
+                <Receipt item={bill.ItemList[paywhich].items||[]} />
                 <Box>
                     <Typography variant='h6' sx={{display:"flex",flexDirection:"row"}}>總金額</Typography>
                     <Typography variant='body2' sx={{display:"flex",flexDirection:"row-reverse"}}>{total}</Typography>
