@@ -20,12 +20,12 @@ import { SelectUnstyledContext } from "@mui/base";
 const ProductDrawer = ({item, handleClose}) => {
     // set state
     const [option, setOption] = useState("");
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState(1);
     const [optionChosed, setOptionChosed] = useState("");
     const [note, setNote]     = useState("");
 
     //import backend functions
-    const {AddItemToBill, AddItemToTBill} = useBackend();
+    const {AddItemToTBill} = useBackend();
     const {iflog, setUserBill, currentBillId, userLineId} = useWebsite();
 
     //useNavigate
@@ -43,32 +43,27 @@ const ProductDrawer = ({item, handleClose}) => {
     }
 
     // function
-    const handleChange = (event) => {
-        setOption(event.target.value);
-    };
 
     return(
         <div>
         <Box
-          sx={{backgroundColor:'#b0bec5',
+          sx={{backgroundColor: "background.default",
           display:"flex",
           flexDirection:"row",
           justifyContent:"center"
           }}
-          //onClick={toggleDrawer(anchor, false)}
-          //onKeyDown={toggleDrawer(anchor, false)}
         >
             <Box sx={{
                 width: 300,
                 height:300,
                 margin:"20px",
-                backgroundColor: 'primary.dark',
+                backgroundColor: 'background.default',
             }}>
                 <img src={item.URL} width="300px" height="300px"></img>
             </Box>
             <Box sx={{flexDirection:"column",
                     display:"flex",
-                    backgroundColor:'#b0bec5',
+                    backgroundColor:'background.default',
                     justifyContent:"space-between",
                     justifyItems:"center",
                     paddingBottom:"10px"}}>
@@ -83,7 +78,6 @@ const ProductDrawer = ({item, handleClose}) => {
                     sx={{ m: 1, width: '25ch' }}
                     InputProps={{
                     type:"number",
-                    defaultValue:1,
                     startAdornment: <InputAdornment position="start"></InputAdornment>,
                     }}
                     onChange={(e)=>{
@@ -109,18 +103,18 @@ const ProductDrawer = ({item, handleClose}) => {
                             }}
                     value={number}
                 />
+                {!(item.options.length <= 1)? 
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="demo-simple-select-label">選項</InputLabel>
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    // value={option}
                     label="選項"
                     value={optionChosed}
                     onChange={(e)=>{setOptionChosed(e.target.value)}}>
                         {item.options.map((e)=>(<MenuItem value={e.option}>{e.option}</MenuItem>))}
                     </Select>
-                </FormControl>
+                </FormControl>:<></>}
                 <TextField 
                     id="standard-basic" 
                     label="備註" 
@@ -128,16 +122,21 @@ const ProductDrawer = ({item, handleClose}) => {
                     size="small"
                     onChange={(e)=>{setNote(e.target.value)}}
                 />
-                <Button sx={{width:"50%",alignSelf:"flex-end",m: 1, width: '15ch'}}
-                variant="outlined"
-                onClick={()=>{
-                    handleClose(false);
-                    if(!iflog){
-                        navigate("/login")
-                        return
-                    }
-                    onAddItemToBill(item.name, item.price, optionChosed, number, note, item.product_type, item.category);
-                }}>加入購物車</Button>
+                <Button 
+                    sx={{width:"50%",alignSelf:"flex-end",m: 1, width: '15ch'}}
+                    variant="contained"
+                    disabled={(number < 1) || (!optionChosed && !(item.options.length <= 1))}
+                    onClick={()=>{
+                        handleClose(false);
+                        if(!iflog){
+                            navigate("/login")
+                            return
+                        }
+                        onAddItemToBill(item.name, item.price, optionChosed, number, note, item.product_type, item.category);
+                    }}
+                >
+                    加入購物車
+                </Button>
             </Box>
         </Box>
         </div>

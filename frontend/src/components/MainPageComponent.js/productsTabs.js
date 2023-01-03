@@ -95,7 +95,7 @@ function ProductsTabs() {
         </TabPanel>
   {/*end of the "all" tab*/}
         {categories.map((label, index)=>(
-          <TabPanel value={label} key={index}>
+          <TabPanel value={label} key={index+1}>
             <Grid container key={index}>
                 <Box
                   sx={{

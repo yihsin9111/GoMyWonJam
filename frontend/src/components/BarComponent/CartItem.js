@@ -66,7 +66,7 @@ const CartInclude = ({open ,setOpen}) => {
             display: "grid",
             gap: 1
         }}>
-            <Typography variant="h5" component="div">購物車明細</Typography>
+            <Typography color="primary.main" variant="h4" component="div">購物車明細</Typography>
             {
                 bill.ItemList.map((value, index)=>(
                     <Card key={index}>

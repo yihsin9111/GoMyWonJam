@@ -61,7 +61,7 @@ const CategoryCart = ({items, category, ind, setOpen}) => {
                 <Box sx={{
                 display: "grid",
                 }}>
-                    <Typography variant="body2" component="div">選項：{value.option}</Typography>
+                    {value.option? <Typography variant="body2" component="div">選項：{value.option}</Typography>:<></>}
                     <Typography variant="body2" component="div">數量：{value.number}</Typography>
                     <Typography variant="body2" component="div">金額：{value.price*value.number}</Typography>
                 </Box>

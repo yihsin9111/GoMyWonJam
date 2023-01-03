@@ -42,11 +42,19 @@ const AddItemToTBill = (lineId, item ,ws) => {
                 }
             }
             else{
-                obj[0].ItemList[index_cat].items.push(item);
+                const item_index = obj[0].ItemList[index_cat].items.findIndex(function (element) {
+                    return (element.name === item.name && element.option === item.option)
+                })
+                if(item_index === -1){
+                    obj[0].ItemList[index_cat].items.push(item);
+                }
+                else{
+                    obj[0].ItemList[index_cat].items[item_index].number = parseInt(obj[0].ItemList[index_cat].items[item_index].number)+parseInt(item.number);
+                }
             }
             console.log('Bill found. adding item to bill...');
             sendData(["bill", obj[0]], ws);
-            console.log("new obj: ", obj[0].ItemList);
+            console.log("new obj: ", obj[0].ItemList[index_cat]);
             await obj[0].save();
             
             
