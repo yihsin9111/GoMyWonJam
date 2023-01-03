@@ -34,8 +34,8 @@ const ProductDrawer = ({item, handleClose}) => {
     // handle add item to bill
     // suppose global state known. default: userLineId:ming
     // currentBillId: ming_2022-12-30T09:14:22.000Z
-    const onAddItemToBill = (name, price, option, number, note)=>{
-        const item = {name, price, option, number, note}
+    const onAddItemToBill = (name, price, option, number, note, product_type)=>{
+        const item = {name, price, option, number, note, product_type}
         // const BillId = 'ming_2022-12-30T09:14:22.000Z'
         console.log("adding item to bill", item, currentBillId);
         AddItemToTBill(userLineId, item);
@@ -136,7 +136,7 @@ const ProductDrawer = ({item, handleClose}) => {
                         navigate("/login")
                         return
                     }
-                    onAddItemToBill(item.name, item.price, optionChosed, number, note);
+                    onAddItemToBill(item.name, item.price, optionChosed, number, note, item.product_type);
                 }}>加入購物車</Button>
             </Box>
         </Box>

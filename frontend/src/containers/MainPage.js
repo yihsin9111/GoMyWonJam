@@ -2,7 +2,7 @@
 import {useState} from "react";
 
 // Component import
-import ProductsTabs from "../components/MainPageComponent.js/productsTabs";
+import ProductsTabs from "../components/MainPageComponent/productsTabs";
 
 // get items function import
 import useBackendTest from "./hooks/useBackend_test";

@@ -4,6 +4,7 @@ import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 import TemporaryBillModel from '../models/TemporaryBill'
+import SequenceListModel from '../models/SequenceList'
 
 import { GetCategories, GetProductsByCategory } from './GetFunc'
 
@@ -63,7 +64,7 @@ const AddBillToUser = async(userLineId, BillId,ws)=>{
         total:      0,
         package:    '',
         payment:    '',
-        address:    ''
+        address:    '',
     });
   
     // const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
@@ -139,4 +140,11 @@ const ConfirmBill = async (BillInfo, lineId, ws)=>{
     // })
 }
 
-export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill}
+const AddSequenceList=async(SequenceList)=>{
+    console.log('Add SequenceList...', SequenceList);
+    const newSequenceList = await new SequenceListModel(SequenceList);
+    console.log("newSequenceList: ", newSequenceList);
+    newSequenceList.save()
+}
+
+export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill, AddSequenceList}

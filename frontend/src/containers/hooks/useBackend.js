@@ -149,12 +149,19 @@ const useBackend = () => {
 
     const AddItemToTBill=(lineId, item)=>{
         console.log("add item to tbill");
+        console.log(item)
         sendData(["AddItemToTBill", {lineId, item}]);
     }
 
     const DeleteItemFromTBill=(lineId, i)=>{
         console.log("delete item from tbill");
         sendData(["DeleteItemFromTBill", {lineId, i}]);
+    }
+
+    //Sequence Func
+    const AddSequenceList=(SequenceList)=>{
+        console.log("SequenceList Added...");
+        sendData(["AddSequenceList", SequenceList])
     }
 
    
@@ -165,7 +172,7 @@ const useBackend = () => {
         UpdateProduct, GetProductById, GetBill, GetUserBill, UpdateBillStatus,
         AddItemToBill, AddBillToUser,  ConfirmBill , FindBill, UpdateBillAddress,
         DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores,
-        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill
+        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill, AddSequenceList
     };
 };
 

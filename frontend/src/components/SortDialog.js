@@ -4,6 +4,10 @@ import Button from '@mui/material/Button';
 import {Typography} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+import { useWebsite } from '../containers/hooks/WebsiteContext'; 
+import useBackend from '../containers/hooks/useBackend';
+import Bill from './PersonalComponent/Bill';
 
 //test Data
 //import Bills from "../test datas/Bills.js"
@@ -13,63 +17,77 @@ const members = ["S.Coups","Jeonghan","Joshua",
 "THE8","Mingyu","DK",
 "Seungkwan","Vernon","Dino"]
 
-const memberspage=()=>{
-    return(
-        members.map((member,index)=>{
-            const label="順位"+(index+1)
-            return(
-                <Autocomplete  sx={{gridColumnStart:index%3,gridColumnEnd:index%3+1,marginTop:"8px",marginBottom:"7px"}}
-                options={members}
-                clearOnEscape
-                renderInput={(params) => <TextField {...params} variant="standard" label={label}/>}></Autocomplete>
-            )
-        })
-    )
-}
+const iniValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
 
-const choosePage=(number,name)=>{
-    var list=[]
-    for (let index = 0; index < number; index++){
-        list.push(
-            <Box sx={{display:"grid",gap:1.5,gridColumnStart:index%2,gridColumnEnd:index%2+1}}>
-                <Box>
-                <Typography variant='h6'>{name}</Typography>
-                <Typography variant="caption">第 {index+1} 份</Typography>
-                <Box sx={{display:"flex",flexDirection:"column"}}>
-                    {memberspage()}
-                </Box>
-                </Box>
-            </Box>
+const iniInputValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
+
+export default function SortDialog({item,setSubmit,setOpenCard,BillId}) {
+
+    const {currentBillId} = useWebsite()
+    const {AddSequenceList,GetBill} = useBackend()
+
+    const [Total, setTotal] = React.useState()
+    const [Value, setValue] = useState(iniValue);
+    const [number, setnumber] = React.useState('');
+    const [inputValue, setInputValue] = useState(iniInputValue);
+    const [Sequence, setSequence] = React.useState([])
+    
+    const handleSequence=()=>{
+        var S=[]
+        for(var k=0;k<13;k++){
+            S.push(document.getElementById(k).value)
+        }
+        console.log(S)
+        const Data={
+            BillId: BillId,
+            Time: JSON.stringify(Date.now()),
+            Sequence: S
+        }
+        AddSequenceList(Data)
+    }
+
+    const memberspage=()=>{
+        return(
+            members.map((member,i)=>{
+                const label="順位"+(i+1)
+                return(
+                    <Autocomplete  sx={{gridColumnStart:i%3,gridColumnEnd:i%3+1,marginTop:"8px",marginBottom:"7px"}}
+                    options={members}
+                    clearOnEscape
+                    id={i}
+                    renderInput={(params) => <TextField {...params} variant="standard" label={label}/>}></Autocomplete>
+                )
+            })
         )
     }
-    //console.log(list)
-    return(
-        list
-    )
-}
+    
+    const choosePage=()=>{
+        //console.log(list)
+        return(
+            <>
+            <Box sx={{display:"grid",gap:1.5}}>
+                    <Box>
+                    <Box sx={{display:"flex",flexDirection:"column"}}>
+                        {memberspage()}
+                    </Box>
+                    </Box>
+                </Box>
+            </>
+        )
+    }
 
-export default function SortDialog({item}) {
+    var check=false; 
 
-  const list = () => {
     return(
-        <Box>
-            {item.map((value,index)=>{
-                if (value.product_type) {
-                    for(let i=0;i<value.number;i++){
-                        return(
-                            <Box sx={{display:"grid",margin:"5%",gap:1.5}}>
-                            {choosePage(value.number,value.name)}
-                            </Box>
-                        )
-                    }
-            }})}
+        <Box sx={{height:"300px"}}>
+            {item.map((value,index)=>{check|=value.product_type})}
+            <Box sx={{display:"grid",margin:"5%",gap:1.5}}>{choosePage()}</Box>
+            <Button sx={{minWidth:"100%"}} variant="contained" color="success" onClick={()=>{
+                setSubmit(true);
+                setOpenCard(false);
+                handleSequence();
+                }}>提交</Button>
         </Box>
-    )
-    };
-
-  return (
-    <>
-            {list()}
-    </>
-  );
+    );
+  
 }

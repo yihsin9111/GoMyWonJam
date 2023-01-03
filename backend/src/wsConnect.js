@@ -1,4 +1,4 @@
-import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill } from './functions/AddFunc'
+import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill, AddSequenceList } from './functions/AddFunc'
 import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
@@ -38,6 +38,11 @@ export default {
             case 'AddItemToBill':{
                 const {BillId, item} = payload;
                 AddItemToBill(BillId, item);
+                break;
+            }
+            case "AddSequenceList" :{
+                //const {SequenceList}=payload;
+                AddSequenceList(payload);
                 break;
             }
 
@@ -120,10 +125,12 @@ export default {
             }
             case "AddItemToTBill":{
                 AddItemToTBill(payload.lineId, payload.item, ws);
+                console.log("test",payload.item)
                 break;
             }
             case "getTBill":{
                 getTBill(payload, ws);
+                console.log("test",payload)
                 break;
             }
             

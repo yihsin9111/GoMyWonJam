@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const BillSchema = Schema({
     userLineId: { type: String, required: true },
     billId:  { type:String },
-    items:   [{ type: {name: String, price: Number, number: Number, option: String, note:String}}],
+    items:   [{ type: {name: String, price: Number, number: Number, option: String, note:String, product_type:Boolean}}],
     total:   { type: Number },
     package: { type: String },
     payment: { type: String },

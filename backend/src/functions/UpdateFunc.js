@@ -36,8 +36,8 @@ const UpdateProduct = async(product, ws)=>{
             URL: product.URL,
             price: product.price,
             note: product.note,
-            product_type: product.product_type,
             option_type: product.option_type,
+            product_type: product.product_type,
             options: product.options
         });
     GetProductsByCategory(product.name, ws);
