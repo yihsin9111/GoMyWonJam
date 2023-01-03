@@ -106,7 +106,7 @@ const ManageBill = ({item}) => {
                                 display: "grid",
                                 gridTemplateColumns: "1fr 1fr"
                                 }}>
-                                地址：{item.address}
+                                地址：{item.address.substring(0,6)}
                             </Typography>
                         </Box>
                     </Box>

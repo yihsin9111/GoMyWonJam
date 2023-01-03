@@ -53,8 +53,13 @@ function ProductsTabs() {
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example" variant="fullWidth">
-            <Tab label='all' value='all'/>
+          <TabList 
+            onChange={handleChange} 
+            aria-label="lab API tabs example" 
+            variant="fullWidth"
+            textColor="background.default"
+            indicatorColor="secondary">
+            <Tab label='all' value='all' sx={{bgcolor: "background.default"}} />
             {categories.map((label,index)=>(<Tab label={label} value={label} key={index}/>))}
           </TabList>
         </Box>
@@ -64,7 +69,7 @@ function ProductsTabs() {
                 <Box
                   sx={{
                     p: 2,
-                    bgcolor: 'background.default',
+                    bgcolor: '',
                     display: 'grid',
                     gridTemplateColumns: { md: '1fr 1fr 1fr' },
                     gap: 2,

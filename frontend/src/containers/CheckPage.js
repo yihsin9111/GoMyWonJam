@@ -44,8 +44,8 @@ const CheckPage = () => {
     const [county, setCounty] = React.useState("");
     
     //hooks
-    const {bill, total, currentBillId, userData, stores} = useWebsite();
-    const {ConfirmBill, GetStores} = useBackend();
+    const {bill, total, currentBillId, userData, stores, userLineId} = useWebsite();
+    const {ConfirmBill, GetStores, AddBillToUser, renewTBill} = useBackend();
     const navigate = useNavigate();
 
     React.useEffect(()=>{
@@ -82,16 +82,26 @@ const CheckPage = () => {
     }
 
     const onHandleCheckout=()=>{
+        new Date();
+        // const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
+        const id = userLineId+"_"+JSON.stringify(Date.now()).replace(/"/g, '')
+        console.log("date now: ", id);
+        // AddBillToUser(userLineId, id);
+        // console.log("billid: ", currentBillId);
         const BillInfo = {
-            billId  : currentBillId,
+            userLineId: userLineId,
+            billId  : id,
             package : PackageOption,
             payment : PaymentOption,
             phone   : Phone,
             receiver    : name,
-            address : value.substring(0,6),
+            address : value,
             total   :total,
+            items   :[...bill.items]
         }
-        ConfirmBill(BillInfo);
+        ConfirmBill(BillInfo, userLineId);
+        renewTBill(userLineId);
+        console.log("renewTBill");
         navigate("/");
     }
 
@@ -200,24 +210,6 @@ const CheckPage = () => {
                         </MenuItem>
                     ))}
                 </TextField>
-                {/* <TextField
-                    id="outlined-select-category"
-                    select
-                    required
-                    margin="dense"
-                    label="門市"
-                    value={appearAddress}
-                    onChange={(e)=>{setAAddress(e.target.value);setAddress(e.target.value)}}
-                    sx={{gridColumnStart:2,gridColumnEnd:3}}
-                    helperText="輸入 店號/門市名稱/道路名稱 查找"
-                    disabled={Infm.state}
-                >
-                    {stores.map((option) => (
-                        <MenuItem key={option.name} value={option.id}>
-                        {option.name}
-                        </MenuItem>
-                    ))}
-                </TextField> */}
                 <Autocomplete
                     id="ReceiverAddress"
                     margin="dense"
@@ -237,7 +229,7 @@ const CheckPage = () => {
                 >
                 </Autocomplete>
                 <Button variant="contained" 
-                    disabled={!Infm.state} 
+                    disabled={!Infm.state || !bill || !PackageOption || !PaymentOption || !value || !Phone} 
                     onClick={onHandleCheckout}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}>
                     結帳</Button>

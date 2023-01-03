@@ -82,14 +82,14 @@ const useBackend = () => {
     }
 
     //userLineId, items(list of items), packing(包裝), payment(付款方式), address(地址)
-    const AddBillToUser = (id)=>{
+    const AddBillToUser = (lineId, billId)=>{
         console.log("Adding Bill to User..."); 
-        sendData(["AddBillToUser",id])
+        sendData(["AddBillToUser",{lineId, billId}])
     }
 
-    const ConfirmBill = (BillInfo)=>{
+    const ConfirmBill = (BillInfo, lineId)=>{
         console.log("confirming bill...")
-        sendData(["ConfirmBill",BillInfo])
+        sendData(["ConfirmBill",{BillInfo, lineId}])
     }
     
     //return a list of bill based on input filters
@@ -137,6 +137,26 @@ const useBackend = () => {
         console.log('get county...');
         sendData(["GetStores",county]);
     }
+
+    //Temporary function
+    const getTBill=(lineId)=>{
+        console.log("at getTBill: ", lineId);
+        sendData(["getTBill", lineId]);
+    }
+    const renewTBill=(lineId)=>{
+        sendData(["renewTBill", lineId]);
+    }
+
+    const AddItemToTBill=(lineId, item)=>{
+        console.log("add item to tbill");
+        sendData(["AddItemToTBill", {lineId, item}]);
+    }
+
+    const DeleteItemFromTBill=(lineId, i)=>{
+        console.log("delete item from tbill");
+        sendData(["DeleteItemFromTBill", {lineId, i}]);
+    }
+
    
 
     return {
@@ -144,7 +164,8 @@ const useBackend = () => {
         AddCategory, UpdateCategory, GetProductsByCategory, GetCategories, AddProductToCategory, 
         UpdateProduct, GetProductById, GetBill, GetUserBill, UpdateBillStatus,
         AddItemToBill, AddBillToUser,  ConfirmBill , FindBill, UpdateBillAddress,
-        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores
+        DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores,
+        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill
     };
 };
 

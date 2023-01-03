@@ -7,7 +7,7 @@ const ProductSchema = Schema({
     URL:        { type: String, required: true },
     price:      { type: Number, required: true },
     note:       { type: String }, //如果截止日期有提早之類的
-    product_type: { type: String, required: true }, 
+    product_type: { type: Boolean, required: true }, 
     option_type:  { type: String,  required: true },
     options:    [{ type: {option: String, bought: Number, sold: Number, buyers: [String]}}],
 }, {

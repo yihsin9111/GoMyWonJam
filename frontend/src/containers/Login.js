@@ -22,7 +22,7 @@ const Login = () => {
 
     //hook import
     const { checkManager, iflog } = useWebsite();
-    const { GetUserData, AddUser, AddBillToUser } = useBackend();
+    const { GetUserData, AddUser, AddBillToUser, getTBill } = useBackend();
 
     //navigate define
     const navigate = useNavigate();
@@ -38,13 +38,13 @@ const Login = () => {
         console.log("if login: ", iflog);
         if(iflog){
             navigate("/")
-            AddBillToUser(id);
+            getTBill(id);
         }
         else{
             AddUser(name, id);
             GetUserData(id);
             navigate("/");
-            AddBillToUser(id);
+            getTBill(id);
         }   
 
         
@@ -71,7 +71,11 @@ const Login = () => {
                 value={id}
                 onChange={(e)=>{setId(e.target.value)}}
             />
-            <Button variant="contained" onClick={()=>{handleLogin()}}>
+            <Button 
+                variant="contained" 
+                disabled={!id || !name}
+                onClick={()=>{handleLogin()}}
+                >
                 登入
             </Button>
         </Box>

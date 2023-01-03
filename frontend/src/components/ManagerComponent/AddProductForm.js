@@ -89,7 +89,7 @@ const AddProductForm = () => {
     }
 
     const onAddProduct = ()=>{
-        if (!name || !whichCategory || !photoURL || !price || !type || !optionNum){
+        if (!name || !whichCategory || !photoURL || !price || !type ){
             return;
         }
         let ops = []
@@ -106,7 +106,7 @@ const AddProductForm = () => {
             URL: photoURL,
             price: price,
             note: note,
-            product_type: type,
+            product_type: (type==="true"),
             option_type: optionNum,
             options: ops
         }

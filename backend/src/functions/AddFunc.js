@@ -3,6 +3,7 @@ import UserModel from '../models/User'
 import ItemModel from '../models/Item'
 import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
+import TemporaryBillModel from '../models/TemporaryBill'
 
 import { GetCategories, GetProductsByCategory } from './GetFunc'
 
@@ -53,11 +54,11 @@ const AddUser = (User, ws)=>{
     })
 }
 
-const AddBillToUser = async(userLineId,ws)=>{
+const AddBillToUser = async(userLineId, BillId,ws)=>{
     console.log('adding bill to user', userLineId)
     const bill = await new BillModel({
         userLineId: userLineId,
-        billId:     '',
+        billId:     BillId,
         items:      [],
         total:      0,
         package:    '',
@@ -65,11 +66,11 @@ const AddBillToUser = async(userLineId,ws)=>{
         address:    ''
     });
   
-    const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
-    bill.billId = id
-    sendData(["billId",id],ws);
+    // const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
+    // bill.billId = id
+    // sendData(["billId",id],ws);
     bill.save();
-    sendData(["bill", bill], ws);
+    // sendData(["bill", bill], ws);
 }
 
 const AddCategory = async(Category,ws)=>{
@@ -115,22 +116,27 @@ const AddItemToBill = (BillId, item) => {
     })
 }
 
-const ConfirmBill = (BillInfo, ws)=>{
-    console.log('confirming bill...');
-    BillModel.find({billId:BillInfo.billId}, async function(err, obj){
-        if(obj.length){
-            console.log('bill found :)');
-            obj[0].package=BillInfo.package;
-            obj[0].payment=BillInfo.payment;
-            obj[0].address=BillInfo.address;
-            obj[0].receiver=BillInfo.receiver;
-            obj[0].phone=BillInfo.phone;
-            obj[0].status=1 ;
-            obj[0].total=BillInfo.total;
-            await obj[0].save();
-        }
-        else console.log('bill not found ;_;');
-    })
+const ConfirmBill = async (BillInfo, lineId, ws)=>{
+    console.log('confirming bill...', BillInfo, lineId);
+    let Tempo = await TemporaryBillModel.findOne({userLineId: lineId});
+    const newB = await new BillModel(BillInfo).save();
+    console.log("newB: ", newB);
+    // BillModel.find({billId:BillInfo.billId}, async function(err, obj){
+    //     if(obj.length){
+    //         console.log("tempo item: ", Tempo.items);
+    //         console.log('bill found :)');
+    //         obj[0].package=BillInfo.package;
+    //         obj[0].payment=BillInfo.payment;
+    //         obj[0].address=BillInfo.address;
+    //         obj[0].receiver=BillInfo.receiver;
+    //         obj[0].phone=BillInfo.phone;
+    //         obj[0].status=1 ;
+    //         obj[0].total=BillInfo.total;
+    //         obj[0].items=[...BillInfo.items];
+    //         await obj[0].save();
+    //     }
+    //     else console.log('bill not found ;_;');
+    // })
 }
 
 export {AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill}

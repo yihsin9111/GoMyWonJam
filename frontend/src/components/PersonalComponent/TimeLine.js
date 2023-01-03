@@ -8,7 +8,7 @@ import StepLabel from '@mui/material/StepLabel';
 
 //const define
 const steps_cash=[
-    "請至購物車點選結帳以確認帳單",
+    "訂單已確認",
     "訂單處理中",
     "購買完成 or 取消訂單",
     "官方出貨中",
@@ -16,7 +16,6 @@ const steps_cash=[
 ]
 
 const steps_card=[
-    "請至購物車點選結帳以確認帳單",
     "訂單處理中",
     "購買完成 or 取消訂單",
     "匯款已成功對帳",

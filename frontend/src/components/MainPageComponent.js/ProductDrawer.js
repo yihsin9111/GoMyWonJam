@@ -25,8 +25,8 @@ const ProductDrawer = ({item, handleClose}) => {
     const [note, setNote]     = useState("");
 
     //import backend functions
-    const {AddItemToBill} = useBackend();
-    const {iflog, setUserBill, currentBillId} = useWebsite();
+    const {AddItemToBill, AddItemToTBill} = useBackend();
+    const {iflog, setUserBill, currentBillId, userLineId} = useWebsite();
 
     //useNavigate
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const ProductDrawer = ({item, handleClose}) => {
         const item = {name, price, option, number, note}
         // const BillId = 'ming_2022-12-30T09:14:22.000Z'
         console.log("adding item to bill", item, currentBillId);
-        AddItemToBill(currentBillId, item);
+        AddItemToTBill(userLineId, item);
         setUserBill([]);
     }
 

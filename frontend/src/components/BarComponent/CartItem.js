@@ -29,8 +29,8 @@ const CartInclude = ({open ,setOpen}) => {
     }
 
     //fetch data
-    const { GetBill, DeleteItemFromBill } = useBackend();
-    const { bill, currentBillId, total, setTotal } = useWebsite();
+    const { GetBill, DeleteItemFromBill, DeleteItemFromTBill } = useBackend();
+    const { bill, currentBillId, total, setTotal, userLineId } = useWebsite();
 
     useEffect(()=>{
         let tot = 0;
@@ -40,7 +40,7 @@ const CartInclude = ({open ,setOpen}) => {
 
     const onDeleteItemFromBill= async(i)=>{
         console.log('deleting item '+i+' from bill'+currentBillId)
-        DeleteItemFromBill(currentBillId, i);
+        DeleteItemFromTBill(userLineId, i);
     }
 
     return(
@@ -97,9 +97,11 @@ const CartInclude = ({open ,setOpen}) => {
             ))}
         </Box>
             <Typography variant="body1" component="div">總金額：{total}</Typography>
-            <Button sx={{width:"50%",alignSelf:"flex-end"}}
-            variant="contained"
-            onClick={()=>{handlePay()}}>結帳</Button>
+            <Button 
+                sx={{width:"50%",alignSelf:"flex-end"}}
+                disabled={!(bill.items.length)}
+                variant="contained"
+                onClick={()=>{handlePay()}}>結帳</Button>
         </Box>
     </Box>
     )

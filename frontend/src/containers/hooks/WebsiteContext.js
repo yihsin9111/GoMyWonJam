@@ -98,7 +98,6 @@ const WebsiteProvider = (props) => {
             }
             case 'billId':{
                 setCurrentBillId(payload);
-                setIflog(true);
                 break;
             }
             case "categories":{

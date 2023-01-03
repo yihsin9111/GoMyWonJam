@@ -2,6 +2,7 @@ import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBil
 import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
+import { AddItemToTBill, renewTBill, getTBill, DeleteItemFromTBill } from './functions/TemporaryBillFunc';
 import { getStores } from './functions/711Func';
 
 //helper functions
@@ -31,7 +32,7 @@ export default {
                 break;
             }
             case 'AddBillToUser':{
-                AddBillToUser(payload,ws);
+                AddBillToUser(payload.lineId, payload.billId,ws);
                 break;
             }
             case 'AddItemToBill':{
@@ -42,8 +43,8 @@ export default {
 
             //Confirm functions
             case 'ConfirmBill':{
-                ConfirmBill(payload,ws);
-                GetBill(payload.billId,ws);
+                ConfirmBill(payload.BillInfo, payload.lineId,ws);
+                GetBill(payload.BillInfo.billId, ws);
                 break;
             }
 
@@ -111,6 +112,23 @@ export default {
             }
             case "GetStores":{
                 getStores(payload,ws);
+                break;
+            }
+            case "renewTBill":{
+                renewTBill(payload, ws);
+                break;
+            }
+            case "AddItemToTBill":{
+                AddItemToTBill(payload.lineId, payload.item, ws);
+                break;
+            }
+            case "getTBill":{
+                getTBill(payload, ws);
+                break;
+            }
+            
+            case "DeleteItemFromTBill":{
+                DeleteItemFromTBill(payload, ws);
                 break;
             }
         }

@@ -12,7 +12,7 @@ import { ThemeProvider } from '@emotion/react';
 
 // mui icon import
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 // react import
 import {useState, Fragment, useEffect } from "react";
@@ -53,8 +53,8 @@ const NavBar = ({open, setOpen}) => {
     const [badgeNum, setBadgeNum] = useState(0);
     
     //advoid undefined list of items rendered.
-    const { bill, currentBillId, iflog } = useWebsite();
-    const { GetBill } = useBackend();
+    const { bill, currentBillId, iflog, userLineId } = useWebsite();
+    const { GetBill, getTBill } = useBackend();
 
     // set theme
     const theme = useTheme(theme1);
@@ -67,15 +67,18 @@ const NavBar = ({open, setOpen}) => {
     },[])
 
     useEffect(()=>{
-      if(iflog && bill.items.length){
+      if(iflog && bill.items){
         setBadgeNum(bill.items.length);
+      }
+      else{
+        setBadgeNum(0);
       }
       console.log("rerender");
       // console.log("bill length: ", bill.items.length);
-    },[bill.items]);
+    },[bill]);
     
     const handleCart = async() => {
-      await GetBill(currentBillId);
+      await getTBill(userLineId);
       setOpenCart(true);
       console.log("open cart", bill, bill.length);
     };
@@ -138,7 +141,7 @@ const NavBar = ({open, setOpen}) => {
                     onClick={()=>{navigate("/login")}}
                     color="inherit"
                   >
-                    <LoginIcon />
+                    <AccountCircleIcon />
               </IconButton>
             </Fragment>
           </Toolbar>
