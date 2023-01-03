@@ -6,7 +6,6 @@ import './App.css';
 import MainPage from './containers/MainPage';
 import TestPage from "./containers/testPage";
 import ProductPage from "./components/ProductPage";
-import CartList from './components/CartList';
 import PersonalPage from "./containers/PersonalPage";
 import BillPage from "./containers/BillPage";
 import ManagerPage from "./containers/ManagerPage";
@@ -22,12 +21,19 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Provider import
 import {WebsiteProvider} from './containers/hooks/WebsiteContext'
+
+// mui import
+import { ThemeProvider } from "@mui/material";
+
+//theme import
+import theme from "./theme";
+
 function App() {
   // set state
   const [open, setOpen] = useState(false);
 
   return (
-    
+    <ThemeProvider theme={theme}>
     <WebsiteProvider>
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
@@ -41,13 +47,13 @@ function App() {
           <Route path="/personal/bills" element={<BillPage />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/product" element={<ProductPage />} />
-          <Route path="/cartlist" element={<CartList />} />
           <Route path="/manager" element={<ManagerPage />} />
         </Routes>
         </DrawerHeader>
       </Main>
     </Router>
     </WebsiteProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,6 +1,5 @@
 //react import 
 import React from 'react'
-import {useNavigate} from "react-router-dom";
 
 //mui import 
 import { Card, CardContent, Typography } from "@mui/material";
@@ -73,11 +72,7 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
-<<<<<<< HEAD
         // setModified(true);
-=======
-        //setModified(true);
->>>>>>> origin/LZTdeploytest
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -97,12 +92,7 @@ const CheckPage = () => {
             total   :total,
         }
         ConfirmBill(BillInfo);
-<<<<<<< HEAD
         navigate("/");
-=======
-        console.log("BillInfo", BillInfo)
-        navigate("/personal/bills")
->>>>>>> origin/LZTdeploytest
     }
 
 
@@ -210,19 +200,7 @@ const CheckPage = () => {
                         </MenuItem>
                     ))}
                 </TextField>
-<<<<<<< HEAD
-                {/* <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Movie" />}
-                    /> */}
-                <TextField
-                    autoComplete='off'
-=======
                 {/* <TextField
->>>>>>> origin/LZTdeploytest
                     id="outlined-select-category"
                     select
                     required

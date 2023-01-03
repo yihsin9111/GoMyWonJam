@@ -35,7 +35,6 @@ const Login = () => {
         GetUserData(id);
         const ifM=checkManager(name, id);
         console.log("if manager: ", ifM);
-<<<<<<< HEAD
         console.log("if login: ", iflog);
         if(iflog){
             navigate("/")
@@ -47,9 +46,6 @@ const Login = () => {
             navigate("/");
             AddBillToUser(id);
         }   
-=======
-        navigate("/")
->>>>>>> origin/LZTdeploytest
 
         
     }

@@ -39,12 +39,12 @@ const Managers =[
 const WebsiteProvider = (props) => {
     const [status, setStatus]           = useState({});
     const [isManager, setIsManager]     = useState(false);
-    const [userLineId, setuserLineId]   = useState("ming"); //default: ming
+    const [userLineId, setuserLineId]   = useState(""); //default: ming
     const [userData, setUserData]       = useState({});
     const [userBill, setUserBill]       = useState([]);
     const [shopping, setShopping]       = useState(false);
     const [bill, setBill]                 = useState({});
-    const [currentBillId, setCurrentBillId] = useState("ming_2022-12-30T09:14:22.000Z");
+    const [currentBillId, setCurrentBillId] = useState(""); //default: ming_2022-12-30T09:14:22.000Z
     const [categories, setCategories]       = useState([]);
     const [deadlines, setDeadlines]         = useState([]);
     const [products, setProducts]           = useState([]);

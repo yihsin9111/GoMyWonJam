@@ -5,14 +5,20 @@ import CategoryModel from '../models/Category'
 import ProductModel from '../models/Product'
 import { GetCategories, GetProductsByCategory, GetUserBill, GetUserData } from './GetFunc'
 
-const UpdateUser = (user)=>{
+const sendData = (data, ws) =>{
+    ws.send(JSON.stringify(data));
+    console.log('send data called in getFunc.');
+}
+
+const UpdateUser = (user, ws)=>{
     UserModel.find({lineId:user.lineId}, async function(err, obj){
         if(obj.length){
             obj[0].name = user.name;
             obj[0].address = user.address;
             obj[0].phoneNumber = user.phoneNumber;
             await obj[0].save();
-            GetUserData(user.lineId,ws);
+            console.log("userData: ", obj[0]);
+            sendData(["userData", obj[0]], ws)
         }
         else console.log('user not found ;_;')
     })

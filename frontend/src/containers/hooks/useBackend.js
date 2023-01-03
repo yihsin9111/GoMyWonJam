@@ -23,6 +23,7 @@ const useBackend = () => {
     }
     const UpdateUser = (user) => {
         console.log('updating user...')
+        console.log("before updateing: ", user)
         sendData(["UpdateUser", user])
     }
     const GetUserData = (userLineId) => {
