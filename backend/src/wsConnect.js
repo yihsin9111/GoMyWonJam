@@ -1,5 +1,5 @@
 import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill, AddSequenceList } from './functions/AddFunc'
-import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
+import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct, UpdateItem } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
 import { AddItemToTBill, renewTBill, getTBill, DeleteItemFromTBill } from './functions/TemporaryBillFunc';
@@ -91,6 +91,11 @@ export default {
             case 'UpdateBillStatus':{
                 UpdateBillStatus(payload,ws);
                 GetUserBill('all',ws);
+                break;
+            }
+            case "UpdateItem":{
+                UpdateItem(payload,ws);
+                GetBill(payload.id,ws);
                 break;
             }
 

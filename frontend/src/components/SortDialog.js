@@ -21,16 +21,11 @@ const iniValue = ["None","None","None","None","None","None","None","None","None"
 
 const iniInputValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
 
-export default function SortDialog({item,setSubmit,setOpenCard,BillId}) {
+export default function SortDialog({item,handleSubmit,setOpenCard,BillId}) {
 
     const {currentBillId} = useWebsite()
     const {AddSequenceList,GetBill} = useBackend()
 
-    const [Total, setTotal] = React.useState()
-    const [Value, setValue] = useState(iniValue);
-    const [number, setnumber] = React.useState('');
-    const [inputValue, setInputValue] = useState(iniInputValue);
-    const [Sequence, setSequence] = React.useState([])
     
     const handleSequence=()=>{
         var S=[]
@@ -44,6 +39,7 @@ export default function SortDialog({item,setSubmit,setOpenCard,BillId}) {
             Sequence: S
         }
         AddSequenceList(Data)
+
     }
 
     const memberspage=()=>{
@@ -83,7 +79,7 @@ export default function SortDialog({item,setSubmit,setOpenCard,BillId}) {
             {item.map((value,index)=>{check|=value.product_type})}
             <Box sx={{display:"grid",margin:"5%",gap:1.5}}>{choosePage()}</Box>
             <Button sx={{minWidth:"100%"}} variant="contained" color="success" onClick={()=>{
-                setSubmit(true);
+                handleSubmit();
                 setOpenCard(false);
                 handleSequence();
                 }}>提交</Button>

@@ -12,6 +12,7 @@ import ChangeAddress from "../ChangeAddress";
 //component import 
 import Receipt from "./Receipt";
 import TimeLine from "./TimeLine";
+import useBackend from "../../containers/hooks/useBackend";
 
 //import hooks
 
@@ -21,16 +22,40 @@ const Bill = ({item, id}) => {
     const [openCard, setOpenCard] = useState(false);
     const [Submit,setSubmit] = useState(false);
     const [ChangeAddressOpen,setChangeAddressOpen]=useState(false);
+    const {UpdateItem} = useBackend()
     //fetch backend data
     //function define
 
+    const handleSubmit=()=>{
+        setSubmit(true)
+        var a=[]
+        console.log("item: ",item.items)
+        item.items.map((item,index)=>{
+            item.product_type?a.push({
+                name: item.name,
+                note: item.note,
+                number: item.number,
+                option: item.option,
+                price: item.price,
+                product_type: false,
+                _id: item._id,
+            }):a.push(item)
+        })
+        console.log("a: ", a)
+        console.log("billID: ", item.billId)
+        UpdateItem({
+            id: item.billId,
+            items: a})
+    }
+
     //const define
-    console.log(Submit)
+    //console.log(Submit)
     console.log(item)
     let total_type=false
     item.items.map((item,index)=>{
         total_type|=item.product_type
     })
+
     //return 
     return(
         <Card sx={{
@@ -93,7 +118,7 @@ const Bill = ({item, id}) => {
                             sx={{display:"grid",height:"100px"}}
                         >
                             <Box>
-                            <SortDialog item={item.items} setSubmit={setSubmit} setOpenCard={setOpenCard} BillId={item.billId}/>
+                            <SortDialog item={item.items} handleSubmit={handleSubmit} setOpenCard={setOpenCard} BillId={item.billId}/>
                             </Box>
                         </Dialog>
                         <Dialog

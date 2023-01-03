@@ -110,6 +110,11 @@ const useBackend = () => {
         sendData(["UpdateBillStatus",{task,billId,oldStatus}]);
     }
 
+    const UpdateItem = (bill)=>{
+        console.log("Update Item Product_type...",bill);
+        sendData(["UpdateItem", bill])
+    }
+
     //---delete functions--//
     const DeleteBill = (billId)=>{
         console.log('deleting bill...');
@@ -172,7 +177,7 @@ const useBackend = () => {
         UpdateProduct, GetProductById, GetBill, GetUserBill, UpdateBillStatus,
         AddItemToBill, AddBillToUser,  ConfirmBill , FindBill, UpdateBillAddress,
         DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores,
-        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill, AddSequenceList
+        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill, AddSequenceList,UpdateItem
     };
 };
 

@@ -11,7 +11,7 @@ const BillSchema = Schema({
     address: { type: String },
     receiver: { type:String },
     phone:    { type:String },
-    status:  { type: Number, default:0} 
+    status:  { type: Number, default:0},
 }, {
     collection: 'Bill',
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
