@@ -98,8 +98,7 @@ const Bill = ({item, id}) => {
                             fullWidth={true}
                             sx={{display:"grid"}}
                         >
-                        <ChangeAddress/>
-                        <Button variant="contained" color="success" onClick={(e)=>{setChangeAddressOpen(false)}}>確認</Button>
+                        <ChangeAddress setOpen={setChangeAddressOpen}/>
                         </Dialog>
                     </Box>
                 </Box>

@@ -14,6 +14,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 //component import 
 import Receipt from '../components/PersonalComponent/Receipt';
 
+//navigate import
+import { useNavigate } from 'react-router-dom';
+
 //test Data
 import Bills from "../test datas/Bills"
 import { Grid } from 'antd';
@@ -37,7 +40,7 @@ const CheckPage = () => {
     const [Infm, setInfm] = React.useState({btn:"修改",state:true,color:"error"});
     const [value, setValue] = React.useState("");
     const [name, setName] = React.useState('');
-    const [appearAddress, setAAddress] = React.useState("");
+    const [inputValue, setInputValue] = React.useState("");
     const [address, setAddress] = React.useState('');
     const [county, setCounty] = React.useState("");
     
@@ -70,7 +73,11 @@ const CheckPage = () => {
     }
 
     const handleInfmChange=()=>{
+<<<<<<< HEAD
         // setModified(true);
+=======
+        //setModified(true);
+>>>>>>> origin/LZTdeploytest
         if(Infm.state){
             setInfm({btn:"確認",state:false,color:"success"})
         }
@@ -78,6 +85,7 @@ const CheckPage = () => {
             setInfm({btn:"修改",state:true,color:"error"})
         }
     }
+
     const onHandleCheckout=()=>{
         const BillInfo = {
             billId  : currentBillId,
@@ -85,17 +93,18 @@ const CheckPage = () => {
             payment : PaymentOption,
             phone   : Phone,
             receiver    : name,
-            address : value,
+            address : value.substring(0,6),
             total   :total,
         }
         ConfirmBill(BillInfo);
+<<<<<<< HEAD
         navigate("/");
+=======
+        console.log("BillInfo", BillInfo)
+        navigate("/personal/bills")
+>>>>>>> origin/LZTdeploytest
     }
 
-    const setFieldValue = (value) => {
-        setValue(value);
-        console.log(value)
-    };
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
     "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
@@ -116,6 +125,12 @@ const CheckPage = () => {
             </Box>
         )
     }
+
+    var a=[]
+
+    stores.map((option)=>(
+        a.push(option.name)
+    ))
         
     //return
     return(
@@ -195,6 +210,7 @@ const CheckPage = () => {
                         </MenuItem>
                     ))}
                 </TextField>
+<<<<<<< HEAD
                 {/* <Autocomplete
                     disablePortal
                     id="combo-box-demo"
@@ -204,6 +220,9 @@ const CheckPage = () => {
                     /> */}
                 <TextField
                     autoComplete='off'
+=======
+                {/* <TextField
+>>>>>>> origin/LZTdeploytest
                     id="outlined-select-category"
                     select
                     required
@@ -220,22 +239,25 @@ const CheckPage = () => {
                         {option.name}
                         </MenuItem>
                     ))}
-                </TextField>
-                {/* <Autocomplete
-                    disablePortal
+                </TextField> */}
+                <Autocomplete
                     id="ReceiverAddress"
                     margin="dense"
                     disabled={Infm.state}
-                    options={["台大","師大"]}
-                    //defaultValue={"小名"}
-                    // options={[1,3,6,5,7]}
+                    options={a}
                     sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
-                    onChange={(e, option) => setFieldValue(option)}
+                    value={value}
+                    onChange={(event, newValue) => {
+                    setValue(newValue);
+                    }}
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                    }}
                     renderInput={(params) => <TextField {...params} label="門市" 
                     helperText="輸入 店號/門市名稱/道路名稱 查找" required/>}
-
                 >
-                </Autocomplete> */}
+                </Autocomplete>
                 <Button variant="contained" 
                     disabled={!Infm.state} 
                     onClick={onHandleCheckout}

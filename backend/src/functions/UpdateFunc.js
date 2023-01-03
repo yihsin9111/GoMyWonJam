@@ -23,7 +23,7 @@ const UpdateCategory = async(category,ws)=>{ //date not updated ?
 }
 const UpdateProduct = async(product, ws)=>{
     console.log('updating product...',product);
-    await ProductModel.findByIdAndUpdate({name:product.name,category:product.category},
+    await ProductModel.find({name:product.name,category:product.category},
         {
             name: product.name,
             category: product.category,
