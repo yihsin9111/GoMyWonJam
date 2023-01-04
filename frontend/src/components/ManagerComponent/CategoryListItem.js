@@ -84,7 +84,7 @@ const CategoryListItem = ({item, ind, atwhich, setAtwhich}) =>{
                 >
                     <DeleteIcon/>
                 </IconButton>
-                {open? <AddProductForm />:<></>}
+                {open? <AddProductForm category={item} />:<></>}
             </ListItem>
             {open? 
             <Box sx={{width: "100%"}}>

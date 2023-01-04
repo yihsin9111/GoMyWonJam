@@ -94,6 +94,9 @@ const DeleteItemFromTBill = (payload, ws)=>{
                 return element.category === payload.category
             })
             obj[0].ItemList[index_cat].items.splice(payload.i,1);
+            if(obj[0].ItemList[index_cat].items.length === 0){
+                obj[0].ItemList.splice(index_cat,1);
+            }
             await obj[0].save();
             console.log(obj[0]);
             sendData(["bill",obj[0]],ws);

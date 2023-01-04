@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 //react import
 import {useState, useEffect} from "react";
 
-const OptionTextField = ({setOptions, num, options, isUpdate}) => {
+const OptionTextField = ({setOptions, num, options, isUpdate, OptionContent, setOptionContent}) => {
     //set state
     
     //function define
@@ -27,7 +27,7 @@ const OptionTextField = ({setOptions, num, options, isUpdate}) => {
         setOptions(newArr);
     }
     useEffect(()=>{
-        console.log('options',options[num])
+        console.log('options',options)
     },[options])
 
     //return
@@ -37,7 +37,7 @@ const OptionTextField = ({setOptions, num, options, isUpdate}) => {
         autoFocus
         required
         margin="dense"
-        id="category_name"
+        id={num.toString()+"name"}
         label={"選項"+(num+1)+" 名稱"}
         type="text"
         fullWidth
@@ -49,7 +49,7 @@ const OptionTextField = ({setOptions, num, options, isUpdate}) => {
         autoFocus
         required
         margin="dense"
-        id="category_name"
+        id={num.toString()+"count"}
         label={"選項"+(num+1)+" 數量"}
         type="text"
         fullWidth

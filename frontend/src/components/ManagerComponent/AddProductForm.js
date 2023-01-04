@@ -1,5 +1,5 @@
 //react import 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 //mui import 
 import Button from '@mui/material/Button';
@@ -44,7 +44,7 @@ const category = [
 
 
 //functional component
-const AddProductForm = () => {
+const AddProductForm = ({category}) => {
     //call hook
     const {AddProductToCategory} = useBackend();
     const {categories}=useWebsite();
@@ -61,13 +61,41 @@ const AddProductForm = () => {
     const [optionType, setOptionType] = useState("");
     const [optionNum, setOptionNum] = useState(0);
     const [options, setOptions] = useState([]);
+    const [OptionContent, setOptionContent]=useState(false)
 
+    useEffect(()=>{
+        setWhichCategory(category);
+    },[])
 
+    useEffect(()=>{
+        let newArr = [];
+        for(let i=0; i<optionNum; i++){
+            newArr[newArr.length]=({
+                "bought": "",
+                "option": "",
+            })
+        }
+        setOptions(newArr);
+    }, [optionNum])
 
     //function define
     const Cancel = () => {
         setDate(dayjs(""));
         setOpen(false);
+    }
+
+    const handleContentFilled=()=>{
+        var check = true;
+        for(let i=0;i<options.length;i++){
+            if(optionNum){
+                if((document.getElementById(i.toString()+"name")))
+                {
+                    check =check && (document.getElementById(i.toString()+"name").value)
+                    check =check && (document.getElementById(i.toString()+"count").value)
+                }
+            }
+        }
+        return check;
     }
 
     const handleOptions = (newNum) => {
@@ -157,6 +185,7 @@ const AddProductForm = () => {
                 <TextField
                     id="outlined-select-category"
                     select
+                    disabled
                     required
                     margin="dense"
                     label="商品種類"
@@ -247,14 +276,14 @@ const AddProductForm = () => {
                     gap: 1
                 }}>
                 <Divider />
-                <Typography variant="h6" component="div">選項增新</Typography>
+                <Typography variant="h6" component="div">選項新增</Typography>
                 <DialogContent sx={{
                     display: "grid",
                     gap: 1,
                     gridTemplateColumns: "1fr 1fr"
                 }}>
                     {options.map((value,index)=>(
-                        <OptionTextField options={options} setOptions={setOptions}  num={index} key={index} isUpdate={false}/>
+                        <OptionTextField options={options} setOptions={setOptions} num={index} key={index} isUpdate={false} setOptionContent={setOptionContent}/>
                     ))}
                 </DialogContent>
                 </Box>:<></>}
@@ -270,7 +299,7 @@ const AddProductForm = () => {
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
             <Button 
-                disabled={!name || !whichCategory || !photoURL || !price || !type || (optionNum && !options)}
+                disabled={!name || !whichCategory || !photoURL || !price || !type || (!optionType || !optionNum || !(parseInt(optionNum) && handleContentFilled()))}
                 onClick={()=>{onAddProduct()}}>新增商品品項</Button>
             </DialogActions>
         </Dialog>
