@@ -70,7 +70,6 @@ const AddCategoryForm = () => {
             >
            <PostAdd />
         </IconButton>
-        {/* <Button variant="contained" onClick={()=>{setOpen(true)}}>增新商品種類</Button> */}
         <Dialog 
             open={open} 
             onClose={()=>{Cancel()}}

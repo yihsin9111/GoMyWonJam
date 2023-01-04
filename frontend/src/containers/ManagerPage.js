@@ -10,7 +10,7 @@ import ModifyBills from "../components/ManagerComponent/ModifyBills";
 
 
 //router import
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 //hooks import
 import { useEffect } from 'react';
@@ -22,7 +22,7 @@ import { useWebsite } from "../containers/hooks/WebsiteContext";
 const ManagerPage = () => {
     
     //fetch backend data
-    const {GetUserBill, GetCategories, GetCatBill} = useBackend();
+    const {GetCatBill} = useBackend();
     const {UserBill, categories} = useWebsite();
 
     useEffect(()=>{

@@ -1,6 +1,6 @@
 // mui import 
 import MuiAppBar from '@mui/material/AppBar';
-import {styled, useTheme } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -49,7 +49,6 @@ const AppBar = styled(MuiAppBar, {
 // functional component
 const NavBar = ({open, setOpen}) => {
     // set state
-    const [anchorEl, setAnchorEl] = useState(null);
     const [openCart, setOpenCart] = useState(false);
     const [badgeNum, setBadgeNum] = useState(0);
     
@@ -58,7 +57,6 @@ const NavBar = ({open, setOpen}) => {
     const { GetBill, getTBill } = useBackend();
 
     // set theme
-    const theme = useTheme(theme1);
 
     //set navigate
     const navigate = useNavigate();

@@ -14,19 +14,18 @@ import {useState} from "react";
 import useBackend from "../../containers/hooks/useBackend";
 import { useWebsite } from "../../containers/hooks/WebsiteContext";
 import { useNavigate } from "react-router-dom";
-import { SelectUnstyledContext } from "@mui/base";
 
 // functional component
 const ProductDrawer = ({item, handleClose}) => {
     // set state
-    const [option, setOption] = useState("");
+    // const [option, setOption] = useState("");
     const [number, setNumber] = useState(1);
     const [optionChosed, setOptionChosed] = useState("");
     const [note, setNote]     = useState("");
 
     //import backend functions
     const {AddItemToTBill} = useBackend();
-    const {iflog, setUserBill, currentBillId, userLineId} = useWebsite();
+    const {iflog, setUserBill, userLineId} = useWebsite();
 
     //useNavigate
     const navigate = useNavigate();
@@ -37,7 +36,7 @@ const ProductDrawer = ({item, handleClose}) => {
     const onAddItemToBill = (name, price, option, number, note, product_type, category)=>{
         const item = {name, price, option, number, note, product_type, category}
         // const BillId = 'ming_2022-12-30T09:14:22.000Z'
-        console.log("adding item to bill", item, currentBillId);
+        // console.log("adding item to bill", item, currentBillId);
         AddItemToTBill(userLineId, item);
         setUserBill([]);
     }

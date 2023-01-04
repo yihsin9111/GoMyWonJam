@@ -96,7 +96,7 @@ const WebsiteProvider = (props) => {
                 setUserData(payload);
                 setuserLineId(payload.lineId);
                 setIflog(true);
-                console.log("userData: ", payload);
+                // console.log("userData: ", payload);
                 break;
             }
             case "userBill":{
@@ -107,12 +107,12 @@ const WebsiteProvider = (props) => {
                     return (a_value - b_value)*(-1);
                 })
                 setUserBill(newUserBill);
-                console.log('user bill fetched',)
+                // console.log('user bill fetched',)
                 break;
             }
             case "bill":{
                 setBill(payload);
-                console.log("bill: ", payload);
+                // console.log("bill: ", payload);
                 break;
             }
             case 'billId':{
@@ -121,7 +121,7 @@ const WebsiteProvider = (props) => {
             }
             case "categories":{
                 setCategories(payload);
-                console.log('catagories set to:',payload);
+                // console.log('catagories set to:',payload);
                 break;
             }
             case "products":{
@@ -130,7 +130,7 @@ const WebsiteProvider = (props) => {
             }
             case "deadlines":{
                 setDeadlines(payload);
-                console.log('deadlines set to',payload);
+                // console.log('deadlines set to',payload);
                 break;
             }
             case "userAvaliable":{

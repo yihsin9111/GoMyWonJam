@@ -13,7 +13,7 @@ import ListBills from "./listBills";
 import TimeLine from "../PersonalComponent/TimeLine";
 
 //test data import 
-import Bills from "../../test datas/Bills";
+// import Bills from "../../test datas/Bills";
 
 //hooks import
 import { useEffect, useState } from 'react';

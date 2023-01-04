@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import {CardContent} from '@mui/material';
@@ -19,7 +19,7 @@ const ChangeAddress=({setOpen, receiver, phone, address})=>{
     const [county, setCounty] = React.useState("");
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
-    "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
+    "桃園市","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
     "南投縣","雲林縣","嘉義市","嘉義縣","台南市","高雄市",
     "屏東縣","花蓮縣","台東縣","澎湖縣","金門縣","連江縣","海南諸島"
     ]

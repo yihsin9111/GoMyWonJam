@@ -2,18 +2,12 @@
 import { TextField } from "@mui/material";
 
 //react import
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 
-const OptionTextField = ({setOptions, num, options, isUpdate, OptionContent, setOptionContent}) => {
+const OptionTextField = ({setOptions, num, options}) => {
     //set state
     
     //function define
-    const handleSetOptions = (value, which) => {
-        let newArr = [...options];
-        if(which==='name')
-        newArr[num]=value;
-        setOptions(newArr);
-    }
     const handleSetOptionName = (value) => {
         //handleSetOptions(value,'name');
         let newArr = [...options];
