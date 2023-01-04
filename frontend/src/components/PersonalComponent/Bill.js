@@ -104,15 +104,21 @@ const Bill = ({item, id}) => {
                         <Typography variant="body2" component="div">
                             包裝方式：{item.package}
                         </Typography>
-                        <Typography variant="body2" component="div" sx={{
-                            width: "100%",
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr 1fr"
-                            }}>
-                            地址：{item.address}
-                            {(total_type&&item.status <= 3&&(!Submit))? <Button variant="contained" color="success" size="small" align="right" onClick={()=>{setOpenCard(true)}}>參與配卡</Button>:<Button disabled variant="outlined" size="small" align="right">參與配卡</Button>}
-                            {(item.status <= 3)? <Button variant="outlined" size="small" align="right" onClick={()=>{setChangeAddressOpen(true)}}>地址修改</Button>:<Button disabled variant="outlined" size="small" align="right">地址修改</Button>}
+                        {item.caption?
+                        <Typography variant="body2" component="div">
+                            備註（匯款）：{item.caption}
                         </Typography>
+                        :<></>}
+                        <Typography variant="body2" component="div">
+                            地址：{item.address}
+                        </Typography>
+                        <Box sx={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr"
+                        }}>
+                            {(total_type&&item.status === 3&&(!Submit))? <Button variant="contained" color="success" size="small" align="right" onClick={()=>{setOpenCard(true)}}>參與配卡</Button>:<Button disabled variant="outlined" size="small" align="right">參與配卡</Button>}
+                            {(item.status <= 3)? <Button variant="outlined" size="small" align="right" onClick={()=>{setChangeAddressOpen(true)}}>地址修改</Button>:<Button disabled variant="outlined" size="small" align="right">地址修改</Button>}
+                        </Box>
                         <Dialog
                             open={openCard}
                             fullWidth={true}

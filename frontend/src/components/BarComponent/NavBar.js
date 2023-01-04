@@ -12,7 +12,8 @@ import { ThemeProvider } from '@emotion/react';
 
 // mui icon import
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // react import
 import {useState, Fragment, useEffect } from "react";
@@ -53,7 +54,7 @@ const NavBar = ({open, setOpen}) => {
     const [badgeNum, setBadgeNum] = useState(0);
     
     //advoid undefined list of items rendered.
-    const { bill, currentBillId, iflog, userLineId } = useWebsite();
+    const { bill, currentBillId, iflog, userLineId, setIflog, setIsManager } = useWebsite();
     const { GetBill, getTBill } = useBackend();
 
     // set theme
@@ -67,8 +68,8 @@ const NavBar = ({open, setOpen}) => {
     },[])
 
     useEffect(()=>{
-      if(iflog && bill.items){
-        setBadgeNum(bill.items.length);
+      if(iflog && bill.ItemList){
+        setBadgeNum(bill.ItemList.length);
       }
       else{
         setBadgeNum(0);
@@ -87,8 +88,13 @@ const NavBar = ({open, setOpen}) => {
         setOpen(!open);
     }
     
-    const handleClose = () => {
-        setOpen(false);
+    const handleLogin = () => {
+      if(!iflog){
+        navigate("/login")
+      }
+      else{
+        navigate("/personal")
+      }
     }
     
     return (
@@ -138,10 +144,25 @@ const NavBar = ({open, setOpen}) => {
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    onClick={()=>{navigate("/login")}}
+                    onClick={()=>{handleLogin()}}
                     color="inherit"
                   >
                     <AccountCircleIcon />
+              </IconButton>
+              <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={()=>{
+                      setIflog(false);
+                      setIsManager(false);
+                      setBadgeNum(0);
+                      navigate("/login");
+                    }}
+                    color="inherit"
+                  >
+                    <LogoutIcon />
               </IconButton>
             </Fragment>
           </Toolbar>

@@ -10,7 +10,10 @@ const renewTBill = (payload, ws) => {
     TemporaryBillModel.find({userLineId: payload.lineId}, async function(err, obj){
         if(obj.length){
             console.log('Bill found. adding item to bill...');
-            obj[0].ItemList.splice(payload.i,1);
+            const index_cat = obj[0].ItemList.findIndex(function (element) {
+                return element.category === payload.i
+            })
+            obj[0].ItemList.splice(index_cat,1);
             console.log("renew obj[0]: ", obj[0]);
             sendData(["bill", obj[0]], ws);
             obj[0].save();

@@ -38,7 +38,7 @@ const TimeLine = ({status, payment}) => {
     //function define
 
     //const define
-    let steps= (payment === "刷卡")? steps_card:steps_cash
+    let steps= (payment === "匯款")? steps_card:steps_cash
     if(payment === "manager"){
         steps=steps_manager
     }

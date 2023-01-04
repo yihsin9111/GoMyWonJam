@@ -67,7 +67,7 @@ const CartInclude = ({open ,setOpen}) => {
             gap: 1
         }}>
             <Typography color="primary.main" variant="h4" component="div">購物車明細</Typography>
-            {
+            {bill.ItemList?
                 bill.ItemList.map((value, index)=>(
                     <Card key={index}>
                         <CardContent sx={{
@@ -81,7 +81,7 @@ const CartInclude = ({open ,setOpen}) => {
                             <CategoryCart items={value.items} category={value.category} ind={index} setOpen={setOpen}/>
                         </CardContent>
                     </Card>
-                ))
+                )):<></>
             }
         </Box>
         </Box>

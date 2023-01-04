@@ -148,7 +148,7 @@ const UpdateUserForm = ({setRelog}) => {
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
             <Button 
-                disabled={!name || !phone || !address}
+                disabled={!name || !(phone.match(/^(09)[0-9]{8}$/) ? true : false) || !address}
                 onClick={()=>{onUpdateUser()}}>修改</Button>
             </DialogActions>
         </Dialog>

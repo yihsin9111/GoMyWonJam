@@ -21,7 +21,8 @@ const WebsiteContext = createContext({
     paywhich: 0,
     setPaywhich: {},
     setTotal: {},
-    catStatus: 0
+    catStatus: 0,
+    setIsManager: {},
 
 })
 
@@ -155,7 +156,7 @@ const WebsiteProvider = (props) => {
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
                 ,deadlines,checkManager, isManager, iflog, setIflog, stores, paywhich, setPaywhich,
-                setUserBill, catStatus
+                setUserBill, catStatus, setIsManager
             }}
             {...props}
         />

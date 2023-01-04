@@ -51,19 +51,14 @@ const ManageBill = ({item}) => {
                         訂單編號：{item.billId}
                     </Typography>
                     <Grid item>
-                        {/* <IconButton
+                        <IconButton
                             onClick={()=>{handleStateBackward()}}>
                             <ArrowLeftIcon />
                         </IconButton>
                         <IconButton
                             onClick={()=>{handleStateForward()}}>
                             <ArrowRightIcon />
-                        </IconButton> */}
-                        {/* <UpdateBillForm /> */}
-                        {/* <IconButton
-                            onClick={()=>{handleEdit()}}>
-                            <EditIcon />
-                        </IconButton> */}
+                        </IconButton>
                     </Grid>
                 </Grid>
                 <Box sx={{
@@ -101,6 +96,10 @@ const ManageBill = ({item}) => {
                             <Typography variant="body2" component="div">
                                 包裝方式：{item.package}
                             </Typography>
+                            {item.caption?
+                            <Typography variant="body2" component="div">
+                                包裝方式：{item.caption}
+                            </Typography>:<></>}
                             <Typography variant="body2" component="div" sx={{
                                 width: "100%",
                                 display: "grid",

@@ -23,6 +23,7 @@ const ListBills = ({items}) => {
               <TableCell align="right">訂單金額</TableCell>
               <TableCell align="right">包材</TableCell>
               <TableCell align="right">商品</TableCell>
+              <TableCell align="right">備註（匯款）</TableCell>
               
             </TableRow>
           </TableHead>
@@ -45,6 +46,7 @@ const ListBills = ({items}) => {
                         <p key={index}>{value.name+"\t"+value.number+"\t"+value.option+"\t"+value.note}</p>
                     ))}
                 </TableCell>
+                <TableCell align="right">{product.caption}</TableCell>
               </TableRow>
             ))}
           </TableBody>
