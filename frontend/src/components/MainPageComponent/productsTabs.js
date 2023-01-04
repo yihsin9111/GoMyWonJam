@@ -56,9 +56,8 @@ function ProductsTabs() {
             onChange={handleChange} 
             aria-label="lab API tabs example" 
             variant="fullWidth"
-            textColor="background.default"
             indicatorColor="secondary">
-            <Tab label='all' value='all' sx={{bgcolor: "background.default"}} />
+            <Tab label='all' value='all'  />
             {categories.map((label,index)=>(<Tab label={label} value={label} key={index}/>))}
           </TabList>
         </Box>
@@ -75,18 +74,18 @@ function ProductsTabs() {
                 </Box>
             </Grid>
             {products.length?
-              (<Grid container key="1">
+              (<Grid container key="0">
                 <Box
                   sx={{
                     p: 2,
-                    bgcolor: 'background.default',
+                    
                     display: 'grid',
                     gridTemplateColumns: { md: '1fr 1fr 1fr' },
                     gap: 2,
                   }}>
                     {products.map((value,index)=>(
-                      <Grid item>
-                        <ProductCard item={value} key={index} />
+                      <Grid item key={index}>
+                        <ProductCard item={value}  />
                       </Grid>))}
                 </Box>
               </Grid>):<p></p>}
@@ -98,7 +97,7 @@ function ProductsTabs() {
                 <Box
                   sx={{
                     p: 2,
-                    bgcolor: 'background.default',
+                   
                     display: 'grid',
                     gridTemplateColumns: { md: '1fr 1fr 1fr' },
                     gap: 2,
@@ -106,18 +105,18 @@ function ProductsTabs() {
                 </Box>
             </Grid>
             {products.length?
-              (<Grid container key="1">
+              (<Grid container key="100000">
                 <Box
                   sx={{
                     p: 2,
-                    bgcolor: 'background.default',
+                    
                     display: 'grid',
                     gridTemplateColumns: { md: '1fr 1fr 1fr' },
                     gap: 2,
                   }}>
                     {products.map((value,index)=>(
-                      <Grid item>
-                        <ProductCard item={value} key={index} />
+                      <Grid item key={index} >
+                        <ProductCard item={value} />
                       </Grid>))}
                 </Box>
               </Grid>):<p></p>}

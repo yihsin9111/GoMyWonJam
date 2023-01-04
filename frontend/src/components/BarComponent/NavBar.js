@@ -72,7 +72,7 @@ const NavBar = ({open, setOpen}) => {
       else{
         setBadgeNum(0);
       }
-      console.log("rerender");
+      // console.log("rerender");
       // console.log("bill length: ", bill.items.length);
     },[bill]);
     
@@ -147,6 +147,7 @@ const NavBar = ({open, setOpen}) => {
                   >
                     <AccountCircleIcon />
               </IconButton>
+              {iflog? 
               <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -161,7 +162,7 @@ const NavBar = ({open, setOpen}) => {
                     color="inherit"
                   >
                     <LogoutIcon />
-              </IconButton>
+              </IconButton>:<></>}
             </Fragment>
           </Toolbar>
         </AppBar>

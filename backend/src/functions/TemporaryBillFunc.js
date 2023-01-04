@@ -11,7 +11,7 @@ const renewTBill = (payload, ws) => {
         if(obj.length){
             // console.log('Bill found. adding item to bill...');
             const index_cat = obj[0].ItemList.findIndex(function (element) {
-                return element.category === payload.i
+                return element.category === payload.category
             })
             obj[0].ItemList.splice(index_cat,1);
             // console.log("renew obj[0]: ", obj[0]);

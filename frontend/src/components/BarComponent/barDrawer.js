@@ -70,7 +70,7 @@ const BarDrawer = ({open, setOpen, theme}) => {
 
     //useEffect
     useEffect(()=>{
-      console.log("in barDrawer: ", isManager);
+      // console.log("in barDrawer: ", isManager);
     }, [isManager])
 
     //return
