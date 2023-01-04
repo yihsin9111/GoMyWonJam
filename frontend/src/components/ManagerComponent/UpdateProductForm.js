@@ -22,27 +22,6 @@ import { Typography } from "antd";
 import PostAdd from "@mui/icons-material/PostAdd";
 import { useWebsite } from "../../containers/hooks/WebsiteContext";
 
-//test const define
-const category = [
-    {
-        value: "spring",
-        label: "spring"
-    },
-    {
-        value: "Summer",
-        label: "summer"
-    },
-    {
-        value: "Winter",
-        label: "winter"
-    },
-    {
-        value: "Autumn",
-        label: "autumn"
-    }
-]
-
-
 //functional component
 const UpdateProductForm = ({ind}) => {
     //call hook
@@ -117,7 +96,7 @@ const UpdateProductForm = ({ind}) => {
             URL: photoURL,
             price: price,
             note: note,
-            product_type: type,
+            product_type: (type==="true"),
             option_type: optionNum,
             options: ops
         }

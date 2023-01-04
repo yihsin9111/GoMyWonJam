@@ -12,6 +12,7 @@ import ChangeAddress from "../ChangeAddress";
 //component import 
 import Receipt from "./Receipt";
 import TimeLine from "./TimeLine";
+import useBackend from "../../containers/hooks/useBackend";
 
 //import hooks
 
@@ -21,13 +22,39 @@ const Bill = ({item, id}) => {
     const [openCard, setOpenCard] = useState(false);
     const [Submit,setSubmit] = useState(false);
     const [ChangeAddressOpen,setChangeAddressOpen]=useState(false);
+    const {UpdateItem} = useBackend()
     //fetch backend data
-   
-
     //function define
 
-    //const define
+    const handleSubmit=()=>{
+        setSubmit(true)
+        var a=[]
+        console.log("item: ",item.items)
+        item.items.map((item,index)=>{
+            item.product_type?a.push({
+                name: item.name,
+                note: item.note,
+                number: item.number,
+                option: item.option,
+                price: item.price,
+                product_type: false,
+                _id: item._id,
+            }):a.push(item)
+        })
+        console.log("a: ", a)
+        console.log("billID: ", item.billId)
+        UpdateItem({
+            id: item.billId,
+            items: a})
+    }
 
+    //const define
+    //console.log(Submit)
+    console.log(item)
+    let total_type=false
+    item.items.map((item,index)=>{
+        total_type|=item.product_type
+    })
 
     //return 
     return(
@@ -82,17 +109,17 @@ const Bill = ({item, id}) => {
                             gridTemplateColumns: "1fr 1fr 1fr"
                             }}>
                             地址：{item.address}
-                            {/* <Button variant="outlined" size="small" align="right" onClick={()=>{setOpenCard(true)}}>參與配卡</Button> */}
-                            {(item.product_type&&item.status <= 3&&(!Submit))? <Button variant="outlined" size="small" align="right" onClick={()=>{setOpenCard(true)}}>參與配卡</Button>:<Button disabled variant="outlined" size="small" align="right">參與配卡</Button>}
+                            {(total_type&&item.status <= 3&&(!Submit))? <Button variant="contained" color="success" size="small" align="right" onClick={()=>{setOpenCard(true)}}>參與配卡</Button>:<Button disabled variant="outlined" size="small" align="right">參與配卡</Button>}
                             {(item.status <= 3)? <Button variant="outlined" size="small" align="right" onClick={()=>{setChangeAddressOpen(true)}}>地址修改</Button>:<Button disabled variant="outlined" size="small" align="right">地址修改</Button>}
                         </Typography>
                         <Dialog
                             open={openCard}
                             fullWidth={true}
-                            sx={{display:"grid"}}
+                            sx={{display:"grid",height:"100px"}}
                         >
-                        <SortDialog item={item.items}/>
-                            <Button variant="contained" color="success" onClick={()=>{setSubmit(true);setOpenCard(false)}}>提交</Button>
+                            <Box>
+                            <SortDialog item={item.items} handleSubmit={handleSubmit} setOpenCard={setOpenCard} BillId={item.billId}/>
+                            </Box>
                         </Dialog>
                         <Dialog
                             open={ChangeAddressOpen}

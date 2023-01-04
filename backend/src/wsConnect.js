@@ -1,5 +1,5 @@
-import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill } from './functions/AddFunc'
-import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct } from './functions/UpdateFunc'
+import { AddUser ,AddBillToUser, AddCategory, AddProductToCategory, AddItemToBill, ConfirmBill, AddSequenceList } from './functions/AddFunc'
+import { UpdateUser, UpdateBillStatus, UpdateCategory, UpdateProduct, UpdateItem } from './functions/UpdateFunc'
 import { GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill } from './functions/GetFunc';
 import { DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill } from './functions/DeleteFunc'
 import { AddItemToTBill, renewTBill, getTBill, DeleteItemFromTBill } from './functions/TemporaryBillFunc';
@@ -38,6 +38,11 @@ export default {
             case 'AddItemToBill':{
                 const {BillId, item} = payload;
                 AddItemToBill(BillId, item);
+                break;
+            }
+            case "AddSequenceList" :{
+                //const {SequenceList}=payload;
+                AddSequenceList(payload);
                 break;
             }
 
@@ -88,6 +93,11 @@ export default {
                 GetUserBill('all',ws);
                 break;
             }
+            case "UpdateItem":{
+                UpdateItem(payload,ws);
+                GetBill(payload.id,ws);
+                break;
+            }
 
             //delete functions
             case 'DeleteUser':{
@@ -120,10 +130,12 @@ export default {
             }
             case "AddItemToTBill":{
                 AddItemToTBill(payload.lineId, payload.item, ws);
+                console.log("test",payload.item)
                 break;
             }
             case "getTBill":{
                 getTBill(payload, ws);
+                console.log("test",payload)
                 break;
             }
             

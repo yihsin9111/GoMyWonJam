@@ -36,11 +36,17 @@ const UpdateProduct = async(product, ws)=>{
             URL: product.URL,
             price: product.price,
             note: product.note,
-            product_type: product.product_type,
             option_type: product.option_type,
+            product_type: product.product_type,
             options: product.options
         });
     GetProductsByCategory(product.name, ws);
+}
+
+const UpdateItem = async (bill, ws)=>{
+    console.log("Update Item Product_type...")
+    await BillModel.findOneAndUpdate({billId: bill.id},{items: bill.items});
+    //GetBill(bill.id, ws)
 }
 
 //bill modify handling functions
@@ -63,4 +69,4 @@ const UpdateBillStatus = async(payload,ws)=>{
 
 
 
-export {UpdateUser, UpdateCategory, UpdateProduct, UpdateBillStatus}
+export {UpdateUser, UpdateCategory, UpdateProduct, UpdateBillStatus,UpdateItem}
