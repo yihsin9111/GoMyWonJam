@@ -38,6 +38,10 @@ const Managers =[
     {
         name: "LZT",
         id: "B10901111"
+    },
+    {
+        name: "廖子緹",
+        id: "Ub032c7f0ef28e9bd395d269afc517242"
     }
 
 ]
