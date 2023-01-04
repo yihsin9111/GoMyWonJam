@@ -1,13 +1,13 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import {Typography} from "@mui/material";
+// import {Typography} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useWebsite } from '../../containers/hooks/WebsiteContext'; 
 import useBackend from '../../containers/hooks/useBackend';
-import Bill from './Bill';
+// import Bill from './Bill';
 
 //test Data
 //import Bills from "../test datas/Bills.js"
@@ -17,14 +17,14 @@ const members = ["S.Coups","Jeonghan","Joshua",
 "THE8","Mingyu","DK",
 "Seungkwan","Vernon","Dino"]
 
-const iniValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
+// const iniValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
 
-const iniInputValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
+// const iniInputValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
 
 export default function SortDialog({item,handleSubmit,setOpenCard,BillId,category}) {
 
-    const {currentBillId} = useWebsite()
-    const {AddSequenceList,GetBill} = useBackend()
+    // const {currentBillId} = useWebsite()
+    const {AddSequenceList} = useBackend()
 
     
     const handleSequence=()=>{

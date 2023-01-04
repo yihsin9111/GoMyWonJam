@@ -16,13 +16,6 @@ import Receipt from '../components/PersonalComponent/Receipt';
 //navigate import
 import { useNavigate } from 'react-router-dom';
 
-//test Data
-import Bills from "../test datas/Bills"
-import { Grid } from 'antd';
-import Item from 'antd/es/list/Item';
-//import { isEnumType } from 'graphql';
-import Input from 'antd/es/input/Input';
-
 //hooks import
 import { useWebsite } from './hooks/WebsiteContext'; 
 import useBackend from './hooks/useBackend';
@@ -40,16 +33,16 @@ const CheckPage = () => {
     const [value, setValue] = React.useState("");
     const [name, setName] = React.useState('');
     const [inputValue, setInputValue] = React.useState("");
-    const [address, setAddress] = React.useState('');
+    // const [address, setAddress] = React.useState('');
     const [county, setCounty] = React.useState("");
     
     //hooks
     const {bill, total, userData, stores, userLineId, paywhich} = useWebsite();
-    const {ConfirmBill, GetStores, AddBillToUser, renewTBill} = useBackend();
+    const {ConfirmBill, GetStores, renewTBill} = useBackend();
     const navigate = useNavigate();
 
     React.useEffect(()=>{
-        console.log('use effect called.');
+        // console.log('use effect called.');
         setPhone(userData.phoneNumber);
         setName(userData.name);
         setValue(userData.address);
@@ -85,7 +78,7 @@ const CheckPage = () => {
         new Date();
         // const id = userLineId+"_"+JSON.stringify(bill._id.getTimestamp()).replace(/"/g, '')
         const id = userLineId+"_"+JSON.stringify(Date.now()).replace(/"/g, '')
-        console.log("date now: ", id);
+        // console.log("date now: ", id);
         // AddBillToUser(userLineId, id);
         // console.log("billid: ", currentBillId);
         const BillInfo = {
@@ -102,13 +95,13 @@ const CheckPage = () => {
         }
         ConfirmBill(BillInfo, userLineId);
         renewTBill(userLineId, paywhich);
-        console.log("renewTBill");
+        // console.log("renewTBill");
         navigate("/");
     }
 
 
     const CountyOption=["台北市","新北市","基隆市","宜蘭縣",
-    "桃園縣","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
+    "桃園市","新竹市","新竹縣","苗栗縣","台中市","彰化縣",
     "南投縣","雲林縣","嘉義市","嘉義縣","台南市","高雄市",
     "屏東縣","花蓮縣","台東縣","澎湖縣","金門縣","連江縣","海南諸島"
     ]

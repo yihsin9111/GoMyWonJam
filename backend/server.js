@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 db.once('open', ()=> {
-    console.log("MongoDB connected!");
+    // console.log("MongoDB connected!");
     wss.on('connection', (ws)=>{
         //web socket connection logic
         ws.box = ''; //record active ChatBox name

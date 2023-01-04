@@ -2,7 +2,7 @@
 import {useState} from "react";
 
 //mui import
-import {Avatar, Box, Card, Divider, Grid, TextField, Typography, InputAdornment, Button, Alert, AlertTitle} from "@mui/material";
+import {Box, Divider, TextField, Typography, Button, Alert, AlertTitle} from "@mui/material";
 
 //hook import
 import { useWebsite } from "./hooks/WebsiteContext";
@@ -12,21 +12,21 @@ import useBackend from "./hooks/useBackend";
 import { useNavigate } from "react-router-dom";
 
 // component import 
-import SetUpForm from "../components/LoginComponent/SetUpForm";
+// import SetUpForm from "../components/LoginComponent/SetUpForm";
 
 //functional component 
 const Login = () => {
     //set state
     const [id, setId] = useState("");
     const [name, setName] = useState("");
-    const [open, setOpen] = useState(false);
-    const [setUp, setSetUp] = useState(false);
+    // const [open, setOpen] = useState(false);
+    // const [setUp, setSetUp] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
-    const [alert, setAlert] = useState(false);
+    // const [alert, setAlert] = useState(false);
 
     //hook import
     const { checkManager, iflog } = useWebsite();
-    const { GetUserData, AddUser, AddBillToUser, getTBill } = useBackend();
+    const { GetUserData, AddUser, getTBill } = useBackend();
 
     //navigate define
     const navigate = useNavigate();

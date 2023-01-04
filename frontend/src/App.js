@@ -4,7 +4,6 @@ import './App.css';
 
 // Container Import
 import MainPage from './containers/MainPage';
-import TestPage from "./containers/testPage";
 import ProductPage from "./components/ProductPage";
 import PersonalPage from "./containers/PersonalPage";
 import BillPage from "./containers/BillPage";
@@ -20,7 +19,6 @@ import {Main, DrawerHeader} from "./components/BarComponent/barPositionHandler";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Provider import
-import {WebsiteProvider} from './containers/hooks/WebsiteContext'
 
 // mui import
 import { ThemeProvider } from "@mui/material";
@@ -47,8 +45,6 @@ function App() {
           <Route path="/check" element={iflog? <CheckPage />:<Login />} />
           <Route path="/personal" element={iflog? <PersonalPage />:<Login />} />
           <Route path="/personal/bills" element={iflog? <BillPage />:<Login />} />
-          <Route path="/test" element={iflog? <TestPage />:<Login />} />
-          <Route path="/product" element={iflog? <ProductPage />:<Login />} />
           <Route path="/manager" element={(iflog && isManager)? <ManagerPage />:<Login />} />
         </Routes>
         </DrawerHeader>

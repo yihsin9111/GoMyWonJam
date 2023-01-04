@@ -48,9 +48,6 @@ const BarDrawer = ({open, setOpen, theme}) => {
     //set state
 
     //function define
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
     
     const handleDrawerClose = () => {
         setOpen(false);

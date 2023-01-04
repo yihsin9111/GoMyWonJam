@@ -7,10 +7,10 @@ import { getStores } from './functions/711Func';
 import { AddSequenceList } from './functions/SequenceListFunc';
 
 //helper functions
-const sendData = (data, ws) =>{
-    ws.send(JSON.stringify(data));
-    console.log('send data called. (in wsConnect.js, line 5)');
-}
+// const sendData = (data, ws) =>{
+//     ws.send(JSON.stringify(data));
+//     console.log('send data called. (in wsConnect.js, line 5)');
+// }
 
 export default {
     initData: (ws) => {

@@ -15,7 +15,6 @@ import Grid from "@mui/material/Grid";
 import ProductCard from "./ProductCard";
 
 // test data import 
-import Products from "../../test datas/Products";
 
 function ProductsTabs() {
   const { categories, products } = useWebsite();
@@ -63,7 +62,6 @@ function ProductsTabs() {
             {categories.map((label,index)=>(<Tab label={label} value={label} key={index}/>))}
           </TabList>
         </Box>
-  {/*the "all" tab*/}
         <TabPanel value='all' key='all'>
           <Grid container key='all'>
                 <Box
@@ -91,7 +89,7 @@ function ProductsTabs() {
                         <ProductCard item={value} key={index} />
                       </Grid>))}
                 </Box>
-              </Grid>):<p>No product in this category : /</p>}
+              </Grid>):<p></p>}
         </TabPanel>
   {/*end of the "all" tab*/}
         {categories.map((label, index)=>(
@@ -122,7 +120,7 @@ function ProductsTabs() {
                         <ProductCard item={value} key={index} />
                       </Grid>))}
                 </Box>
-              </Grid>):<p>No product in this category : /</p>}
+              </Grid>):<p></p>}
         </TabPanel>))}
       </TabContext>
     </Box>

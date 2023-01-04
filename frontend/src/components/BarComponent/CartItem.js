@@ -1,19 +1,14 @@
 //react import
-import { useNavigate } from 'react-router-dom';
 
 //mui import
 import React from 'react'
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ListItemText from '@mui/material/ListItemText';
-import {Card, CardContent, CardActionArea, Typography, Divider} from "@mui/material";
+import {Card, CardContent, Typography, Divider} from "@mui/material";
 
 //test data import
-import Bills from '../../test datas/Bills';
 
 //hooks import
-import { useState, useEffect } from 'react';
-import useBackend from '../../containers/hooks/useBackend';
+import { useEffect } from 'react';
 import { useWebsite } from '../../containers/hooks/WebsiteContext';
 
 //component import
@@ -28,28 +23,17 @@ const CartInclude = ({open ,setOpen}) => {
     },[])
 
     //navigate define
-    const navigate = useNavigate();
     
     //function define
-    const handlePay = () => {
-        setOpen(false);
-        navigate("/check");
-    }
 
     //fetch data
-    const { GetBill, DeleteItemFromBill, DeleteItemFromTBill } = useBackend();
-    const { bill, currentBillId, total, setTotal, userLineId } = useWebsite();
+    const { bill, setTotal } = useWebsite();
 
     useEffect(()=>{
         let tot = 0;
         // bill.items.map((value,index)=>(tot+=value.price*value.number))
         setTotal(tot);
     },[bill])
-
-    const onDeleteItemFromBill= async(i)=>{
-        console.log('deleting item '+i+' from bill'+currentBillId)
-        DeleteItemFromTBill(userLineId, i);
-    }
 
     return(
     <Box>
