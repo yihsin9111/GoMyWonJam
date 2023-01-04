@@ -23,6 +23,14 @@ const steps_card=[
     "已出貨"
 ]
 
+const steps_manager=[
+    "訂單已確認",
+    "訂單處理中",
+    "購買完成 or 取消訂單",
+    "官方出貨中",
+    "已出貨"
+]
+
 //functional component
 const TimeLine = ({status, payment}) => {
     //set state
@@ -30,7 +38,10 @@ const TimeLine = ({status, payment}) => {
     //function define
 
     //const define
-    const steps= (payment === "刷卡")? steps_card:steps_cash
+    let steps= (payment === "刷卡")? steps_card:steps_cash
+    if(payment === "manager"){
+        steps=steps_manager
+    }
 
 
     //return

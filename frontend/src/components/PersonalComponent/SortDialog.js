@@ -5,9 +5,9 @@ import {Typography} from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { useWebsite } from '../containers/hooks/WebsiteContext'; 
-import useBackend from '../containers/hooks/useBackend';
-import Bill from './PersonalComponent/Bill';
+import { useWebsite } from '../../containers/hooks/WebsiteContext'; 
+import useBackend from '../../containers/hooks/useBackend';
+import Bill from './Bill';
 
 //test Data
 //import Bills from "../test datas/Bills.js"
@@ -21,7 +21,7 @@ const iniValue = ["None","None","None","None","None","None","None","None","None"
 
 const iniInputValue = ["None","None","None","None","None","None","None","None","None","None","None","None","None"]
 
-export default function SortDialog({item,handleSubmit,setOpenCard,BillId}) {
+export default function SortDialog({item,handleSubmit,setOpenCard,BillId,category}) {
 
     const {currentBillId} = useWebsite()
     const {AddSequenceList,GetBill} = useBackend()
@@ -32,9 +32,10 @@ export default function SortDialog({item,handleSubmit,setOpenCard,BillId}) {
         for(var k=0;k<13;k++){
             S.push(document.getElementById(k).value)
         }
-        console.log(S)
+        console.log("S: ", S)
         const Data={
             BillId: BillId,
+            category: category,
             Time: JSON.stringify(Date.now()),
             Sequence: S
         }

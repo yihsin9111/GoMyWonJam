@@ -147,7 +147,9 @@ const UpdateUserForm = ({setRelog}) => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onUpdateUser()}}>確認</Button>
+            <Button 
+                disabled={!name || !phone || !address}
+                onClick={()=>{onUpdateUser()}}>修改</Button>
             </DialogActions>
         </Dialog>
         </>

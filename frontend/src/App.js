@@ -24,6 +24,7 @@ import {WebsiteProvider} from './containers/hooks/WebsiteContext'
 
 // mui import
 import { ThemeProvider } from "@mui/material";
+import { useWebsite } from "./containers/hooks/WebsiteContext";
 
 //theme import
 import theme from "./theme";
@@ -31,10 +32,11 @@ import theme from "./theme";
 function App() {
   // set state
   const [open, setOpen] = useState(false);
+  const {iflog, isManager} = useWebsite();
 
   return (
     <ThemeProvider theme={theme}>
-    <WebsiteProvider>
+    {/* <WebsiteProvider> */}
     <Router>
       <NavBar open={open} setOpen={setOpen}/>
       <Main open={open}>
@@ -42,17 +44,17 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/check" element={<CheckPage />} />
-          <Route path="/personal" element={<PersonalPage />} />
-          <Route path="/personal/bills" element={<BillPage />} />
-          <Route path="/test" element={<TestPage />} />
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/manager" element={<ManagerPage />} />
+          <Route path="/check" element={iflog? <CheckPage />:<Login />} />
+          <Route path="/personal" element={iflog? <PersonalPage />:<Login />} />
+          <Route path="/personal/bills" element={iflog? <BillPage />:<Login />} />
+          <Route path="/test" element={iflog? <TestPage />:<Login />} />
+          <Route path="/product" element={iflog? <ProductPage />:<Login />} />
+          <Route path="/manager" element={(iflog && isManager)? <ManagerPage />:<Login />} />
         </Routes>
         </DrawerHeader>
       </Main>
     </Router>
-    </WebsiteProvider>
+    {/* </WebsiteProvider> */}
     </ThemeProvider>
   );
 }

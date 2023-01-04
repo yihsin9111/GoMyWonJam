@@ -11,12 +11,18 @@ const sendData = (data, ws) =>{
 const GetCategories = async(ws)=>{
     const categories = await CategoryModel.aggregate([
         { $group: { _id: null, category_names: { $push: "$name" } } }])
-    sendData(["categories",categories[0].category_names],ws);
-    
+    console.log("get categories: ", categories.length);
+    if(categories){
+        sendData(["categories",categories[0].category_names],ws);
+    }
+
     //send category deadlines
     const deadlines = await CategoryModel.aggregate([
         { $group: { _id: null, category_dl:{ $push:"$deadline" }}}])
-    sendData(["deadlines",deadlines[0].category_dl],ws);
+    if(categories){
+        sendData(["deadlines",deadlines[0].category_dl],ws);
+        }
+    
 }
 
 const GetProductsByCategory = async(category, ws)=>{
@@ -70,4 +76,18 @@ const GetBill = async(billId, ws)=>{
     })
 }
 
-export {GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill}
+//new function
+
+const GetCatBill = async (category, ws) => {
+    BillModel.find({category: category}, async function(err, obj){
+        console.log("bill of catrgory: ", obj)
+        sendData(["userBill", obj], ws)
+    })
+
+    CategoryModel.find({name: category}, async function (err, obj){
+        console.log("category: ", obj[0]);
+        sendData(["GetCatStatus", obj[0].status], ws);
+    })
+}
+
+export {GetCategories, GetProductsByCategory, GetUserData, GetUserBill, GetBill, GetCatBill}

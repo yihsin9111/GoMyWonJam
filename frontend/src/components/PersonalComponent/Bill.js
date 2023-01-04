@@ -1,10 +1,10 @@
 //react import 
 import Box from "@mui/material/Box";
-import {Card, CardContent} from "@mui/material";
+import {Card, CardContent, DialogContent, DialogTitle} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Typography, List, Button, Dialog } from "@mui/material";
 import {useState} from "react";
-import SortDialog from "../SortDialog";
+import SortDialog from "./SortDialog";
 import ChangeAddress from "../ChangeAddress";
 
 //mui import 
@@ -13,6 +13,7 @@ import ChangeAddress from "../ChangeAddress";
 import Receipt from "./Receipt";
 import TimeLine from "./TimeLine";
 import useBackend from "../../containers/hooks/useBackend";
+import { Divider } from "antd";
 
 //import hooks
 
@@ -115,18 +116,23 @@ const Bill = ({item, id}) => {
                         <Dialog
                             open={openCard}
                             fullWidth={true}
-                            sx={{display:"grid",height:"100px"}}
+                            onClose={()=>{setOpenCard(false)}}
                         >
-                            <Box>
-                            <SortDialog item={item.items} handleSubmit={handleSubmit} setOpenCard={setOpenCard} BillId={item.billId}/>
-                            </Box>
+                            <DialogTitle>配卡志願序</DialogTitle>
+                            <Divider />
+                            <DialogContent sx={{
+                                display: "grid",
+                                gap: 1
+                            }}>
+                            <SortDialog item={item.items} handleSubmit={handleSubmit} setOpenCard={setOpenCard} BillId={item.billId} category={item.category} />
+                            </DialogContent>
                         </Dialog>
                         <Dialog
                             open={ChangeAddressOpen}
                             fullWidth={true}
                             sx={{display:"grid"}}
                         >
-                        <ChangeAddress setOpen={setChangeAddressOpen}/>
+                        <ChangeAddress setOpen={setChangeAddressOpen} receiver={item.receiver} phone={item.phone} address={item.address} />
                         </Dialog>
                     </Box>
                 </Box>

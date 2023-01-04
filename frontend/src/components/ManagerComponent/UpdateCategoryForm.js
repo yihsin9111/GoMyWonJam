@@ -99,7 +99,9 @@ const UpdateCategoryForm = ({oldData}) => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onUpdateCategory()}}>更新</Button>
+            <Button 
+                disabled={!name || !date}
+                onClick={()=>{onUpdateCategory()}}>更新</Button>
             </DialogActions>
         </Dialog>
         </Box>

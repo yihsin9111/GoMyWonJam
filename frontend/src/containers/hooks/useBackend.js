@@ -165,8 +165,24 @@ const useBackend = () => {
 
     //Sequence Func
     const AddSequenceList=(SequenceList)=>{
-        console.log("SequenceList Added...");
+        console.log("SequenceList Added...", SequenceList);
         sendData(["AddSequenceList", SequenceList])
+    }
+
+    //new function
+    const GetCatBill = (category) => {
+        console.log("get category bill");
+        sendData(["GetCatBill", category])
+    }
+
+    const UpdateCategoryStatus = (payload) => {
+        console.log("update cat status");
+        sendData(["UpdateCategoryStatus", payload]);
+    }
+
+    const getCatStatus = (payload) => {
+        console.log("get cat status");
+        sendData(["GetCatStatus", payload]);
     }
 
    
@@ -177,7 +193,8 @@ const useBackend = () => {
         UpdateProduct, GetProductById, GetBill, GetUserBill, UpdateBillStatus,
         AddItemToBill, AddBillToUser,  ConfirmBill , FindBill, UpdateBillAddress,
         DeleteBill, DeleteCategory, DeleteUser, DeleteProduct, DeleteItemFromBill, GetStores,
-        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill, AddSequenceList,UpdateItem
+        getTBill, renewTBill, AddItemToTBill, DeleteItemFromTBill, AddSequenceList,UpdateItem, GetCatBill,
+        UpdateCategoryStatus, getCatStatus
     };
 };
 

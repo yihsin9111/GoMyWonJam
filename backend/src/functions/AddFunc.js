@@ -82,7 +82,7 @@ const AddCategory = async(Category,ws)=>{
         }
         else{
             console.log('creating new category...');
-            await new CategoryModel({name:Category.cat_name, deadline:Category.deadLine,products:[]}).save();
+            await new CategoryModel({name:Category.cat_name, deadline:Category.deadLine,products:[], status: 0}).save();
             await GetCategories(ws);
         }
     })

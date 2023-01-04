@@ -22,14 +22,13 @@ import { useWebsite } from "../containers/hooks/WebsiteContext";
 const ManagerPage = () => {
     
     //fetch backend data
-    const {GetUserBill} = useBackend();
-    const {UserBill} = useWebsite();
+    const {GetUserBill, GetCategories, GetCatBill} = useBackend();
+    const {UserBill, categories} = useWebsite();
 
     useEffect(()=>{
-        GetUserBill('all');
+        GetCatBill(categories[0]);
     },[])
     useEffect(()=>{
-        GetUserBill('all');
     },[UserBill])
 
     //set state

@@ -259,7 +259,9 @@ const UpdateProductForm = ({ind}) => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onAddProduct()}}>更新</Button>
+            <Button 
+                disabled={!name || !whichCategory || !photoURL  || !price || (optionNum && !options)}
+                onClick={()=>{onAddProduct()}}>更新</Button>
             </DialogActions>
         </Dialog>
         </Box>

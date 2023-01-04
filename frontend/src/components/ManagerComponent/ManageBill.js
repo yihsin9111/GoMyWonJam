@@ -51,14 +51,14 @@ const ManageBill = ({item}) => {
                         訂單編號：{item.billId}
                     </Typography>
                     <Grid item>
-                        <IconButton
+                        {/* <IconButton
                             onClick={()=>{handleStateBackward()}}>
                             <ArrowLeftIcon />
                         </IconButton>
                         <IconButton
                             onClick={()=>{handleStateForward()}}>
                             <ArrowRightIcon />
-                        </IconButton>
+                        </IconButton> */}
                         {/* <UpdateBillForm /> */}
                         {/* <IconButton
                             onClick={()=>{handleEdit()}}>

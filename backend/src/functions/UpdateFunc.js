@@ -29,7 +29,7 @@ const UpdateCategory = async(category,ws)=>{ //date not updated ?
 }
 const UpdateProduct = async(product, ws)=>{
     console.log('updating product...',product);
-    await ProductModel.find({name:product.name,category:product.category},
+    await ProductModel.findOneAndUpdate({name:product.name,category:product.category},
         {
             name: product.name,
             category: product.category,
@@ -67,6 +67,33 @@ const UpdateBillStatus = async(payload,ws)=>{
     })
 }
 
+const UpdateCategoryStatus = async (payload, ws) => {
+    console.log("in updatecat status");
+    CategoryModel.find({name: payload.category}, async function(err, obj){
+        if(obj.length){
+            console.log("update status: ", obj[0].status);
+            obj[0].status = parseInt(obj[0].status)+parseInt(payload.action);
+            console.log("update cat status: ", obj[0]);
+            sendData(["GetCatStatus", obj[0].status], ws)
+            const newStatus = obj[0].status;
+            await obj[0].save();
+            BillModel.find({category: payload.category}, async function(err, obj){
+                console.log("in Bills update");
+                if(obj.length){
+                    obj.map(async (item)=>{
+                        item.status = newStatus;
+                        await item.save();
+                    })
+                    console.log("new obj: ", obj);
+                    sendData(["userBill", obj], ws);
+                }
+            })
+        }
+    })
+    
+    
+}
 
 
-export {UpdateUser, UpdateCategory, UpdateProduct, UpdateBillStatus,UpdateItem}
+
+export {UpdateUser, UpdateCategory, UpdateProduct, UpdateBillStatus,UpdateItem, UpdateCategoryStatus}

@@ -133,7 +133,7 @@ const AddProductForm = () => {
             onClose={()=>{setOpen(false)}} 
             fullWidth={true}
             >
-            <DialogTitle>增新商品品項</DialogTitle>
+            <DialogTitle>新增商品品項</DialogTitle>
             <DialogContent sx={{
                 display: "grid",
                 gap: 1.5
@@ -269,7 +269,9 @@ const AddProductForm = () => {
             </DialogContent>
             <DialogActions>
             <Button onClick={()=>{Cancel()}}>取消</Button>
-            <Button onClick={()=>{onAddProduct()}}>增新</Button>
+            <Button 
+                disabled={!name || !whichCategory || !photoURL || !price || !type || (optionNum && !options)}
+                onClick={()=>{onAddProduct()}}>新增商品品項</Button>
             </DialogActions>
         </Dialog>
         </Box>

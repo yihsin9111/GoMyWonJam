@@ -2,7 +2,7 @@
 import {useState} from "react";
 
 //mui import
-import {Avatar, Box, Card, Divider, Grid, TextField, Typography, InputAdornment, Button} from "@mui/material";
+import {Avatar, Box, Card, Divider, Grid, TextField, Typography, InputAdornment, Button, Alert, AlertTitle} from "@mui/material";
 
 //hook import
 import { useWebsite } from "./hooks/WebsiteContext";
@@ -12,6 +12,7 @@ import useBackend from "./hooks/useBackend";
 import { useNavigate } from "react-router-dom";
 
 // component import 
+import SetUpForm from "../components/LoginComponent/SetUpForm";
 
 //functional component 
 const Login = () => {
@@ -19,6 +20,9 @@ const Login = () => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [open, setOpen] = useState(false);
+    const [setUp, setSetUp] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [alert, setAlert] = useState(false);
 
     //hook import
     const { checkManager, iflog } = useWebsite();
@@ -50,6 +54,11 @@ const Login = () => {
         
     }
 
+
+    const handleLine = () => {
+        console.log("handle Line");
+    }
+
     return(
         <Box sx={{
             display: "grid",
@@ -71,50 +80,26 @@ const Login = () => {
                 value={id}
                 onChange={(e)=>{setId(e.target.value)}}
             />
+            {openAlert? 
+            <Alert severity="error">
+                <AlertTitle>{Alert}</AlertTitle>
+            </Alert>:<></>}
+            <Button 
+                variant="contained" 
+                sx={{backgroundColor: "green"}}
+                disabled={!id || !name}
+                onClick={()=>{handleLine()}}
+                >
+                使用Line登入
+            </Button>
             <Button 
                 variant="contained" 
                 disabled={!id || !name}
                 onClick={()=>{handleLogin()}}
                 >
-                登入
+                登入 / 註冊
             </Button>
         </Box>
-        // <Grid container justifyContent="center" direction="column">
-        //     <Card>
-        //         <Typography variant="h5" component="div">買家登入</Typography>
-        //         <Divider />
-        //     </Card>
-        //     <Grid item>
-                
-        //     </Grid>
-        //     <Grid item>
-        //         <TextField
-        //                 autoFocus
-        //                 required
-        //                 margin="dense"
-        //                 id="category_name"
-        //                 label="使用者名稱"
-        //                 type="text"
-        //                 variant="outlined"
-        //                 value={name}
-        //                 onChange={(e)=>{setName(e.target.value)}}
-        //             />
-        //     </Grid>
-        //     <Grid>
-        //         <TextField
-        //                 autoFocus
-        //                 required
-        //                 margin="dense"
-        //                 id="category_name"
-        //                 label="使用者ID"
-        //                 type="text"
-        //                 variant="outlined"
-        //                 value={id}
-        //                 onChange={(e)=>{setId(e.target.value)}}
-        //                 />
-        //     </Grid>
-
-        // </Grid>
     )
 }
 

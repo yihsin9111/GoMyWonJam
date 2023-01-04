@@ -20,7 +20,8 @@ const WebsiteContext = createContext({
     stores: [],
     paywhich: 0,
     setPaywhich: {},
-    setTotal: {}
+    setTotal: {},
+    catStatus: 0
 
 })
 
@@ -56,10 +57,12 @@ const WebsiteProvider = (props) => {
     const [iflog, setIflog]                 = useState(false);
     const [stores, setStores]               = useState([]);
     const [paywhich, setPaywhich]           = useState(0);
+    const [catStatus, setCatStatus]         =useState(0);
 
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
         if(!getName){
+            setIsManager(false);
            return false
         }
         if(getName.id === id){
@@ -67,21 +70,14 @@ const WebsiteProvider = (props) => {
             return true
         }
         else{
+            setIsManager(false);
             return false
         }
 
     }
 
     useEffect(()=>{
-        let newUserBill = [...userBill];
-        newUserBill.sort(function(a,b){
-            let a_value = parseInt(a.billId.split("_")[1]);
-            let b_value = parseInt(b.billId.split("_")[1]);
-            return (a_value - b_value)*(-1);
-        })
-        setUserBill(newUserBill);
-
-    },userBill)
+    },[userBill])
 
     client.onmessage = (byteString) => {
         const {data} = byteString;
@@ -103,7 +99,13 @@ const WebsiteProvider = (props) => {
                 break;
             }
             case "userBill":{
-                setUserBill(payload);
+                let newUserBill = [...payload];
+                newUserBill.sort(function(a,b){
+                    let a_value = parseInt(a.billId.split("_")[1]);
+                    let b_value = parseInt(b.billId.split("_")[1]);
+                    return (a_value - b_value)*(-1);
+                })
+                setUserBill(newUserBill);
                 console.log('user bill fetched',)
                 break;
             }
@@ -138,6 +140,10 @@ const WebsiteProvider = (props) => {
                 setStores(payload);
                 break;
             }
+            //new func
+            case "GetCatStatus": {
+                setCatStatus(payload);
+            }
             default : break;
         }
     }
@@ -149,7 +155,7 @@ const WebsiteProvider = (props) => {
                 userBill, shopping, setShopping, currentBillId, 
                 setCurrentBillId ,categories, products, bill, total, setTotal
                 ,deadlines,checkManager, isManager, iflog, setIflog, stores, paywhich, setPaywhich,
-                setUserBill
+                setUserBill, catStatus
             }}
             {...props}
         />

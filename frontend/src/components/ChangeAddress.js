@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useWebsite } from '../containers/hooks/WebsiteContext'; 
 import useBackend from '../containers/hooks/useBackend';
 
-const ChangeAddress=({setOpen})=>{
+const ChangeAddress=({setOpen, receiver, phone, address})=>{
 
     const [Phone, setPhone] = React.useState('');
     const [value, setValue] = React.useState("");
@@ -97,7 +97,7 @@ const ChangeAddress=({setOpen})=>{
                 id="ReceiverName"
                 margin="dense"
                 disabled
-                defaultValue={Name}
+                defaultValue={receiver}
                 label="姓名"
                 sx={{gridColumnStart:1,gridColumnEnd:3}}
             >
@@ -107,7 +107,7 @@ const ChangeAddress=({setOpen})=>{
                 margin="dense"
                 label="手機"
                 disabled
-                defaultValue={Phone}
+                defaultValue={phone}
                 inputMode="tel"
                 sx={{gridColumnStart:1,gridColumnEnd:3}}
             >
@@ -118,9 +118,10 @@ const ChangeAddress=({setOpen})=>{
   return (
     <Box sx={{width:"100%",display:"grid"}}>
         {list()}
-        <Button variant="contained"
-        color="success"
-        onClick={()=>{setOpen(false);onHandleChangeAddr()}}
+        <Button 
+            variant="contained"
+            disabled={!value}
+            onClick={()=>{setOpen(false);onHandleChangeAddr()}}
         >確認</Button>
     </Box>
   );

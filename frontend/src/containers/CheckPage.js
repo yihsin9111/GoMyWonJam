@@ -95,7 +95,7 @@ const CheckPage = () => {
             payment : PaymentOption,
             phone   : Phone,
             receiver    : name,
-            address : value,
+            address : inputValue,
             total   :total,
             items   :[...bill.ItemList[paywhich].items],
             category: bill.ItemList[paywhich].category
@@ -219,18 +219,20 @@ const CheckPage = () => {
                     sx={{gridColumnStart:2,gridColumnEnd:3,marginTop:"7.5px"}}
                     value={value}
                     onChange={(event, newValue) => {
-                    setValue(newValue);
+                        console.log("newValue: ", newValue);
+                        setValue(newValue);
                     }}
                     inputValue={inputValue}
                     onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
+                        console.log("newInputValue: ", newInputValue);
+                        setInputValue(newInputValue);
                     }}
                     renderInput={(params) => <TextField {...params} label="門市" 
                     helperText="輸入 店號/門市名稱/道路名稱 查找" required/>}
                 >
                 </Autocomplete>
                 <Button variant="contained" 
-                    disabled={!Infm.state || !bill || !PackageOption || !PaymentOption || !value || !Phone} 
+                    disabled={!bill || !PackageOption || !PaymentOption || !value || !Phone} 
                     onClick={onHandleCheckout}
                     sx={{gridColumnStart:1,gridColumnEnd:3}}>
                     結帳</Button>
