@@ -4,6 +4,7 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import {Card, CardContent, Typography, Divider} from "@mui/material";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 //test data import
 
@@ -50,7 +51,9 @@ const CartInclude = ({open ,setOpen}) => {
             display: "grid",
             gap: 1
         }}>
-            <Typography color="primary.main" variant="h4" component="div">購物車明細</Typography>
+            <Typography color="primary.main" variant="h6" component="div" sx={{display:"flex",flexDirection:"row",justifyContent:'space-between'}}> 購物車明細
+            <div onClick={()=>{setOpen(false)}}><CancelIcon sx={{gridColumnEnd:2}}></CancelIcon></div>
+            </Typography>
             {
                 bill.ItemList.map((value, index)=>(
                     <Card key={index}>
