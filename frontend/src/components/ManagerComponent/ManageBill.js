@@ -1,9 +1,9 @@
 //react import
 
 //mui import 
-import {Card, Grid, Typography, CardContent, Box} from "@mui/material";
-// import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-// import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import {Card, Grid, Typography, CardContent, Box, IconButton} from "@mui/material";
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // import EditIcon from '@mui/icons-material/Edit';
 
 //component import
@@ -11,15 +11,26 @@ import Receipt from "../PersonalComponent/Receipt";
 import TimeLine from "../PersonalComponent/TimeLine";
 
 //import hooks
-// import { useWebsite } from "../../containers/hooks/WebsiteContext";
+import { useWebsite } from "../../containers/hooks/WebsiteContext";
+import useBackend from "../../containers/hooks/useBackend";
 
 //functional component
 const ManageBill = ({item}) => {
     //set state
+    const {UpdateBillStatus} = useBackend();
 
     //fetch backend data
 
     //function define
+    const handleStateForward = () => {
+        // console.log("handle change state", item.status, item.billId);
+        UpdateBillStatus('add',item.billId,item.status);
+    }
+
+    const handleStateBackward = () => {
+        // console.log("handle backward")
+        UpdateBillStatus('minus',item.billId,item.status);
+    }
 
     //return
     return(
